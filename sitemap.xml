@@ -2,151 +2,151 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</loc>
+    <loc>https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</loc>
+    <loc>https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</loc>
+    <loc>https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2016/11/agile-at-poppulo/</loc>
+    <loc>https://pierrevincent.github.io/2016/11/agile-at-poppulo/</loc>
     <lastmod>2016-11-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2015/10/docker-microservices-and-service-discovery/</loc>
+    <loc>https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/agile/</loc>
+    <loc>https://pierrevincent.github.io/tags/agile/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/api/</loc>
+    <loc>https://pierrevincent.github.io/tags/api/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/archives/</loc>
+    <loc>https://pierrevincent.github.io/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://pierrevincent.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/conference/</loc>
+    <loc>https://pierrevincent.github.io/tags/conference/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/consumer-driven-contracts/</loc>
+    <loc>https://pierrevincent.github.io/tags/consumer-driven-contracts/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/continuous-delivery/</loc>
+    <loc>https://pierrevincent.github.io/tags/continuous-delivery/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/devops/</loc>
+    <loc>https://pierrevincent.github.io/tags/devops/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/docker/</loc>
+    <loc>https://pierrevincent.github.io/tags/docker/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/meetup/</loc>
+    <loc>https://pierrevincent.github.io/tags/meetup/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/microservices/</loc>
+    <loc>https://pierrevincent.github.io/tags/microservices/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/monitoring/</loc>
+    <loc>https://pierrevincent.github.io/tags/monitoring/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/pact/</loc>
+    <loc>https://pierrevincent.github.io/tags/pact/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/</loc>
+    <loc>https://pierrevincent.github.io/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/service-discovery/</loc>
+    <loc>https://pierrevincent.github.io/post/</loc>
+    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pierrevincent.github.io/tags/service-discovery/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/smartstack/</loc>
+    <loc>https://pierrevincent.github.io/tags/smartstack/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/sre/</loc>
+    <loc>https://pierrevincent.github.io/tags/sre/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://pierrevincent.github.io/tags/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/talks/</loc>
+    <loc>https://pierrevincent.github.io/categories/talks/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/testing/</loc>
+    <loc>https://pierrevincent.github.io/tags/testing/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

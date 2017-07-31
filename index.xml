@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>pvincent.io - Pierre Vincent</title>
-    <link>/</link>
-    <description>Recent content on pvincent.io - Pierre Vincent</description>
+    <title>Pierre Vincent</title>
+    <link>https://pierrevincent.github.io/</link>
+    <description>Recent content on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 16 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pierrevincent.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Increasing the visibility of distributed systems in production</title>
-      <link>/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</link>
+      <link>https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</link>
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</guid>
+      <guid>https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</guid>
       <description>&lt;p&gt;This talk from &lt;a href=&#34;http://rebelcon2017.com&#34;&gt;RebelCon 2017&lt;/a&gt; gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Microservices in a fast-paced customer-centric environment: How and Why?</title>
-      <link>/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</link>
+      <link>https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</guid>
+      <guid>https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</guid>
       <description>&lt;p&gt;In this talk at &lt;a href=&#34;http://www.tmforumlive.org/&#34;&gt;TMForumLive 2017&lt;/a&gt;, I describe the &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -35,10 +35,10 @@
     
     <item>
       <title>Increasing collaboration and confidence with Consumer-Driven Contracts testing</title>
-      <link>/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</link>
+      <link>https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</link>
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</guid>
+      <guid>https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</guid>
       <description>&lt;p&gt;This talk at &lt;a href=&#34;https://web.pipelineconf.info&#34;&gt;Pipeline, the Continuous Delivery conference&lt;/a&gt; covers how we made Consumer-driven contracts and &lt;a href=&#34;https://docs.pact.io/&#34;&gt;Pact&lt;/a&gt; part of our pipeline at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; and how it improved confidence and collaboration between teams when designing APIs.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -46,10 +46,10 @@
     
     <item>
       <title>Agile at Poppulo</title>
-      <link>/2016/11/agile-at-poppulo/</link>
+      <link>https://pierrevincent.github.io/2016/11/agile-at-poppulo/</link>
       <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>/2016/11/agile-at-poppulo/</guid>
+      <guid>https://pierrevincent.github.io/2016/11/agile-at-poppulo/</guid>
       <description>&lt;p&gt;Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at &lt;a href=&#34;https://www.meetup.com/Agile-Cork/&#34;&gt;Agile Cork&lt;/a&gt;, I go through the evolution of the processes used over the last few years at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -57,10 +57,10 @@
     
     <item>
       <title>Docker, Microservices and Service Discovery</title>
-      <link>/2015/10/docker-microservices-and-service-discovery/</link>
+      <link>https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/</link>
       <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>/2015/10/docker-microservices-and-service-discovery/</guid>
+      <guid>https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/</guid>
       <description>&lt;p&gt;Working with Microservices has recently become very trendy, however building dynamic and distributed systems doesn’t come without new challenges. Service Discovery is one of these challenges: enabling services to dynamically discover other services and communicate with them. In this talk at &lt;a href=&#34;http://corkdev.io/&#34;&gt;CorkDev.io&lt;/a&gt;, I go through a Service Discovery solution, using &lt;a href=&#34;https://medium.com/airbnb-engineering/smartstack-service-discovery-in-the-cloud-4b8a080de619&#34;&gt;Airbnb Smartstack&lt;/a&gt; to wire up Microservices running in Docker containers.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

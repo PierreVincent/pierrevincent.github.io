@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on pvincent.io - Pierre Vincent</title>
-    <link>/categories/</link>
-    <description>Recent content in Categories on pvincent.io - Pierre Vincent</description>
+    <title>Categories on Pierre Vincent</title>
+    <link>https://pierrevincent.github.io/categories/</link>
+    <description>Recent content in Categories on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pierrevincent.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Talks</title>
-      <link>/categories/talks/</link>
+      <link>https://pierrevincent.github.io/categories/talks/</link>
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/categories/talks/</guid>
+      <guid>https://pierrevincent.github.io/categories/talks/</guid>
       <description></description>
     </item>
     

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Consumer Driven Contracts on pvincent.io - Pierre Vincent</title>
-    <link>/tags/consumer-driven-contracts/</link>
-    <description>Recent content in Consumer Driven Contracts on pvincent.io - Pierre Vincent</description>
+    <title>Consumer Driven Contracts on Pierre Vincent</title>
+    <link>https://pierrevincent.github.io/tags/consumer-driven-contracts/</link>
+    <description>Recent content in Consumer Driven Contracts on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 21 Mar 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/consumer-driven-contracts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pierrevincent.github.io/tags/consumer-driven-contracts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Increasing collaboration and confidence with Consumer-Driven Contracts testing</title>
-      <link>/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</link>
+      <link>https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</link>
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</guid>
+      <guid>https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</guid>
       <description>&lt;p&gt;This talk at &lt;a href=&#34;https://web.pipelineconf.info&#34;&gt;Pipeline, the Continuous Delivery conference&lt;/a&gt; covers how we made Consumer-driven contracts and &lt;a href=&#34;https://docs.pact.io/&#34;&gt;Pact&lt;/a&gt; part of our pipeline at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; and how it improved confidence and collaboration between teams when designing APIs.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
