@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Monitoring on Pierre Vincent</title>
-    <link>https://pierrevincent.github.io/tags/monitoring/</link>
-    <description>Recent content in Monitoring on Pierre Vincent</description>
+    <title>Refactoring on Pierre Vincent</title>
+    <link>https://pierrevincent.github.io/tags/refactoring/</link>
+    <description>Recent content in Refactoring on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 Sep 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://pierrevincent.github.io/tags/monitoring/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pierrevincent.github.io/tags/refactoring/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,17 +20,6 @@
       <description>&lt;p&gt;As engineers, we tend to have high expectations of product managers to justify the value of adding new features. What problem is this solving? How will we validate that we’re building the right thing? Is this the most important thing to work on right now?&lt;/p&gt;
 
 &lt;p&gt;These are great questions but interestingly we aren’t always applying the same rigor to the technical work.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Increasing the visibility of distributed systems in production</title>
-      <link>https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</link>
-      <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</guid>
-      <description>&lt;p&gt;This talk from &lt;a href=&#34;http://rebelcon2017.com&#34;&gt;RebelCon 2017&lt;/a&gt; gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

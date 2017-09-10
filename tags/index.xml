@@ -75,6 +75,15 @@
     </item>
     
     <item>
+      <title>Measurement</title>
+      <link>https://pierrevincent.github.io/tags/measurement/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pierrevincent.github.io/tags/measurement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Meetup</title>
       <link>https://pierrevincent.github.io/tags/meetup/</link>
       <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
@@ -95,7 +104,7 @@
     <item>
       <title>Monitoring</title>
       <link>https://pierrevincent.github.io/tags/monitoring/</link>
-      <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://pierrevincent.github.io/tags/monitoring/</guid>
       <description></description>
@@ -107,6 +116,15 @@
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://pierrevincent.github.io/tags/pact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Refactoring</title>
+      <link>https://pierrevincent.github.io/tags/refactoring/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pierrevincent.github.io/tags/refactoring/</guid>
       <description></description>
     </item>
     
