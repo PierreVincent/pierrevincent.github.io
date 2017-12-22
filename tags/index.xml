@@ -104,9 +104,18 @@
     <item>
       <title>Monitoring</title>
       <link>https://pierrevincent.github.io/tags/monitoring/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://pierrevincent.github.io/tags/monitoring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Observability</title>
+      <link>https://pierrevincent.github.io/tags/observability/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pierrevincent.github.io/tags/observability/</guid>
       <description></description>
     </item>
     
@@ -116,6 +125,15 @@
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://pierrevincent.github.io/tags/pact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Prometheus</title>
+      <link>https://pierrevincent.github.io/tags/prometheus/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pierrevincent.github.io/tags/prometheus/</guid>
       <description></description>
     </item>
     

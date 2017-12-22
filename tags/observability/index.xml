@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Monitoring on Pierre Vincent</title>
-    <link>https://pierrevincent.github.io/categories/monitoring/</link>
-    <description>Recent content in Monitoring on Pierre Vincent</description>
+    <title>Observability on Pierre Vincent</title>
+    <link>https://pierrevincent.github.io/tags/observability/</link>
+    <description>Recent content in Observability on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 22 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://pierrevincent.github.io/categories/monitoring/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pierrevincent.github.io/tags/observability/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,19 +20,6 @@
       <description>&lt;p&gt;When it comes to monitoring tools in the last while, Prometheus is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.&lt;/p&gt;
 
 &lt;p&gt;Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Measurement is the number one ally of technical work</title>
-      <link>https://pierrevincent.github.io/2017/09/measurement-is-the-number-one-ally-of-technical-work/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://pierrevincent.github.io/2017/09/measurement-is-the-number-one-ally-of-technical-work/</guid>
-      <description>&lt;p&gt;As engineers, we tend to have high expectations of product managers to justify the value of adding new features. What problem is this solving? How will we validate that we&amp;rsquo;re building the right thing? Is this the most important thing to work on right now?&lt;/p&gt;
-
-&lt;p&gt;These are great questions but interestingly we aren&amp;rsquo;t always applying the same rigor to the technical work.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
