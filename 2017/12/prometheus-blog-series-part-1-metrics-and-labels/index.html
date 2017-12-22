@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -17,25 +21,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.20">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Sre</title>
+    <title>Prometheus Blog Series (Part 1): Metrics and Labels</title>
     <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content=", devops, sre, monitoring">
+    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
     <link rel="icon" href="https://pierrevincent.github.io/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://pierrevincent.github.io/tags/sre/index.xml">
-    
 
     
-    <meta name="description" content="Pierre Vincent - SRE Manager at Poppulo">
-    <meta property="og:description" content="Pierre Vincent - SRE Manager at Poppulo">
+    <meta name="description" content="When it comes to monitoring tools in the last while, Prometheus is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.
+
+Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.
+
+">
+    <meta property="og:description" content="When it comes to monitoring tools in the last while, Prometheus is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.
+
+Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.
+
+">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Sre">
-    <meta property="og:url" content="/tags/sre/">
+    <meta property="og:title" content="Prometheus Blog Series (Part 1): Metrics and Labels">
+    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">
     <meta property="og:site_name" content="Pierre Vincent">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Sre">
-    <meta name="twitter:description" content="Pierre Vincent - SRE Manager at Poppulo">
+    <meta name="twitter:title" content="Prometheus Blog Series (Part 1): Metrics and Labels">
+    <meta name="twitter:description" content="When it comes to monitoring tools in the last while, Prometheus is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.
+
+Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.
+
+">
     
       <meta name="twitter:creator" content="@PierreVincent">
     
@@ -48,6 +62,8 @@
       <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
     
 
+    
+      <meta property="og:image" content="https://pierrevincent.github.io/images/prometheus.png">
     
     
     
@@ -84,7 +100,7 @@ ga('send', 'pageview');
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="https://pierrevincent.github.io/">Pierre Vincent</a>
@@ -104,7 +120,7 @@ ga('send', 'pageview');
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -210,39 +226,25 @@ ga('send', 'pageview');
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      Prometheus Blog Series (Part 1): Metrics and Labels
+    </h1>
   
-
-
+  <div class="postShorten-meta post-meta">
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/">
-          Increasing the visibility of distributed systems in production
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-06-16T00:00:00Z">
+    <time itemprop="datePublished" datetime="2017-12-22T00:00:00Z">
       
-  June 16, 2017
+  December 22, 2017
 
     </time>
   
@@ -251,39 +253,197 @@ ga('send', 'pageview');
   
     <span>in</span>
     
-      <a class="category-link" href="https://pierrevincent.github.io/categories/talks">talks</a>
+      <a class="category-link" href="https://pierrevincent.github.io/categories/monitoring">monitoring</a>
     
   
 
 
 </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        This talk from <a href="http://rebelcon2017.com">RebelCon 2017</a> gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.</p>
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>When it comes to monitoring tools in the last while, Prometheus is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.</p>
 
-<p>
-        <br>
-        <a href="https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://pierrevincent.github.io/images/rebelcon.png"/>
-      </div>
-    </a>
-  
-</article>
+<p>Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.</p>
+
+<p></p>
+
+<h2 id="what-are-metrics-and-labels">What are metrics and labels?</h2>
+
+<p>Metrics are a core concept of Prometheus. Instrumented systems expose them, Prometheus stores them in its time-series database and makes them available to easily query to understand how these systems behave over time.</p>
+
+<p>In short, a metric is an identifier linking data points together over time. For example, the metric <code>http_requests_total</code> denotes all the data points collected by Prometheus for services exposing http requests counters. As there is likely to be multiple services exposing the same <code>http_requests_total</code> metric, labels can be added to each data point to specify which service this counter applies to:</p>
+
+<pre><code># Request counter for the User Directory service
+http_requests_total{service=&quot;users-directory&quot;}
+
+# Request counter for the Billing History Service
+http_requests_total{service=&quot;billing-history&quot;}
+
+# Overall request counter regardless of service
+sum(http_requests_total)
+</code></pre>
+
+<p>Chances are, we won’t have only one instance of each service so another useful label would be an instance identifier. In a typical microservices architecture, the number of instances will vary and these will have a relatively short life span. As a result, queries will mostly be aggregating regardless of the instance, but being able to distinguish between different instances is a powerful debugging tool:</p>
+
+<pre><code># Instance specific
+http_requests_total{service=&quot;users-directory&quot;, instance=&quot;1.2.3.4&quot;}`
+
+# All instances of Users Directory service
+sum(http_requests_total{service=&quot;users-directory&quot;})
+</code></pre>
+
+<h2 id="using-the-power-of-labels">Using the power of labels</h2>
+
+<p>Labels in Prometheus are arbitrary and as such, they can be much more powerful than just which service/instance exposed a metric. Continuing with the simple example of <code>http_requests_total</code>, services can be more descriptive on the requests that are being counted and expose things like the endpoint being used or the status code returned.</p>
+
+<pre><code># Number of unauthorised GET requests to the GET /users/:id endpoint of the Users Directory service
+sum(http_requests_total{service=&quot;users-directory&quot;, method=&quot;GET&quot;, endpoint=&quot;/user/:id&quot;, status=&quot;403&quot;})
+</code></pre>
+
+<p>Augmenting metrics with good labels is key to get the best out of Prometheus. Labels can be combined in a number of different ways using functions, in order to answer a wide range of questions from the all the data collected by Prometheus.</p>
+
+<h3 id="filtering-based-on-labels">Filtering based on labels</h3>
+
+<p>As described in the above examples, it is possible to filter a metric based on the value of one of the labels:</p>
+
+<pre><code># Only consider the Users Directory service
+http_requests_total{service=&quot;users-directory}&quot;
+
+# Filter out successful requests
+http_requests_total{status!=&quot;200&quot;}
+
+# Matching `region` label with regular expression
+failed_logins_attempts_total{region=~&quot;us-west-.*&quot;}
+</code></pre>
+
+<h3 id="aggregating-labels">Aggregating labels</h3>
+
+<p>If a label is not specified, the result of a query will return as many time-series as there are combinations of labels and label values. In order to collapse these combinations (partially for fully), <a href="https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators">aggregation operators</a> can be used:</p>
+
+<pre><code># Total number of requests regardless of any labels
+sum(http_requests_total)
+
+# Average memory usage for each service
+avg(memory_used_bytes) by (service)
+
+# Startup time of the oldest instance of each service in each datacenter
+min(startup_time_milliseconds) by (service, datacenter)
+</code></pre>
+
+<h3 id="a-word-on-label-cardinality">A word on label cardinality</h3>
+
+<p>Labels are really powerful so it can be tempting to annotate each metric with very specific information, however there are some important limitations to what should be used for labels.</p>
+
+<p>Prometheus considers each unique combination of labels and label value as a different time series. As a result if a label has an unbounded set of possible values, Prometheus will have a very hard time storing all these time series. In order to avoid performance issues, labels should not be used for high cardinality data sets (e.g. Customer unique ids).</p>
+
+<h2 id="what-s-next">What’s next?</h2>
+
+<p>In this first post, we went through the main building blocks of Prometheus: metrics, labels and basic operators to query these metrics. The few examples of metrics represented different types of data, such as counting the number of requests served or the amount of memory used at a given time. In the next post, we will dive into the 4 different types of Prometheus metrics (counters, gauges, histograms and summaries) and when to use them.</p>
+
+<p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
+
+<h3 id="more-reading-on-metrics-and-labels">More reading on metrics and labels</h3>
+
+<p>Prometheus documentation:</p>
+
+<ul>
+<li><a href="https://prometheus.io/docs/practices/naming/">Metrics and labels naming best practices</a></li>
+<li><a href="https://prometheus.io/docs/concepts/data_model/">Data model</a></li>
+<li><a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">Querying basics</a></li>
+</ul>
+
+<p>PromCon 2017:</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=_MNYuTNfTb4">Best Practices and Beastly Pitfalls</a> by Julius Voltz</li>
+</ul>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/monitoring/">monitoring</a>
+
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/observability/">observability</a>
+
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/prometheus/">prometheus</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/" data-tooltip="CODE Stockholm Highlights: Data-driven DevOps and raising the Continuous Delivery game">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
 
             
+              
             
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2017 Pierre Vincent. All Rights Reserved
@@ -291,6 +451,86 @@ ga('send', 'pageview');
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/" data-tooltip="CODE Stockholm Highlights: Data-driven DevOps and raising the Continuous Delivery game">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+        <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+        <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-1-metrics-and-labels%2f">
+        <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -560,6 +800,10 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
+    
+  
 
 
 
