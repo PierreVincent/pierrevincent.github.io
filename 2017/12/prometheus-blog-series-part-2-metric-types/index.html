@@ -21,27 +21,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.20">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Microservices in a fast-paced customer-centric environment: How and Why?</title>
+    <title>Prometheus Blog Series (Part 2): Metric types</title>
     <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content="microservices, devops, continuous delivery, devops, sre, monitoring">
+    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
     <link rel="icon" href="https://pierrevincent.github.io/favicon.png">
     
 
     
-    <meta name="description" content="In this talk at TMForumLive 2017, I describe the Poppulo journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.
+    <meta name="description" content="In Part 1 of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
 
 ">
-    <meta property="og:description" content="In this talk at TMForumLive 2017, I describe the Poppulo journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.
+    <meta property="og:description" content="In Part 1 of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
 
 ">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Microservices in a fast-paced customer-centric environment: How and Why?">
-    <meta property="og:url" content="/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/">
+    <meta property="og:title" content="Prometheus Blog Series (Part 2): Metric types">
+    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-2-metric-types/">
     <meta property="og:site_name" content="Pierre Vincent">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Microservices in a fast-paced customer-centric environment: How and Why?">
-    <meta name="twitter:description" content="In this talk at TMForumLive 2017, I describe the Poppulo journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.
+    <meta name="twitter:title" content="Prometheus Blog Series (Part 2): Metric types">
+    <meta name="twitter:description" content="In Part 1 of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
 
 ">
     
@@ -57,7 +57,7 @@
     
 
     
-      <meta property="og:image" content="//www.teoco.com/wp-content/uploads/TMForumLive.png">
+      <meta property="og:image" content="https://pierrevincent.github.io/images/prometheus.png">
     
     
     
@@ -231,14 +231,14 @@ ga('send', 'pageview');
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      Microservices in a fast-paced customer-centric environment: How and Why?
+      Prometheus Blog Series (Part 2): Metric types
     </h1>
   
   <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-05-17T00:00:00Z">
+    <time itemprop="datePublished" datetime="2017-12-24T00:00:00Z">
       
-  May 17, 2017
+  December 24, 2017
 
     </time>
   
@@ -247,7 +247,7 @@ ga('send', 'pageview');
   
     <span>in</span>
     
-      <a class="category-link" href="https://pierrevincent.github.io/categories/talks">talks</a>
+      <a class="category-link" href="https://pierrevincent.github.io/categories/monitoring">monitoring</a>
     
   
 
@@ -258,13 +258,142 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>In this talk at <a href="http://www.tmforumlive.org/">TMForumLive 2017</a>, I describe the <a href="https://www.poppulo.com">Poppulo</a> journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.</p>
+              <p>In <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.</p>
 
 <p></p>
 
-<div class="embed slideshare" style="text-align: center">
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/zdZrKgBJ9xKjf3?rel=0" width="599" height="487" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe>
-</div>
+<h2 id="counters-the-only-way-is-up">Counters: the only way is up</h2>
+
+<p>A great way to instrument the internal state of an application is to count whenever specific events happen, and expose this counter over time as a time series. Each data point of the time series is the value of the counter at the time the counter was observed.</p>
+
+<p>The counter metric type works on a very strict assumption that it can only be incremented. When a service exposes a counter metric, it always starts at 0 and only goes up. Like all other metrics, each label combination is its own data-point and is incremented individually.</p>
+
+<p>The best practice on naming counters is to using the <code>_total</code> suffix, e.g. <code>batch_jobs_completed_total</code>.</p>
+
+<h3 id="observing-counters-over-time">Observing counters over time</h3>
+
+<p>The absolute value of a counter is pretty irrelevant and should not be relied on - this is because counters do not preserve their value over application restarts. In a microservices architecture, instances of services are short-lived (e.g. rolling-updates, auto-scaling&hellip;), therefore counters will very often reset back to 0.</p>
+
+<p>The real purpose of counters is actually in their evolution over time, which can be obtained through functions like <code>rate()</code> or <code>irate()</code>. These functions will automatically correct counter resets, allowing to calculate accurate rates even if some services restart.</p>
+
+<pre><code># Total number of completed cleanup jobs by datacenter (will be affected by restarts)
+sum(batch_jobs_completed_total{job_type=&quot;hourly-cleanup&quot;}) by (datacenter)
+
+# Number of completed cleanup jobs per second, by datacenter (not affected by restarts)
+sum(rate(batch_jobs_completed_total{job_type=&quot;hourly-cleanup&quot;}[5m])) by (datacenter)
+</code></pre>
+
+<p>Unlike the <code>sum()</code> function, <code>rate()</code> does not take in a metric, but a <em>range vector</em> (created by using the <code>[ ]</code> operator). A <em>range vector</em> contains all the data-points of the metric for the time-period specified. In the example above, <code>[5m]</code> will consider all data-points captured for our <code>batch_jobs_completed_total</code> metric for 5 minutes. Applying <code>rate()</code> to a <em>range vector</em> calculates the average rate of increase per second during that time-window. The longer the time-window, the smoother the <code>rate()</code> graph will be (potentially hiding local spikes).</p>
+
+<p>Example of a requests counter (total and rate):</p>
+
+<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-requests-counter.png" alt="Total number of requests" /></p>
+
+<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-requests-counter-rate.png" alt="Requests rate" /></p>
+
+<h2 id="gauges-instrumenting-the-current-state">Gauges: instrumenting the current state</h2>
+
+<p>Not all application metrics can be covered by counters, as they might go up and down over time. Typically this will be the case of any metric exposing the <em>current state</em> of something, as opposed to <em>how many things happened</em>. Gauges can be used to track such metrics, for example:</p>
+
+<pre><code># Amount of memory currently used
+memory_bytes_used
+
+# Number of jobs currently in queue
+batch_jobs_in_queue{job_type=&quot;hourly-cleanup&quot;}
+</code></pre>
+
+<p>Gauges are very easy to reason about - unlike counters, their absolute value is meaningful and can be used for graphs and alerts. Their evolution over-time can also be used, with functions like <code>delta()</code>, <code>deriv()</code> and even <a href="https://www.robustperception.io/reduce-noise-from-disk-space-alerts/">predicted using linear-regression</a> with functions like <code>predict_linear()</code></p>
+
+<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-memory-gauge.png" alt="Memory usage gauge" /></p>
+
+<h2 id="histograms-sampling-observations">Histograms: sampling observations</h2>
+
+<p>When trying to observe the request latency of a service, the initial temptation can be to work with averages: they are simple to calculate over time using a total and a counter. Averages unfortunately have the big drawback of hiding distribution and prevent the discovery of outliers.</p>
+
+<p>Quantiles are better measurement for this kind of metrics, as they allow to understand distribution. For example, if the request latency 0.5-quantile (50th percentile) is 100ms, it means that 50% of requests completed under 100ms. Similarly, if the 0.99-quantile (99th percentile) is 4s, it means that 1% of requests responded in more than 4s.</p>
+
+<p>Quantiles are however quite expensive to calculate accurately, as they need the full set of observations (i.e. duration of each requests). Histograms make this simpler by sampling the observations in a pre-defined <em>buckets</em>. For example, a request latency Histogram can have buckets for &lt;10ms, &lt;100ms, &lt;1s, &lt;10s.</p>
+
+<p>When creating an Histogram, it is important to think about what the buckets should be from the beginning. In most scenarios, the <em>SLO</em> for the metric in question can be a good place to start.</p>
+
+<p>Prometheus can use these <em>buckets</em> to infer the quantiles using the <code>histogram_quantile()</code> function:</p>
+
+<pre><code># Request duration 90th percentile
+histogram_quantile(0.9, rate(http_request_duration_milliseconds_bucket[5m]))
+</code></pre>
+
+<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-latency-histogram.png" alt="Memory usage gauge" /></p>
+
+<p>The graph aboves highlights how important distribution is to understand a metric like latency. If we imagine that this metric has an <em>SLO</em> of 150ms, a 137ms average latency might look acceptable; in reality 1 out of 10 requests completes in 193ms or more (90th percentile) and 1 out of 100 takes more than 1s!</p>
+
+<h3 id="more-buckets-means-more-labels">More buckets means more labels</h3>
+
+<p>In practice, a Histogram will result in the creation of an additional metric (with the <code>_bucket</code> suffix), labeled with the upper bound of the <em>bucket</em>:</p>
+
+<pre><code># HELP http_request_duration_milliseconds Http request latency histogram
+# TYPE http_request_duration_milliseconds histogram
+http_request_duration_milliseconds_bucket{le=&quot;100&quot;} 3741
+http_request_duration_milliseconds_bucket{le=&quot;200&quot;} 4597
+http_request_duration_milliseconds_bucket{le=&quot;400&quot;} 4747
+http_request_duration_milliseconds_bucket{le=&quot;800&quot;} 4978
+http_request_duration_milliseconds_bucket{le=&quot;1600&quot;} 4991
+http_request_duration_milliseconds_bucket{le=&quot;+Inf&quot;} 5033
+http_request_duration_milliseconds_sum 673428
+http_request_duration_milliseconds_count 5033
+</code></pre>
+
+<p>Keeping in mind that each unique combination of labels is considered as a separate time-series, it is usually good practice to keep the number of buckets small, as well as the number of other labels on Histograms.</p>
+
+<h2 id="summaries-client-side-quantiles">Summaries: client-side quantiles</h2>
+
+<p><a href="https://prometheus.io/docs/practices/histograms/">Histograms and Summaries</a> are very similar in the way that they expose the distribution of a given data set. While Histograms use sampling (with <em>buckets</em>) and estimate quantiles on the Prometheus server, Summaries are calculated on the client side (i.e. the service exposing metrics)</p>
+
+<p>Summaries have the advantage of being more accurate for the pre-defined quantiles, however the client-side calculation can be expensive to do (while Histograms are basically just counters). One of the other drawbacks of Summaries is that they cannot be combined together, because quantiles cannot be averaged. Therefore, Summaries should only be used for metrics that make sense at an individual instance level (e.g. garbage collection times) or if the service in question is only going to have a single instance.</p>
+
+<p>The pre-configured aspect of Summaries quantiles can also be a bit limiting, while Histograms allow to do this at the server level, without changing client instrumentation.</p>
+
+<p>Example of the built-in Golang garbage collector summary:</p>
+
+<pre><code># HELP go_gc_duration_seconds A summary of the GC invocation durations.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile=&quot;0&quot;} 4.274e-05
+go_gc_duration_seconds{quantile=&quot;0.25&quot;} 6.8508e-05
+go_gc_duration_seconds{quantile=&quot;0.5&quot;} 0.000275171
+go_gc_duration_seconds{quantile=&quot;0.75&quot;} 0.002328529
+go_gc_duration_seconds{quantile=&quot;1&quot;} 0.201453313
+go_gc_duration_seconds_sum 0.467543895
+go_gc_duration_seconds_count 92
+</code></pre>
+
+<h2 id="what-s-next">What&rsquo;s next?</h2>
+
+<p>This second part covered the different metric types Prometheus offers and in what situation they should (or should not) be used:</p>
+
+<ul>
+<li><strong>Counters</strong>: use for counting events that happen (e.g. total number of requests) and query using <code>rate()</code></li>
+<li><strong>Gauge</strong>: use to instrument the current state of a metric (e.g. memory usage, jobs in queue)</li>
+<li><strong>Histograms</strong>: use to sample observations in order to analyse distribution of a data set (e.g. request latency)</li>
+<li><strong>Summaries</strong>: use for pre-calculated quantiles on client side, but be mindful of calculation cost and aggregation limitations</li>
+</ul>
+
+<p>You should now have a better understanding of what Prometheus metrics are and how to query them&hellip;  but how do these metrics get there in the first place? The next part of this series will get into the Prometheus <em>pull model</em> on how clients expose metrics and how Prometheus collects them.</p>
+
+<p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
+
+<h3 id="more-reading">More reading</h3>
+
+<p>Prometheus documentation:</p>
+
+<ul>
+<li><a href="https://prometheus.io/docs/concepts/metric_types/">Metric types</a></li>
+<li><a href="https://prometheus.io/docs/practices/histograms/">Histograms and quantiles</a></li>
+</ul>
+
+<p>Articles:</p>
+
+<ul>
+<li>Using <code>predict_linear()</code> to alert on disk about to fill up, from <a href="https://www.robustperception.io/reduce-noise-from-disk-space-alerts/">robustperception.io</a></li>
+</ul>
               
             </div>
           </div>
@@ -276,13 +405,11 @@ ga('send', 'pageview');
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/microservices/">microservices</a>
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/monitoring/">monitoring</a>
 
-  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/devops/">devops</a>
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/observability/">observability</a>
 
-  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/continuous-delivery/">continuous delivery</a>
-
-  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/conference/">conference</a>
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/prometheus/">prometheus</a>
 
                   </div>
                 
@@ -294,7 +421,7 @@ ga('send', 'pageview');
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/" data-tooltip="Increasing the visibility of distributed systems in production">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -302,7 +429,7 @@ ga('send', 'pageview');
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/" data-tooltip="Increasing collaboration and confidence with Consumer-Driven Contracts testing">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" data-tooltip="Prometheus Blog Series (Part 1): Metrics and Labels">
           
             <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
             <i class="fa fa-angle-right"></i>
@@ -319,17 +446,17 @@ ga('send', 'pageview');
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -365,7 +492,7 @@ ga('send', 'pageview');
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/" data-tooltip="Increasing the visibility of distributed systems in production">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -373,7 +500,7 @@ ga('send', 'pageview');
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/" data-tooltip="Increasing collaboration and confidence with Consumer-Driven Contracts testing">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" data-tooltip="Prometheus Blog Series (Part 1): Metrics and Labels">
           
             <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
             <i class="fa fa-angle-right"></i>
@@ -390,17 +517,17 @@ ga('send', 'pageview');
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -421,17 +548,17 @@ ga('send', 'pageview');
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
         <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
         <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f05%2fmicroservices-in-a-fast-paced-customer-centric-environment-how-and-why%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
         <i class="fa fa-twitter"></i><span>Share on Twitter</span>
       </a>
     </li>
