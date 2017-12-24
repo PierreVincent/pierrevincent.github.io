@@ -321,7 +321,7 @@ failed_logins_attempts_total{region=~&quot;us-west-.*&quot;}
 
 <h3 id="aggregating-labels">Aggregating labels</h3>
 
-<p>If a label is not specified, the result of a query will return as many time-series as there are combinations of labels and label values. In order to collapse these combinations (partially for fully), <a href="https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators">aggregation operators</a> can be used:</p>
+<p>If a label is not specified, the result of a query will return as many time-series as there are combinations of labels and label values. In order to collapse these combinations (partially or fully), <a href="https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators">aggregation operators</a> can be used:</p>
 
 <pre><code># Total number of requests regardless of any labels
 sum(http_requests_total)
