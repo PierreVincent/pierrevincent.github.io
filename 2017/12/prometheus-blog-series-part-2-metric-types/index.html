@@ -29,10 +29,10 @@
     
 
     
-    <meta name="description" content="In Part 1 of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
+    <meta name="description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
 
 ">
-    <meta property="og:description" content="In Part 1 of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
+    <meta property="og:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
 
 ">
     <meta property="og:type" content="blog">
@@ -41,7 +41,7 @@
     <meta property="og:site_name" content="Pierre Vincent">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Prometheus Blog Series (Part 2): Metric types">
-    <meta name="twitter:description" content="In Part 1 of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
+    <meta name="twitter:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
 
 ">
     
@@ -258,7 +258,7 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>In <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.</p>
+              <p>In <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> of this series, we talked about <a href="https://prometheus.io/">Prometheus</a> metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.</p>
 
 <p></p>
 
@@ -376,7 +376,7 @@ go_gc_duration_seconds_count 92
 <li><strong>Summaries</strong>: use for pre-calculated quantiles on client side, but be mindful of calculation cost and aggregation limitations</li>
 </ul>
 
-<p>You should now have a better understanding of what Prometheus metrics are and how to query them&hellip;  but how do these metrics get there in the first place? The next part of this series will get into the Prometheus <em>pull model</em> on how clients expose metrics and how Prometheus collects them.</p>
+<p>You should now have a better understanding of what Prometheus metrics are and how to query them&hellip;  but how do these metrics get there in the first place? The <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">next part</a> of this series will get into the Prometheus <em>pull model</em> on how clients expose metrics and how Prometheus collects them.</p>
 
 <p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
 
@@ -421,7 +421,7 @@ go_gc_duration_seconds_count 92
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -492,7 +492,7 @@ go_gc_duration_seconds_count 92
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -618,6 +618,25 @@ go_gc_duration_seconds_count 92
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">
+                <h3 class="media-heading">Prometheus Blog Series (Part 3): Exposing and collecting metrics</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> and <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/">Part 2</a> of this series, we covered the basics of <a href="https://prometheus.io/">Prometheus</a> metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/">
                 <h3 class="media-heading">Prometheus Blog Series (Part 2): Metric types</h3>
               </a>
@@ -626,7 +645,7 @@ go_gc_duration_seconds_count 92
                   Dec 12, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>In <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.</p>
+              <div class="media-content hide-xs font-merryweather"><p>In <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> of this series, we talked about <a href="https://prometheus.io/">Prometheus</a> metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.</p>
 
 <p></p></div>
             </div>
@@ -645,7 +664,7 @@ go_gc_duration_seconds_count 92
                   Dec 12, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>When it comes to monitoring tools in the last while, Prometheus is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.</p>
+              <div class="media-content hide-xs font-merryweather"><p>When it comes to monitoring tools in the last while, <a href="https://prometheus.io/">Prometheus</a> is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.</p>
 
 <p>Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.</p>
 
@@ -790,23 +809,6 @@ go_gc_duration_seconds_count 92
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://pierrevincent.github.io/post/">
-                <h3 class="media-heading">Posts</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Dec 12, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -814,7 +816,7 @@ go_gc_duration_seconds_count 92
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         10 posts found
+         11 posts found
       </p>
     </div>
   </div>

@@ -6,10 +6,21 @@
     <description>Recent content on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://pierrevincent.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Prometheus Blog Series (Part 3): Exposing and collecting metrics</title>
+      <link>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</link>
+      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; and &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;Part 2&lt;/a&gt; of this series, we covered the basics of &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Prometheus Blog Series (Part 2): Metric types</title>
@@ -17,7 +28,7 @@
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; of this series, we talked about metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.&lt;/p&gt;
+      <description>&lt;p&gt;In &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; of this series, we talked about &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
@@ -28,7 +39,7 @@
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/</guid>
-      <description>&lt;p&gt;When it comes to monitoring tools in the last while, Prometheus is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.&lt;/p&gt;
+      <description>&lt;p&gt;When it comes to monitoring tools in the last while, &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.&lt;/p&gt;
 
 &lt;p&gt;Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.&lt;/p&gt;
 

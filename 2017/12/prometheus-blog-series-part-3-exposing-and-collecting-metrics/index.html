@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -17,25 +21,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.20">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Pierre Vincent</title>
+    <title>Prometheus Blog Series (Part 3): Exposing and collecting metrics</title>
     <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content=", devops, sre, monitoring">
+    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
     <link rel="icon" href="https://pierrevincent.github.io/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://pierrevincent.github.io/index.xml">
-    
 
     
-    <meta name="description" content="Pierre Vincent - SRE Manager at Poppulo">
-    <meta property="og:description" content="Pierre Vincent - SRE Manager at Poppulo">
+    <meta name="description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.
+
+">
+    <meta property="og:description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.
+
+">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Pierre Vincent">
-    <meta property="og:url" content="/">
+    <meta property="og:title" content="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">
     <meta property="og:site_name" content="Pierre Vincent">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Pierre Vincent">
-    <meta name="twitter:description" content="Pierre Vincent - SRE Manager at Poppulo">
+    <meta name="twitter:title" content="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+    <meta name="twitter:description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.
+
+">
     
       <meta name="twitter:creator" content="@PierreVincent">
     
@@ -48,6 +56,8 @@
       <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
     
 
+    
+      <meta property="og:image" content="https://pierrevincent.github.io/images/prometheus.png">
     
     
     
@@ -84,7 +94,7 @@ ga('send', 'pageview');
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="https://pierrevincent.github.io/">Pierre Vincent</a>
@@ -104,7 +114,7 @@ ga('send', 'pageview');
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -211,35 +221,24 @@ ga('send', 'pageview');
 
       
 
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        <section class="postShorten-group main-content-wrap">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
           
           
-            
+            <div class="post-header main-content-wrap text-center">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      Prometheus Blog Series (Part 3): Exposing and collecting metrics
+    </h1>
   
-
-
+  <div class="postShorten-meta post-meta">
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/">
-          Increasing collaboration and confidence with Consumer-Driven Contracts testing
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-03-21T00:00:00Z">
+    <time itemprop="datePublished" datetime="2017-12-26T00:00:00Z">
       
-  March 21, 2017
+  December 26, 2017
 
     </time>
   
@@ -248,165 +247,150 @@ ga('send', 'pageview');
   
     <span>in</span>
     
-      <a class="category-link" href="https://pierrevincent.github.io/categories/talks">talks</a>
+      <a class="category-link" href="https://pierrevincent.github.io/categories/monitoring">monitoring</a>
     
   
 
 
 </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        This talk at <a href="https://web.pipelineconf.info">Pipeline, the Continuous Delivery conference</a> covers how we made Consumer-driven contracts and <a href="https://docs.pact.io/">Pact</a> part of our pipeline at <a href="https://www.poppulo.com">Poppulo</a> and how it improved confidence and collaboration between teams when designing APIs.</p>
-
-<p>
-        <br>
-        <a href="https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="//pipelineconf.files.wordpress.com/2013/10/pipelineconf-logo-medium.png"/>
-      </div>
-    </a>
-  
-</article>
-
+</div>
           
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>In <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> and <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/">Part 2</a> of this series, we covered the basics of <a href="https://prometheus.io/">Prometheus</a> metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.</p>
+
+<p></p>
+
+<h2 id="push-vs-pull">Push vs Pull</h2>
+
+<p>Metrics collection with Prometheus relies on the <em>pull model</em>, meaning that Prometheus is responsible for getting metrics (<em>scraping</em>) from the services that it monitors. This is diametrically opposed from other tools like Graphite, which are passively waiting on clients to <em>push</em> their metrics to a known server.</p>
+
+<p>Moving this responsibility to the server relieves the clients from a lot of the workload. Instrumented services only have to expose metrics in a way a Prometheus server can read them and doesn’t need to worry about where the Prometheus server is (or if there is any at all). Additionally, instrumenting a service is relatively cheap on the client side, as Prometheus does all the heavy lifting for complex calculations (see Histograms mentioned in <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/">Part 2</a>). Finally, if the Prometheus server was ever under pressure, it will throttle the scraping of services itself, as opposed to having clients pushing metrics and bringing down the server.</p>
+
+<p>A potential challenge with this model is that Prometheus now needs to know where to collect these metrics. In a microservices architecture, services can be short-lived and their number of instances can vary over time, which means that static configuration is not an option. Fortunately, Prometheus server comes with built-in service discovery solutions and makes it pretty seamless to integrate with a number of platforms and tools, including <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#&lt;kubernetes_sd_config">Kubernetes</a> and <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#&lt;consul_sd_config">Consul</a>.</p>
+
+<h2 id="exposing-and-scraping-metrics">Exposing and scraping metrics</h2>
+
+<p>Clients have only one responsibility: make their metrics available for a Prometheus server to scrape. This is done by exposing an HTTP endpoint, usually <code>/metrics</code>, which returns the full list of metrics (with label sets) and their values. This endpoint is very cheap to call as it simply outputs the current value of each metric, without doing any calculation.</p>
+
+<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-service-scrape.png" alt="Scraping a single service" /></p>
+
+<p>Most languages have some implementation of the Prometheus client, which comes with:</p>
+
+<ul>
+<li>Built-in metrics for the language (e.g. JVM metrics, Go metrics)</li>
+<li>The ability to registry custom metrics</li>
+<li>Some HTTP handler to create the <code>/metrics</code> endpoint</li>
+</ul>
+
+<p>On the Prometheus server side, each target (statically defined, or dynamically discovered) is scraped at a regular interval (<em>scrape interval</em>). Each scrape reads the <code>/metrics</code> to get the current state of the client metrics, and persists the values in the Prometheus time-series database.</p>
+
+<p>In addition to the collected metrics, Prometheus will create an additional one called <code>up</code>, which will be set to <code>1</code> if the last scrape is successful, or <code>0</code> otherwise. The <code>up</code> metric is incredibly useful to detect crashes.</p>
+
+<h2 id="exporters-instrumenting-machines-and-third-party-appliances">Exporters: Instrumenting machines and third-party appliances</h2>
+
+<p>Not everything can be instrumented at the code level. This is where <em>exporters</em> come useful, acting as side-cars to machines or other applications (e.g. databases).</p>
+
+<p>The most common one is the <a href="https://github.com/prometheus/node_exporter">node exporter</a>, which can be installed on every machine to read system level metrics (cpu, memory, file system&hellip;) and expose them under a <code>/metrics</code> endpoint in the way Prometheus can scrape it.</p>
+
+<p>Other exporters are listed on the <a href="https://prometheus.io/docs/instrumenting/exporters/">Prometheus documentation</a></p>
+
+<h2 id="the-big-picture">The big picture</h2>
+
+<p>Combining client libraries, node exporters and application-specific exporters, Prometheus can gather metrics from services, infrastructure and third-party appliances:</p>
+
+<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-scrape.png" alt="Scraping services, infra and appliances" /></p>
+
+<h2 id="what-s-next">What&rsquo;s next?</h2>
+
+<p>The key of any monitoring tool is its simplicity, especially when it comes to instrumentation. Prometheus shines in that area, making it very easy for clients to expose built-in metrics without having to worry about the Prometheus server (so long as best practices are being followed in terms of label cardinality!). However, built-in metrics only get us some part of the way to observe systems; in the next part, we will be looking at how to instrument Golang and Java applications to add custom metrics.</p>
+
+<p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
             
-  
-    
-  
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/monitoring/">monitoring</a>
 
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/observability/">observability</a>
 
-  
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/prometheus/">prometheus</a>
 
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://pierrevincent.github.io/2016/11/agile-at-poppulo/">
-          Agile at Poppulo
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2016-11-10T00:00:00Z">
-      
-  November 10, 2016
-
-    </time>
-  
-  
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://pierrevincent.github.io/categories/talks">talks</a>
-    
-  
-
-
-</div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at <a href="https://www.meetup.com/Agile-Cork/">Agile Cork</a>, I go through the evolution of the processes used over the last few years at <a href="https://www.poppulo.com">Poppulo</a> (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.</p>
-
-<p>
-        <br>
-        <a href="https://pierrevincent.github.io/2016/11/agile-at-poppulo/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-          
+                  </div>
+                
+              
             
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/">
-          Docker, Microservices and Service Discovery
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2015-10-18T00:00:00Z">
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
       
-  October 18, 2015
-
-    </time>
-  
-  
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://pierrevincent.github.io/categories/talks">talks</a>
-    
-  
-
-
-</div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        Working with Microservices has recently become very trendy, however building dynamic and distributed systems doesn’t come without new challenges. Service Discovery is one of these challenges: enabling services to dynamically discover other services and communicate with them. In this talk at <a href="http://corkdev.io/">CorkDev.io</a>, I go through a Service Discovery solution, using <a href="https://medium.com/airbnb-engineering/smartstack-service-discovery-in-the-cloud-4b8a080de619">Airbnb Smartstack</a> to wire up Microservices running in Docker containers.</p>
-
-<p>
-        <br>
-        <a href="https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://pierrevincent.github.io/images/corkdev.png"/>
-      </div>
-    </a>
-  
-</article>
-
+        <li class="post-action">
           
+            <a class="post-action-btn btn btn--disabled">
           
-  <div class="pagination-bar">
-    <ul class="pagination">
-      
-        <li class="pagination-prev">
-          <a class="btn btn--default btn--small" href="https://pierrevincent.github.io/">
-            <i class="fa fa-angle-left text-base icon-mr"></i>
-            <span>NEWER POSTS</span>
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/" data-tooltip="Prometheus Blog Series (Part 2): Metric types">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+            <i class="fa fa-angle-right"></i>
           </a>
         </li>
       
-      
-      <li class="pagination-number">page 2 of 2</li>
     </ul>
-  </div>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 
 
-        </section>
+            
+              
+            
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2017 Pierre Vincent. All Rights Reserved
@@ -414,6 +398,86 @@ ga('send', 'pageview');
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/" data-tooltip="Prometheus Blog Series (Part 2): Metric types">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+        <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+        <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
+        <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -705,6 +769,10 @@ $(document).ready(function() {
 });
 </script>
 
+  
+    
+  
+
 
 
 
@@ -712,3 +780,4 @@ $(document).ready(function() {
     
   </body>
 </html>
+
