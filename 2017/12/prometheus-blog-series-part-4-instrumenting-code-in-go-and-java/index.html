@@ -21,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.31.1">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Prometheus Blog Series (Part 2): Metric types</title>
+    <title>Prometheus Blog Series (Part 4): Instrumenting code in Go and Java</title>
     <meta name="author" content="Pierre Vincent">
     <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
@@ -29,19 +29,25 @@
     
 
     
-    <meta name="description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
+    <meta name="description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.
+
+This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.
 
 ">
-    <meta property="og:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
+    <meta property="og:description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.
+
+This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.
 
 ">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Prometheus Blog Series (Part 2): Metric types">
-    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-2-metric-types/">
+    <meta property="og:title" content="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
+    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/">
     <meta property="og:site_name" content="Pierre Vincent">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Prometheus Blog Series (Part 2): Metric types">
-    <meta name="twitter:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
+    <meta name="twitter:title" content="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
+    <meta name="twitter:description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.
+
+This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.
 
 ">
     
@@ -231,14 +237,14 @@ ga('send', 'pageview');
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      Prometheus Blog Series (Part 2): Metric types
+      Prometheus Blog Series (Part 4): Instrumenting code in Go and Java
     </h1>
   
   <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-12-24T00:00:00Z">
+    <time itemprop="datePublished" datetime="2017-12-28T00:00:00Z">
       
-  December 24, 2017
+  December 28, 2017
 
     </time>
   
@@ -258,142 +264,243 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>In <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> of this series, we talked about <a href="https://prometheus.io/">Prometheus</a> metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.</p>
+              <p>So far in this <a href="https://prometheus.io/">Prometheus</a> blog series, we have looked into Prometheus metrics and labels (see <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> &amp; <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/">2</a>), as well as how Prometheus integrates in a distributed architecture (see <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">Part 3</a>). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.</p>
+
+<p>This post will go through examples in Go and Java. Prometheus has a number of other <a href="https://prometheus.io/docs/instrumenting/clientlibs/">supported languages</a>, through official libraries and community maintained ones.</p>
 
 <p></p>
 
-<h2 id="counters-the-only-way-is-up">Counters: the only way is up</h2>
+<h2 id="instrumentation-in-go">Instrumentation in Go</h2>
 
-<p>A great way to instrument the internal state of an application is to count whenever specific events happen, and expose this counter over time as a time series. Each data point of the time series is the value of the counter at the time the counter was observed.</p>
+<p>Go is one of the officially supported languages for Prometheus instrumentation. Not hugely surprising, since Prometheus is written in Go!</p>
 
-<p>The counter metric type works on a very strict assumption that it can only be incremented. When a service exposes a counter metric, it always starts at 0 and only goes up. Like all other metrics, each label combination is its own data-point and is incremented individually.</p>
+<p>The <a href="https://github.com/prometheus/client_golang">Prometheus Go client</a> provides:</p>
 
-<p>The best practice on naming counters is to using the <code>_total</code> suffix, e.g. <code>batch_jobs_completed_total</code>.</p>
+<ul>
+<li>Built-in Go metrics (memory usage, goroutines, GC, &hellip;)</li>
+<li>The ability to create custom metrics</li>
+<li>An HTTP handler for the <code>/metrics</code> endpoint</li>
+</ul>
 
-<h3 id="observing-counters-over-time">Observing counters over time</h3>
+<h3 id="add-built-in-metrics">Add built-in metrics</h3>
 
-<p>The absolute value of a counter is pretty irrelevant and should not be relied on - this is because counters do not preserve their value over application restarts. In a microservices architecture, instances of services are short-lived (e.g. rolling-updates, auto-scaling&hellip;), therefore counters will very often reset back to 0.</p>
+<p>Enabling the built-in metrics is as simple as importing the library and exposing the metrics handler.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">package</span> main
 
-<p>The real purpose of counters is actually in their evolution over time, which can be obtained through functions like <code>rate()</code> or <code>irate()</code>. These functions will automatically correct counter resets, allowing to calculate accurate rates even if some services restart.</p>
+<span style="color:#00a">import</span> (
+    <span style="color:#a50">&#34;github.com/prometheus/client_golang/prometheus/promhttp&#34;</span>
+    <span style="color:#a50">&#34;net/http&#34;</span>
+)
 
-<pre><code># Total number of completed cleanup jobs by datacenter (will be affected by restarts)
-sum(batch_jobs_completed_total{job_type=&quot;hourly-cleanup&quot;}) by (datacenter)
-
-# Number of completed cleanup jobs per second, by datacenter (not affected by restarts)
-sum(rate(batch_jobs_completed_total{job_type=&quot;hourly-cleanup&quot;}[5m])) by (datacenter)
-</code></pre>
-
-<p>Unlike the <code>sum()</code> function, <code>rate()</code> does not take in a metric, but a <em>range vector</em> (created by using the <code>[ ]</code> operator). A <em>range vector</em> contains all the data-points of the metric for the time-period specified. In the example above, <code>[5m]</code> will consider all data-points captured for our <code>batch_jobs_completed_total</code> metric for 5 minutes. Applying <code>rate()</code> to a <em>range vector</em> calculates the average rate of increase per second during that time-window. The longer the time-window, the smoother the <code>rate()</code> graph will be (potentially hiding local spikes).</p>
-
-<p>Example of a requests counter (total and rate):</p>
-
-<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-requests-counter.png" alt="Total number of requests" /></p>
-
-<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-requests-counter-rate.png" alt="Requests rate" /></p>
-
-<h2 id="gauges-instrumenting-the-current-state">Gauges: instrumenting the current state</h2>
-
-<p>Not all application metrics can be covered by counters, as they might go up and down over time. Typically this will be the case of any metric exposing the <em>current state</em> of something, as opposed to <em>how many things happened</em>. Gauges can be used to track such metrics, for example:</p>
-
-<pre><code># Amount of memory currently used
-memory_bytes_used
-
-# Number of jobs currently in queue
-batch_jobs_in_queue{job_type=&quot;hourly-cleanup&quot;}
-</code></pre>
-
-<p>Gauges are very easy to reason about - unlike counters, their absolute value is meaningful and can be used for graphs and alerts. Their evolution over-time can also be used, with functions like <code>delta()</code>, <code>deriv()</code> and even <a href="https://www.robustperception.io/reduce-noise-from-disk-space-alerts/">predicted using linear-regression</a> with functions like <code>predict_linear()</code></p>
-
-<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-memory-gauge.png" alt="Memory usage gauge" /></p>
-
-<h2 id="histograms-sampling-observations">Histograms: sampling observations</h2>
-
-<p>When trying to observe the request latency of a service, the initial temptation can be to work with averages: they are simple to calculate over time using a total and a counter. Averages unfortunately have the big drawback of hiding distribution and prevent the discovery of outliers.</p>
-
-<p>Quantiles are better measurement for this kind of metrics, as they allow to understand distribution. For example, if the request latency 0.5-quantile (50th percentile) is 100ms, it means that 50% of requests completed under 100ms. Similarly, if the 0.99-quantile (99th percentile) is 4s, it means that 1% of requests responded in more than 4s.</p>
-
-<p>Quantiles are however quite expensive to calculate accurately, as they need the full set of observations (i.e. duration of each requests). Histograms make this simpler by sampling the observations in a pre-defined <em>buckets</em>. For example, a request latency Histogram can have buckets for &lt;10ms, &lt;100ms, &lt;1s, &lt;10s.</p>
-
-<p>When creating an Histogram, it is important to think about what the buckets should be from the beginning. In most scenarios, the <em>SLO</em> for the metric in question can be a good place to start.</p>
-
-<p>Prometheus can use these <em>buckets</em> to infer the quantiles using the <code>histogram_quantile()</code> function:</p>
-
-<pre><code># Request duration 90th percentile
-histogram_quantile(0.9, rate(http_request_duration_milliseconds_bucket[5m]))
-</code></pre>
-
-<p><img src="https://pierrevincent.github.io/images/prometheus-series/prometheus-latency-histogram.png" alt="Memory usage gauge" /></p>
-
-<p>The graph aboves highlights how important distribution is to understand a metric like latency. If we imagine that this metric has an <em>SLO</em> of 150ms, a 137ms average latency might look acceptable; in reality 1 out of 10 requests completes in 193ms or more (90th percentile) and 1 out of 100 takes more than 1s!</p>
-
-<h3 id="more-buckets-means-more-labels">More buckets means more labels</h3>
-
-<p>In practice, a Histogram will result in the creation of an additional metric (with the <code>_bucket</code> suffix), labeled with the upper bound of the <em>bucket</em>:</p>
-
-<pre><code># HELP http_request_duration_milliseconds Http request latency histogram
-# TYPE http_request_duration_milliseconds histogram
-http_request_duration_milliseconds_bucket{le=&quot;100&quot;} 3741
-http_request_duration_milliseconds_bucket{le=&quot;200&quot;} 4597
-http_request_duration_milliseconds_bucket{le=&quot;400&quot;} 4747
-http_request_duration_milliseconds_bucket{le=&quot;800&quot;} 4978
-http_request_duration_milliseconds_bucket{le=&quot;1600&quot;} 4991
-http_request_duration_milliseconds_bucket{le=&quot;+Inf&quot;} 5033
-http_request_duration_milliseconds_sum 673428
-http_request_duration_milliseconds_count 5033
-</code></pre>
-
-<p>Keeping in mind that each unique combination of labels is considered as a separate time-series, it is usually good practice to keep the number of buckets small, as well as the number of other labels on Histograms.</p>
-
-<h2 id="summaries-client-side-quantiles">Summaries: client-side quantiles</h2>
-
-<p><a href="https://prometheus.io/docs/practices/histograms/">Histograms and Summaries</a> are very similar in the way that they expose the distribution of a given data set. While Histograms use sampling (with <em>buckets</em>) and estimate quantiles on the Prometheus server, Summaries are calculated on the client side (i.e. the service exposing metrics)</p>
-
-<p>Summaries have the advantage of being more accurate for the pre-defined quantiles, however the client-side calculation can be expensive to do (while Histograms are basically just counters). One of the other drawbacks of Summaries is that they cannot be combined together, because quantiles cannot be averaged. Therefore, Summaries should only be used for metrics that make sense at an individual instance level (e.g. garbage collection times) or if the service in question is only going to have a single instance.</p>
-
-<p>The pre-configured aspect of Summaries quantiles can also be a bit limiting, while Histograms allow to do this at the server level, without changing client instrumentation.</p>
-
-<p>Example of the built-in Golang garbage collector summary:</p>
+<span style="color:#00a">func</span> main() {
+    http.Handle(<span style="color:#a50">&#34;/metrics&#34;</span>, promhttp.Handler())
+    <span style="color:#0aa">panic</span>(http.ListenAndServe(<span style="color:#a50">&#34;:8080&#34;</span>, <span style="color:#00a">nil</span>))
+}</code></pre></div>
+<p>This sample application will expose standard Go metrics, which should be accessible under <a href="http://localhost:8080/metrics">http://localhost:8080/metrics</a>. It should output something like:</p>
 
 <pre><code># HELP go_gc_duration_seconds A summary of the GC invocation durations.
 # TYPE go_gc_duration_seconds summary
-go_gc_duration_seconds{quantile=&quot;0&quot;} 4.274e-05
-go_gc_duration_seconds{quantile=&quot;0.25&quot;} 6.8508e-05
-go_gc_duration_seconds{quantile=&quot;0.5&quot;} 0.000275171
-go_gc_duration_seconds{quantile=&quot;0.75&quot;} 0.002328529
-go_gc_duration_seconds{quantile=&quot;1&quot;} 0.201453313
-go_gc_duration_seconds_sum 0.467543895
-go_gc_duration_seconds_count 92
+go_gc_duration_seconds{quantile=&quot;0&quot;} 0
+go_gc_duration_seconds{quantile=&quot;0.25&quot;} 0
+go_gc_duration_seconds{quantile=&quot;0.5&quot;} 0
+go_gc_duration_seconds{quantile=&quot;0.75&quot;} 0
+go_gc_duration_seconds{quantile=&quot;1&quot;} 0
+go_gc_duration_seconds_sum 0
+go_gc_duration_seconds_count 0
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 8
+# HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.
+# TYPE go_memstats_alloc_bytes gauge
+go_memstats_alloc_bytes 510728
+# [...]
 </code></pre>
 
+<h3 id="creating-custom-metrics">Creating custom metrics</h3>
+
+<p>Instrumenting an application goes further than low-level metrics. Custom metrics can be used to expose information about the internal state of applications, to gain more understanding for monitoring or debugging purposes.</p>
+
+<h4 id="simple-gauge">Simple Gauge</h4>
+
+<p>Custom metrics are created via the <code>github.com/prometheus/client_golang/prometheus</code> package. For example, a Gauge for the number of jobs currently in a queue:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">import</span> <span style="color:#a50">&#34;github.com/prometheus/client_golang/prometheus&#34;</span>
+
+<span style="color:#00a">var</span> jobsInQueue = prometheus.NewGauge(
+    prometheus.GaugeOpts{
+        Name: <span style="color:#a50">&#34;jobs_in_queue&#34;</span>,
+        Help: <span style="color:#a50">&#34;Current number of jobs in the queue&#34;</span>,
+    },
+)</code></pre></div>
+<p>To include the new metric in the list exposed in the HTTP handler, it must be registered in the default registry (it is easy to forget this step and spend a while figuring out why a metric is missing from the endpoint):</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> init(){
+    promtheus.MustRegister(jobsInQueue)
+}</code></pre></div>
+<p>Finally, the metric can be used inside the code:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> enqueueJob(job Job) {
+    queue.Add(job)
+    jobsInQueue.Inc()
+}
+
+<span style="color:#00a">func</span> runNextJob() {
+    job := queue.Dequeue()
+    jobsInQueue.Dec()
+    
+    job.Run()
+}</code></pre></div>
+<p>Creating a Counter is very similar to a Gauge, using <code>prometheus.NewCounter()</code>. The only difference is that a Counter only has the <code>.Inc()</code> receiver.</p>
+
+<h4 id="adding-labels">Adding labels</h4>
+
+<p>As it is, <code>jobs_in_queue</code> is a simple metric with no labels. It would be interesting to track the queue size for each type of jobs. In this case, the metric creation can use <code>NewGaugeVec()</code> instead of <code>NewGauge()</code> and specify the list of labels for the metric.</p>
+
+<p>The metric creation code becomes:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">var</span> jobsInQueue = prometheus.NewGaugeVec(
+    prometheus.GaugeOpts{
+        Name: <span style="color:#a50">&#34;jobs_in_queue&#34;</span>,
+        Help: <span style="color:#a50">&#34;Current number of jobs in the queue&#34;</span>,
+    },
+    []<span style="color:#0aa">string</span>{<span style="color:#a50">&#34;job_type&#34;</span>},
+)</code></pre></div>
+<p>The instrumentation must now specify the values for the labels (in this case <code>job_type</code>) before incrementing or decrementing the Gauge:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> enqueueJob(job Job) {
+    queue.Add(job)
+    jobsInQueue.WithLabelValues(job.Type()).Inc()
+}
+
+<span style="color:#00a">func</span> runNextJob() {
+    job := queue.Dequeue()
+    jobsInQueue.WithLabelValues(job.Type()).Dec()
+
+    job.Run()
+}</code></pre></div>
+<p>If specifying multiple labels, the label values must be passed in the same order as the labels were defined when creating the metric.</p>
+
+<h4 id="defining-histogram-buckets">Defining Histogram buckets</h4>
+
+<p>Measuring the duration of the things happening inside applications is usually a good way to get some insights of performance and detect anomalies. As explained in <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/">Part 2</a>, durations should be analysed through their distribution (and not averages), which means the ideal metric type in such a situation is an Histogram (or potentially a Summary).</p>
+
+<p>Histograms observe all values and count them in bounded <em>buckets</em>. These <em>buckets</em> must be defined for the Histogram at creation time and should be tailored to what&rsquo;s being measured (otherwise, the metric will be of very little use). If the typical profile for the jobs ran by this application is in the order of 1~5 seconds, good <em>buckets</em> could be: &lt;1s, &lt;2s, &lt;5s, &lt;10s, &lt;20s, &lt;1m.</p>
+
+<p>Creating an Histogram is very similar to a Gauge, with the addition of the <em>buckets</em>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">var</span> jobsDurationHistogram = prometheus.NewHistogramVec(
+    prometheus.HistogramOpts{
+        Name:    <span style="color:#a50">&#34;jobs_duration_seconds&#34;</span>,
+        Help:    <span style="color:#a50">&#34;Jobs duration distribution&#34;</span>,
+        Buckets: []<span style="color:#0aa">float64</span>{<span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">5</span>, <span style="color:#099">10</span>, <span style="color:#099">20</span>, <span style="color:#099">60</span>},
+    },
+    []<span style="color:#0aa">string</span>{<span style="color:#a50">&#34;job_type&#34;</span>},
+)</code></pre></div>
+<p>Instead of defining the <em>buckets</em> manually, it is also possible to create <em>buckets</em> in a linear sequence (e.g. 10, 15, 20, 25) or exponential sequence (e.g. 1, 10, 100, 1000):</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#aaa;font-style:italic">// 4 buckets, starting from 10 and adding 5 between each
+</span><span style="color:#aaa;font-style:italic"></span>prometheus.LinearBuckets(<span style="color:#099">10</span>, <span style="color:#099">5</span>, <span style="color:#099">4</span>)
+
+<span style="color:#aaa;font-style:italic">// 4 buckets, starting from 1 and multiplying by 10 between each
+</span><span style="color:#aaa;font-style:italic"></span>prometheus.ExponentialBuckets(<span style="color:#099">1</span>, <span style="color:#099">10</span>, <span style="color:#099">4</span>)</code></pre></div>
+<p>The Histogram is then used inside the code to observe the duration of each job:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">start := time.Now()
+job.Run()
+duration := time.Since(start)
+jobsDurationHistogram.WithLabelValues(job.Type()).Observe(duration.Seconds())</code></pre></div>
+<p>Creating a Summary is somewhat similar to an Histogram, the difference is that <code>prometheus.NewSummary()</code> must specify which <em>quantiles</em> to calculate (instead of specifying <em>buckets</em>).</p>
+
+<p>You can find more <a href="https://github.com/prometheus/client_golang/tree/master/examples">examples</a> provided with the Go client library.</p>
+
+<h2 id="instrumentation-in-java">Instrumentation in Java</h2>
+
+<p>The <a href="https://github.com/prometheus/client_java">client library for Java</a> is also officially supported and as a result instrumenting Java code is very similar to Go.</p>
+
+<p>Following the same example as above, here are the equivalent code snippets in Java.</p>
+
+<h3 id="add-built-in-metrics-1">Add built-in metrics</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">import</span> <span style="color:#0aa">io.prometheus.client.exporter.MetricsServlet</span>;
+<span style="color:#00a">import</span> <span style="color:#0aa">io.prometheus.client.hotspot.DefaultExports</span>;
+
+<span style="color:#aaa;font-style:italic">// ...
+</span><span style="color:#aaa;font-style:italic"></span>
+<span style="color:#00a">public</span> <span style="color:#0aa">void</span> <span style="color:#0a0">initContext</span>(ServletContextHandler context) {
+   <span style="color:#aaa;font-style:italic">// Enable default JVM metrics
+</span><span style="color:#aaa;font-style:italic"></span>   DefaultExports.<span style="color:#1e90ff">initialize</span>();
+
+   <span style="color:#aaa;font-style:italic">// Add metrics servlet to the context
+</span><span style="color:#aaa;font-style:italic"></span>   context.<span style="color:#1e90ff">addServlet</span>(<span style="color:#00a">new</span> ServletHolder(<span style="color:#00a">new</span> MetricsServlet()), <span style="color:#a50">&#34;/metrics&#34;</span>);
+
+   <span style="color:#aaa;font-style:italic">// ...
+</span><span style="color:#aaa;font-style:italic"></span>}</code></pre></div>
+<p>If you are using a framework like Spring Boot, a lot of this might be taken care of through configuration and annotations. There is a good example in a blog from Njål Nordmark: <a href="https://njalnordmark.wordpress.com/2017/05/08/using-prometheus-with-spring-boot/">Using Prometheus with Spring Boot</a>. Another alertnative for instrumenting a Spring Boot app is to use a vendor-neutral library that supports Prometheus, such as <a href="https://ordina-jworks.github.io/microservices/2017/09/17/monitoring-your-microservices-with-micrometer.html">Micrometer</a>.</p>
+
+<h3 id="creating-a-simple-gauge">Creating a simple Gauge</h3>
+
+<p>Creation and registration:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Gauge JOBS_IN_QUEUE = Gauge.<span style="color:#1e90ff">build</span>()
+    .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_in_queue&#34;</span>)
+    .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Current number of jobs in the queue&#34;</span>)
+    .<span style="color:#1e90ff">register</span>();</code></pre></div>
+<p>Using the metric:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">public</span> <span style="color:#0aa">void</span> <span style="color:#0a0">enqueueJob</span>(Job job) {
+    queue.<span style="color:#1e90ff">add</span>(job);
+    JOBS_IN_QUEUE.<span style="color:#1e90ff">inc</span>();
+}
+
+<span style="color:#00a">public</span> <span style="color:#0aa">void</span> <span style="color:#0a0">runNextJob</span>() {
+    Job job = queue.<span style="color:#1e90ff">dequeue</span>();
+    JOBS_IN_QUEUE.<span style="color:#1e90ff">dec</span>();
+
+    job.<span style="color:#1e90ff">run</span>();
+}</code></pre></div>
+<h3 id="adding-labels-1">Adding labels</h3>
+
+<p>Defining the metric with the added <code>job_type</code> label:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Gauge JOBS_IN_QUEUE = Gauge.<span style="color:#1e90ff">build</span>()
+    .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_in_queue&#34;</span>)
+    .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Current number of jobs in the queue&#34;</span>)
+    .<span style="color:#1e90ff">labelNames</span>(<span style="color:#a50">&#34;job_type&#34;</span>)
+    .<span style="color:#1e90ff">register</span>();</code></pre></div>
+<p>Adding the label value when using the Gauge:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">public</span> <span style="color:#0aa">void</span> <span style="color:#0a0">enqueueJob</span>(Job job) {
+    queue.<span style="color:#1e90ff">add</span>(job);
+    JOBS_IN_QUEUE.<span style="color:#1e90ff">labels</span>(job.<span style="color:#1e90ff">getType</span>()).<span style="color:#1e90ff">inc</span>();
+}
+
+<span style="color:#00a">public</span> <span style="color:#0aa">void</span> <span style="color:#0a0">runNextJob</span>() {
+    Job job = queue.<span style="color:#1e90ff">dequeue</span>();
+    JOBS_IN_QUEUE.<span style="color:#1e90ff">labels</span>(job.<span style="color:#1e90ff">getType</span>()).<span style="color:#1e90ff">dec</span>();
+
+    job.<span style="color:#1e90ff">run</span>();
+}</code></pre></div>
+<h4 id="defining-histogram-buckets-1">Defining Histogram buckets</h4>
+
+<p>Creating an histogram with manually defined <em>buckets</em>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Histogram JOB_DURATION_HISTOGRAM = Histogram.<span style="color:#1e90ff">build</span>()
+    .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_duration_seconds&#34;</span>)
+    .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Jobs duration distribution&#34;</span>)
+    .<span style="color:#1e90ff">labelNames</span>(<span style="color:#a50">&#34;job_type&#34;</span>)
+    .<span style="color:#1e90ff">buckets</span>(1, 2, 5, 10, 20, 60)
+    .<span style="color:#1e90ff">register</span>();</code></pre></div>
+<p>With linear <em>buckets</em>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Histogram JOB_DURATION_HISTOGRAM = Histogram.<span style="color:#1e90ff">build</span>()
+    .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_duration_seconds&#34;</span>)
+    .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Jobs duration distribution&#34;</span>)
+    .<span style="color:#1e90ff">labelNames</span>(<span style="color:#a50">&#34;job_type&#34;</span>)
+    .<span style="color:#1e90ff">linearBuckets</span>(10, 5, 4)
+    .<span style="color:#1e90ff">register</span>();</code></pre></div>
+<p>With exponential <em>buckets</em>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Histogram JOB_DURATION_HISTOGRAM = Histogram.<span style="color:#1e90ff">build</span>()
+    .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_duration_seconds&#34;</span>)
+    .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Jobs duration distribution&#34;</span>)
+    .<span style="color:#1e90ff">labelNames</span>(<span style="color:#a50">&#34;job_type&#34;</span>)
+    .<span style="color:#1e90ff">exponentialBuckets</span>(1, 10, 4)
+    .<span style="color:#1e90ff">register</span>();</code></pre></div>
+<p>Observing job durations:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Histogram.<span style="color:#1e90ff">Timer</span> jobTimer = JOB_DURATION_HISTOGRAM.<span style="color:#1e90ff">WithLabelValues</span>(job.<span style="color:#1e90ff">Type</span>()).<span style="color:#1e90ff">startTimer</span>();
+job.<span style="color:#1e90ff">run</span>();
+jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div>
 <h2 id="what-s-next">What&rsquo;s next?</h2>
 
-<p>This second part covered the different metric types Prometheus offers and in what situation they should (or should not) be used:</p>
+<p>With the large number of client libraries available for Prometheus instrumentation, there is very little barrier to add custom metrics to any application you write yourself.</p>
 
-<ul>
-<li><strong>Counters</strong>: use for counting events that happen (e.g. total number of requests) and query using <code>rate()</code></li>
-<li><strong>Gauge</strong>: use to instrument the current state of a metric (e.g. memory usage, jobs in queue)</li>
-<li><strong>Histograms</strong>: use to sample observations in order to analyse distribution of a data set (e.g. request latency)</li>
-<li><strong>Summaries</strong>: use for pre-calculated quantiles on client side, but be mindful of calculation cost and aggregation limitations</li>
-</ul>
-
-<p>You should now have a better understanding of what Prometheus metrics are and how to query them&hellip;  but how do these metrics get there in the first place? The <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">next part</a> of this series will get into the Prometheus <em>pull model</em> on how clients expose metrics and how Prometheus collects them.</p>
+<p>Custom metrics can be infinitely more valuable than system metrics, as they can allow to create powerful indicators of how a service is fulfilling its responsibilities (or not). These top-level metrics are typically more interesting to alert on; in the next post, we will look more into what is worth alerting on, and how to define Prometheus rules in order to trigger such alerts.</p>
 
 <p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
-
-<h3 id="more-reading">More reading</h3>
-
-<p>Prometheus documentation:</p>
-
-<ul>
-<li><a href="https://prometheus.io/docs/concepts/metric_types/">Metric types</a></li>
-<li><a href="https://prometheus.io/docs/practices/histograms/">Histograms and quantiles</a></li>
-</ul>
-
-<p>Articles:</p>
-
-<ul>
-<li>Using <code>predict_linear()</code> to alert on disk about to fill up, from <a href="https://www.robustperception.io/reduce-noise-from-disk-space-alerts/">robustperception.io</a></li>
-</ul>
               
             </div>
           </div>
@@ -421,7 +528,7 @@ go_gc_duration_seconds_count 92
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -429,7 +536,7 @@ go_gc_duration_seconds_count 92
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" data-tooltip="Prometheus Blog Series (Part 1): Metrics and Labels">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
           
             <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
             <i class="fa fa-angle-right"></i>
@@ -446,17 +553,17 @@ go_gc_duration_seconds_count 92
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -492,7 +599,7 @@ go_gc_duration_seconds_count 92
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -500,7 +607,7 @@ go_gc_duration_seconds_count 92
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" data-tooltip="Prometheus Blog Series (Part 1): Metrics and Labels">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
           
             <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
             <i class="fa fa-angle-right"></i>
@@ -517,17 +624,17 @@ go_gc_duration_seconds_count 92
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -548,17 +655,17 @@ go_gc_duration_seconds_count 92
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
         <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
         <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
         <i class="fa fa-twitter"></i><span>Share on Twitter</span>
       </a>
     </li>

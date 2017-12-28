@@ -6,10 +6,23 @@
     <description>Recent content on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://pierrevincent.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Prometheus Blog Series (Part 4): Instrumenting code in Go and Java</title>
+      <link>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</guid>
+      <description>&lt;p&gt;So far in this &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; blog series, we have looked into Prometheus metrics and labels (see &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;2&lt;/a&gt;), as well as how Prometheus integrates in a distributed architecture (see &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/&#34;&gt;Part 3&lt;/a&gt;). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&amp;rsquo; wide adoption.&lt;/p&gt;
+
+&lt;p&gt;This post will go through examples in Go and Java. Prometheus has a number of other &lt;a href=&#34;https://prometheus.io/docs/instrumenting/clientlibs/&#34;&gt;supported languages&lt;/a&gt;, through official libraries and community maintained ones.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Prometheus Blog Series (Part 3): Exposing and collecting metrics</title>

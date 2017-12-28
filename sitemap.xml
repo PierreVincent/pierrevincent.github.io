@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</loc>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+  </url>
   
   <url>
     <loc>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</loc>
@@ -135,19 +141,19 @@
   
   <url>
     <loc>https://pierrevincent.github.io/tags/monitoring/</loc>
-    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pierrevincent.github.io/categories/monitoring/</loc>
-    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pierrevincent.github.io/tags/observability/</loc>
-    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -159,19 +165,19 @@
   
   <url>
     <loc>https://pierrevincent.github.io/</loc>
-    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pierrevincent.github.io/post/</loc>
-    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pierrevincent.github.io/tags/prometheus/</loc>
-    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
