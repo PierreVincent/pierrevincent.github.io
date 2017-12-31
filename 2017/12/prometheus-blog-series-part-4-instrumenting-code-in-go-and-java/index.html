@@ -344,7 +344,7 @@ go_memstats_alloc_bytes 510728
 <span style="color:#00a">func</span> runNextJob() {
     job := queue.Dequeue()
     jobsInQueue.Dec()
-    
+
     job.Run()
 }</code></pre></div>
 <p>Creating a Counter is very similar to a Gauge, using <code>prometheus.NewCounter()</code>. The only difference is that a Counter only has the <code>.Inc()</code> receiver.</p>
@@ -498,7 +498,7 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
 
 <p>With the large number of client libraries available for Prometheus instrumentation, there is very little barrier to add custom metrics to any application you write yourself.</p>
 
-<p>Custom metrics can be infinitely more valuable than system metrics, as they can allow to create powerful indicators of how a service is fulfilling its responsibilities (or not). These top-level metrics are typically more interesting to alert on; in the next post, we will look more into what is worth alerting on, and how to define Prometheus rules in order to trigger such alerts.</p>
+<p>Custom metrics can be infinitely more valuable than system metrics, as they can allow to create powerful indicators of how a service is fulfilling its responsibilities (or not). These top-level metrics are typically more interesting to alert on; in the <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/">next post</a>, we will look more into what is worth alerting on, and how to define Prometheus rules in order to trigger such alerts.</p>
 
 <p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
               
@@ -528,7 +528,7 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" data-tooltip="Prometheus Blog Series (Part 5): Alerting rules">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -599,7 +599,7 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" data-tooltip="Prometheus Blog Series (Part 5): Alerting rules">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -721,6 +721,27 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/">
+                <h3 class="media-heading">Prometheus Blog Series (Part 5): Alerting rules</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">blog series</a>, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover <em>unknown unknowns</em>, either pro-actively (testing) or reactively (debugging).</p>
+
+<p>Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their <em>normal</em> state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -899,25 +920,6 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://pierrevincent.github.io/2016/11/agile-at-poppulo/">
-                <h3 class="media-heading">Agile at Poppulo</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Nov 11, 2016
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at <a href="https://www.meetup.com/Agile-Cork/">Agile Cork</a>, I go through the evolution of the processes used over the last few years at <a href="https://www.poppulo.com">Poppulo</a> (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -925,7 +927,7 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         12 posts found
+         13 posts found
       </p>
     </div>
   </div>
