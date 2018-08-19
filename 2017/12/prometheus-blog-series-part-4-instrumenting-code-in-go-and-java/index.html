@@ -333,7 +333,7 @@ go_memstats_alloc_bytes 510728
 )</code></pre></div>
 <p>To include the new metric in the list exposed in the HTTP handler, it must be registered in the default registry (it is easy to forget this step and spend a while figuring out why a metric is missing from the endpoint):</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> init(){
-    promtheus.MustRegister(jobsInQueue)
+    prometheus.MustRegister(jobsInQueue)
 }</code></pre></div>
 <p>Finally, the metric can be used inside the code:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> enqueueJob(job Job) {
