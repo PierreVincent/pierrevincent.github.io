@@ -21,33 +21,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.31.1">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Prometheus Blog Series (Part 5): Alerting rules</title>
+    <title>Patterns for zero-downtime deployments of large applications</title>
     <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
+    <meta name="keywords" content="continuous delivery, continuous deployment, monitoring, devops, zero-downtime, devops, sre, monitoring">
 
     <link rel="icon" href="https://pierrevincent.github.io/favicon.png">
     
 
     
-    <meta name="description" content="Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this blog series, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover unknown unknowns, either pro-actively (testing) or reactively (debugging).
-
-Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their normal state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.
+    <meta name="description" content="For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&rsquo;s products started their development more than a decade ago, with different practices, assumptions or expectations.
 
 ">
-    <meta property="og:description" content="Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this blog series, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover unknown unknowns, either pro-actively (testing) or reactively (debugging).
-
-Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their normal state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.
+    <meta property="og:description" content="For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&rsquo;s products started their development more than a decade ago, with different practices, assumptions or expectations.
 
 ">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Prometheus Blog Series (Part 5): Alerting rules">
-    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-5-alerting-rules/">
+    <meta property="og:title" content="Patterns for zero-downtime deployments of large applications">
+    <meta property="og:url" content="/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/">
     <meta property="og:site_name" content="Pierre Vincent">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Prometheus Blog Series (Part 5): Alerting rules">
-    <meta name="twitter:description" content="Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this blog series, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover unknown unknowns, either pro-actively (testing) or reactively (debugging).
-
-Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their normal state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.
+    <meta name="twitter:title" content="Patterns for zero-downtime deployments of large applications">
+    <meta name="twitter:description" content="For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&rsquo;s products started their development more than a decade ago, with different practices, assumptions or expectations.
 
 ">
     
@@ -63,7 +57,7 @@ Metrics can also be used to help with things we already know and care about: ins
     
 
     
-      <meta property="og:image" content="https://pierrevincent.github.io/images/prometheus.png">
+      <meta property="og:image" content="https://pierrevincent.github.io/images/uptime-247.png">
     
     
     
@@ -237,14 +231,14 @@ ga('send', 'pageview');
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      Prometheus Blog Series (Part 5): Alerting rules
+      Patterns for zero-downtime deployments of large applications
     </h1>
   
   <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-12-31T00:00:00Z">
+    <time itemprop="datePublished" datetime="2018-12-10T00:00:00Z">
       
-  December 31, 2017
+  December 10, 2018
 
     </time>
   
@@ -253,7 +247,7 @@ ga('send', 'pageview');
   
     <span>in</span>
     
-      <a class="category-link" href="https://pierrevincent.github.io/categories/monitoring">monitoring</a>
+      <a class="category-link" href="https://pierrevincent.github.io/categories/devops">devops</a>
     
   
 
@@ -264,117 +258,122 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">blog series</a>, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover <em>unknown unknowns</em>, either pro-actively (testing) or reactively (debugging).</p>
-
-<p>Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their <em>normal</em> state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.</p>
+              <p>For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&rsquo;s products started their development more than a decade ago, with different practices, assumptions or expectations.</p>
 
 <p></p>
 
-<p><em>Important: examples in this post follow the new rules syntax from Prometheus 2.0. If you haven&rsquo;t upgraded yet, you can refer to the <a href="https://prometheus.io/docs/prometheus/1.8/configuration/alerting_rules/">Prometheus 1.x documentation</a>.</em></p>
+<h1 id="what-do-you-mean-downtime-during-deployments">What do you mean downtime during deployments?</h1>
 
-<h2 id="defining-thresholds-to-alert-on">Defining thresholds to alert on</h2>
+<p>Historical assumptions lead to early design and architecture choices, which are following a project for years. One of these assumptions 10-15 years ago was that it was acceptable to take a system out for maintenance for a few hours every 6 months to deploy the latest version.</p>
 
-<p>Continuing the jobs queue example from <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/">Part 4</a>, the following rule is creating an alert if the total number of jobs in the queue is above 100. This threshold is obviously arbitrary (and the example simplistic) and would need to be based on the understanding of what <em>normal</em> looks like for the metric used.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">alert:<span style="color:#bbb"> </span>Lots_Of_Jobs_In_Queue<span style="color:#bbb">
-</span><span style="color:#bbb"></span>expr:<span style="color:#bbb"> </span>sum(jobs_in_queue)<span style="color:#bbb"> </span><span style="color:#a50">&gt; 100</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>for:<span style="color:#bbb"> </span>5m<span style="color:#bbb">
-</span><span style="color:#bbb"></span>labels:<span style="color:#bbb">
-</span><span style="color:#bbb">   </span>severity:<span style="color:#bbb"> </span>major</code></pre></div>
-<p>In the above example, the <code>expr</code> field specifies the metric query and threshold under which this alert should fire, i.e. when the queue size is greater than 100.</p>
+<p>As the years pass, the product becomes successful and more engineers start contributing to its growth. Embracing agile principles, the teams gravitate to more frequent releases. And the friction starts: more releases means more downtime. Besides, finding a good time to upgrade the application becomes a struggle, as there is no longer such a thing as <em>out-of-hours</em> for the worldwide user base.</p>
 
-<p>The <code>for</code> field is used to delay the alert from triggering, in order to avoid spurious alerts when the threshold is only reached for a short period of time before returning to normal. In this case, <code>5m</code> means that if the queue size goes over 100, the alert will be set to <em>Pending</em> and remain that way if it doesn’t recover. After 5 minutes, it will be set to <em>Firing</em> and the relevant notifications will be triggered.</p>
+<p>All this compounds with the business concerns: downtime is a thing of the past! How come the new competitor on the block doesn&rsquo;t have any monthly maintenance?</p>
 
-<p>Prometheus itself does not send the actual alert messages to users, this is the responsibility of the <a href="https://prometheus.io/docs/alerting/alertmanager/">Alertmanager</a> (deployed independently). When an alert reaches the <em>Firing</em> state, Prometheus notifies the Alertmanager, which in turn will route the alert to the right channel (e.g. Slack, Pagerduty&hellip;) and to the right people. Alertmanager routing will be covered in the next post of this series.</p>
+<p>Looking back at the application architecture, carrying the inertia of all these original decisions, the immediate reaction is &ldquo;this will never work&rdquo;. But hold off the big re-architecting project, reality is actually much less scary in my experience.</p>
 
-<h3 id="a-word-on-namespacing-queries-in-alerting-rules">A word on namespacing queries in alerting rules</h3>
+<p>The reason zero-downtime deployments sound scary is because we look at it from the inside out.  Zero-downtime is actually an external property of the system: it doesn&rsquo;t mean everything is up, it doesn&rsquo;t mean everything is running the latest version, it means nobody notices!</p>
 
-<p>As Prometheus stores all metrics together, the metric named <code>jobs_in_queue</code> could come from different services to represent something different in their own context. Using <code>sum(jobs_in_queue)</code> could therefore create false positive if suddenly a new service started using the same metric name (without knowing it was already used by a different team).</p>
+<h1 id="deployment-mapping-exercise">Deployment mapping exercise</h1>
 
-<p>In order to avoid this, it is best to filter the metric with a specific label for the services the alert related to, e.g. <code>sum(jobs_in_queue{service=&quot;billing-processing&quot;}) &gt; 100</code>.</p>
+<p>Trying to solve everything at once is rarely the best way the achieve the optimal result. Going from a 3-hour blackout to nothing is not going to happen in one go. But there is an obvious success metric to track progress: by how much did we reduce deployment downtime?</p>
 
-<p>An alternative approach is to keep the <code>service</code> label so it can be used later on to silence alerts, e.g. <code>sum(jobs_in_queue) by (service)</code>.</p>
-
-<h2 id="provide-context-to-facilitate-resolution">Provide context to facilitate resolution</h2>
-
-<p>Nobody wants to be woken up in the middle of the night by a critical alert. Unfortunately, the complexity of distributed applications and the underlying infrastructure means that sometimes things go wrong. In order to facilitate the mitigation and resolution of an incident, it is crucial to provide the on-call person with as much context as possible, for example:</p>
+<p>First thing is to map out what happens during the deployment:</p>
 
 <ul>
-<li>A short description of what was actually detected</li>
-<li>The impact of the detected problem (Are customers affected? Are they about to be affected?)</li>
-<li>Is there anything that can be done to quickly mitigate the issue? (while investigating for a more durable fix)</li>
-<li>Dashboards with more in-depth information</li>
-<li>A list of likely contributing causes</li>
-<li>Steps to investigate</li>
+<li>What are the different steps?</li>
+<li>How long do they take?</li>
+<li>Do they happen sequentially? In parallel?</li>
+<li>Why does the system need to be down during these steps?</li>
+<li>How could the system be up during these steps?</li>
 </ul>
 
-<p>These things can be thought through quickly when the alert is defined and will make the on-call person’s life much easier. Even if you are both defining the alert and responding to it, will you remember the context at 4:00am, 6 months from now?</p>
+<p>Armed with the answers to the above, work can be prioritised like for building a product: what is going to bring the most value?</p>
 
-<p>Prometheus alerting rules can be enriched with this kind of metadata using <em>annotations</em>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">alert:<span style="color:#bbb"> </span>Lots_Of_Billing_Jobs_In_Queue<span style="color:#bbb">
-</span><span style="color:#bbb"></span>expr:<span style="color:#bbb"> </span>sum(jobs_in_queue{service=<span style="color:#a50">&#34;billing-processing&#34;</span>})<span style="color:#bbb"> </span><span style="color:#a50">&gt; 100</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span>for:<span style="color:#bbb"> </span>5m<span style="color:#bbb">
-</span><span style="color:#bbb"></span>labels:<span style="color:#bbb">
-</span><span style="color:#bbb">   </span>severity:<span style="color:#bbb"> </span>major<span style="color:#bbb">
-</span><span style="color:#bbb"></span>annotations:<span style="color:#bbb">
-</span><span style="color:#bbb">   </span>summary:<span style="color:#bbb"> </span>Billing<span style="color:#bbb"> </span>queue<span style="color:#bbb"> </span>appears<span style="color:#bbb"> </span>to<span style="color:#bbb"> </span>be<span style="color:#bbb"> </span>building<span style="color:#bbb"> </span>up<span style="color:#bbb"> </span>(consistently<span style="color:#bbb"> </span>more<span style="color:#bbb"> </span>than<span style="color:#bbb"> </span><span style="color:#099">100</span><span style="color:#bbb"> </span>jobs<span style="color:#bbb"> </span>waiting)<span style="color:#bbb">
-</span><span style="color:#bbb">   </span>dashboard:<span style="color:#bbb"> </span>https://grafana.monitoring.intra/dashboard/db/billing-overview<span style="color:#bbb">
-</span><span style="color:#bbb">   </span>impact:<span style="color:#bbb"> </span>Billing<span style="color:#bbb"> </span>is<span style="color:#bbb"> </span>experiencing<span style="color:#bbb"> </span>delays,<span style="color:#bbb"> </span>causing<span style="color:#bbb"> </span>orders<span style="color:#bbb"> </span>to<span style="color:#bbb"> </span>be<span style="color:#bbb"> </span>marked<span style="color:#bbb"> </span>as<span style="color:#bbb"> </span>pending<span style="color:#bbb">
-</span><span style="color:#bbb">   </span>runbook:<span style="color:#bbb"> </span>https://wiki.intra/runbooks/billing-queues-issues.html</code></pre></div>
-<p>As the above example shows, annotations can be used to provide important information up-front (summary and impact), while also linking through additional resources (dashboards and runbooks) that will help the responder focusing on the problem, as opposed to spending time searching wiki pages.</p>
+<h1 id="tackling-roadblocks-to-zero-downtime">Tackling roadblocks to zero-downtime</h1>
 
-<h3 id="grouping-rules">Grouping rules</h3>
+<p>The following points will vary for each application, and this is based on my experience getting the <a href="https://www.poppulo.com">Poppulo</a> core product to zero-downtime deployments. However, these should apply to what most applications would have to tackle.</p>
 
-<p>Prometheus 2.0 introduces the concept of <em>rule group</em> when configuring alerting rules (as well recording rules, which are covered below):</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">groups:<span style="color:#bbb">
-</span><span style="color:#bbb"></span>-<span style="color:#bbb"> </span>name:<span style="color:#bbb"> </span>batch_jobs<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>rules:<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>-<span style="color:#bbb"> </span>alert:<span style="color:#bbb"> </span>Lots_Of_Jobs_In_Queue<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>expr:<span style="color:#bbb"> </span>...<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>-<span style="color:#bbb"> </span>alert:<span style="color:#bbb"> </span>Jobs_Taking_Longer_Than_Expected<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>expr:<span style="color:#bbb"> </span>...<span style="color:#bbb">
-</span><span style="color:#bbb"></span>-<span style="color:#bbb"> </span>name:<span style="color:#bbb"> </span>frontend_health<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>rules:<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>-<span style="color:#bbb"> </span>alert:<span style="color:#bbb"> </span>Frontend_High_Latency<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>expr:<span style="color:#bbb"> </span>...<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>-<span style="color:#bbb"> </span>alert:<span style="color:#bbb"> </span>Frontend_High_ErrorRate<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>expr:<span style="color:#bbb"> </span>...</code></pre></div>
-<p>All the rules in a group are processed sequentially, while all groups are processed in parallel. By default, the rule processing follows the <code>evaluation_interval</code> duration from the Prometheus configuration, but groups can individually override this setting. This is useful if some rules are more expensive and should then be processed less often.</p>
+<h2 id="backward-compatible-database-schemas">Backward compatible database schemas</h2>
 
-<h3 id="difference-between-recording-rules-and-alerting-rules">Difference between recording rules and alerting rules</h3>
+<p>A reason for downtime is to have a period of time to migrate database schemas, without worrying about backward compatibility. In other words, the old schema is for the old application version, the new one for the new version.</p>
 
-<p>In addition to alerting rules, Prometheus also allows the definition of recording rules. Recording rules are evaluated just like alerting rules but instead of creating notifications, they generate new metrics that can be queried.</p>
+<p>Decoupling database migration from application upgrade forces to think about this backward compatibility: the old version of the application needs to keep working with the new schema version. This can be achieved by applying the <a href="https://martinfowler.com/bliki/ParallelChange.html">expand and contract pattern</a>, which staggers breaking changes across multiple releases.</p>
 
-<p>These <em>pre-calculated</em> queries can be re-used in other rules (including alerting rules) and for dashboards, without the performance impact of repeating the query each time.</p>
+<h2 id="loosen-up-application-schema-version-checks">Loosen up application &amp; schema version checks</h2>
 
-<p>For example, the following group creates a new metric to pre-calculate the 99th percentile of the duration of each <code>job_type</code>, which can be reused to trigger alerts of different severity (without calculating the quantile twice).</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">groups:<span style="color:#bbb">
-</span><span style="color:#bbb"></span>-<span style="color:#bbb"> </span>name:<span style="color:#bbb"> </span>billing_jobs_health<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>rules:<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>-<span style="color:#bbb"> </span>record:<span style="color:#bbb"> </span><span style="color:#a50">&#34;job_type:billing_jobs_duration_seconds:99p5m&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span>expr:<span style="color:#bbb"> </span>histogram_quantile(<span style="color:#099">0.99</span>,<span style="color:#bbb"> </span>sum(rate(jobs_duration_seconds_bucket{service=<span style="color:#a50">&#34;billing-processing&#34;</span>}[5m]))<span style="color:#bbb"> </span>by<span style="color:#bbb"> </span>(job_type))<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>-<span style="color:#bbb"> </span>alert:<span style="color:#bbb"> </span>Billing_Processing_Very_Slow<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>expr:<span style="color:#bbb"> </span><span style="color:#a50">&#34;job_type:billing_jobs_duration_seconds:99p5m &gt; 30&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span>for:<span style="color:#bbb"> </span>5m<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>labels:<span style="color:#bbb">
-</span><span style="color:#bbb">       </span>severity:<span style="color:#bbb"> </span>critical<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>-<span style="color:#bbb"> </span>alert:<span style="color:#bbb"> </span>Billing_Processing_Slow<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>expr:<span style="color:#bbb"> </span><span style="color:#a50">&#34;job_type:billing_jobs_duration_seconds:99p5m &gt; 15&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span>for:<span style="color:#bbb"> </span>5m<span style="color:#bbb">
-</span><span style="color:#bbb">    </span>labels:<span style="color:#bbb">
-</span><span style="color:#bbb">       </span>severity:<span style="color:#bbb"> </span>major</code></pre></div>
-<p>Naming convention for recording rules differ from standard metrics, they should follow the pattern <code>level:metric:operations</code>. This is explained in more details in the <a href="https://prometheus.io/docs/practices/rules/">Prometheus best practices</a> documentation.</p>
+<p>Once database schema and application upgrade are decoupled, some code assertions may need to be reviewed or dropped. For example, the application may be running some sanity checks against its database to ensure it is not running against an old version.</p>
 
-<h2 id="what-s-next">What’s next?</h2>
+<p>If these sanity checks cannot be dropped, they can be adjusted for the application <em>(n)</em> to tolerate running with a newer version of the schema <em>(n+1)</em>.</p>
 
-<p>In this post, we focused on how to define alerting rules using metrics and thresholds, as well as how to make these alerts understandable and helpful. However, alerting on the right things is complicated! So much so that it would probably deserve its own post(s) - I might get to it at some point, but in the meantime, there are excellent resources on the subject:</p>
+<h2 id="remove-need-for-wind-down-period">Remove need for <em>wind-down</em> period</h2>
+
+<p>Upgrades may need some form of <em>pre-downtime</em> service degradation. For example, if the application is processing some long-running tasks, the upgrade must start by preventing anybody from starting any more of these tasks. While the application may be up during that <em>wind-down</em> time, there is a non-trivial impact in stopping users trying to use core functionality.</p>
+
+<p>If these tasks are pretty heavy weight, it&rsquo;s probably safe to assume they are already decoupled in separate processes, for horizontal scaling purposes. These processes may pick up tasks from a queue and run a number of them at a time.</p>
+
+<p>Instead of shutting down all of them during the upgrade, the strategy here is to apply the upgrade in a <em>rolling</em> fashion. The tasks are still long-running, so we need to apply the <em>wind-down</em> period on each process before upgrading it (in other words: &ldquo;finish what you are doing and stop picking up new work from the queue&rdquo;) - the big difference here is that this is invisible to the user, each process does that successively always making sure that some processes are fully working during the entire upgrade.</p>
+
+<h2 id="prevent-messaging-incompatibilities">Prevent messaging incompatibilities</h2>
+
+<p>Databases schemas aren&rsquo;t the only thing that need backward compatibility. If messages are being sent between processes, rolling upgrades will imply different versions of processes will be communicating (at least for a period of time).</p>
+
+<p>Backward-compatibility of message schemas can be tackled the same way as in databases, using the expand/contract pattern to handle breaking changes. Processes must also follow <a href="https://martinfowler.com/bliki/TolerantReader.html">Tolerant Reader</a> principles when deserializing messages (e.g. ignoring unknown fields, defining default values for missing fields). Message serialization method may also need to be reviewed - for example, serialized Java objects can lack the flexibility of an evolving structure, compared to a JSON representation.</p>
+
+<h2 id="mitigate-user-session-loss">Mitigate user session loss</h2>
+
+<p>User-facing applications typically come with some session persistence. When processes are restarted, the session information must be preserved as much as possible to avoid user disruption (e.g. have to login again).</p>
+
+<p>This is a pretty challenging area, especially for large applications that store a lot of information in the session. Here are some options (none of them are trivial unfortunately):</p>
 
 <ul>
-<li>The <a href="https://landing.google.com/sre/book/chapters/monitoring-distributed-systems.html">Monitoring Distributed Systems</a> chapter from the Google SRE Book.</li>
-<li>The <a href="https://docs.google.com/document/d/199PqyG3UsyXlwieHaqbGiWVa8eMWi8zzAn0YfcApr8Q/edit">My philosophy on alerting</a> paper by Rob Ewaschuk (foundation of the above chapter in the SRE book)</li>
-<li><a href="https://www.youtube.com/watch?v=lC5SfTMFK3M">Avoiding Alerts Overload from Microservices</a> talk at QCon London 2017, by <a href="https://twitter.com/sarahjwells">Sarah Wells</a></li>
+<li>Persist the session in a data store (can have performance impact)</li>
+<li>Share sessions between applications (can be challenging due to network broadcasts)</li>
+<li>Remove the session entirely from backend services (i.e. stateless backends)</li>
+<li>Use session-affinity, directing all new sessions to upgraded backends and waiting for other sessions to complete before upgrading.</li>
 </ul>
 
-<p>As explained earlier in this post, Prometheus is only responsible for the rule evaluation and does not actually send alerts - for more information about send and routing alerts, you can refer to the <a href="https://prometheus.io/docs/alerting/configuration/">Alertmanager Configuration</a> documentation.</p>
+<h1 id="making-zero-downtime-operationally-viable">Making zero-downtime operationally viable</h1>
+
+<p>Operating a zero-downtime upgrade is quite a different experience than upgrading during a blackout period: users will be going about their usual work while traffic gets rerouted, processes get shut down, machines get restarted, database tables get migrated. And all of this without them noticing anything (hopefully).</p>
+
+<h2 id="use-load-balancing-safely">Use load-balancing safely</h2>
+
+<p>Upgrading processes in rolling fashion means that traffic needs to be drained from backends before shutdown and properly re-enabled to newly restarted backends. It goes without saying that if all of this is done by manually editing configuration files, this is not going to end well.</p>
+
+<p>Load Balancers like HAProxy can be automated very efficiently, using APIs to manage backends or even better relying on health-checks to know what backends should be routed to.</p>
+
+<h2 id="automate-the-deployment-pipeline">Automate the deployment pipeline</h2>
+
+<p>The number of tasks involved in an upgrade can be quite daunting: database migrations, load-balancing, rolling upgrades of hundreds of processes.</p>
+
+<p>The answer here is a solid deployment pipeline: each part of the upgrade is written with code, stored in source control and automated to run the same way regardless of who triggers it (e.g. GitLab Pipelines, Jenkins Pipelines).</p>
+
+<p>The automated deployment pipeline takes away a main anxiety from the deployment operator: &ldquo;will I remember everything I need to do?&rdquo;. Additionally, using source control not only means the code can be reviewed, but also that the deployment process can be repeatedly tested and any change validated to prevent regressions.</p>
+
+<h2 id="be-ready-for-the-unexpected">Be ready for the unexpected</h2>
+
+<p>Unfortunately, it is impossible to guarantee failure will not happen, so the best we can do is be ready for it to recover quickly.</p>
+
+<p>On top of automating the deployment process, it is very important to build enough visibility to understand what is happening while the upgrade is happening (and after).</p>
+
+<p>What can be useful is dedicated dashboards showing the progress of upgrades, with information such as:</p>
+
+<ul>
+<li>Breakdown of processes running in <em>old</em> vs <em>new</em> version</li>
+<li>Number and progress of long-running tasks awaiting completion</li>
+<li>Queue lengths for long-running tasks</li>
+<li>Health status of all processes</li>
+<li>Status of synthetic monitoring of core user journeys</li>
+</ul>
+
+<p>This goes further than dashboards. Especially if something unexpected happens, it needs to be easy for individuals involved to have access to all the information the applications are exposing: metrics, logs, events, traces, etc.</p>
+
+<h1 id="in-closing">In closing</h1>
+
+<p>Calling deployments to be zero-downtime is entirely something in the eyes of the user. Applications carrying the weight of architecture and technology decisions of 10 years ago don&rsquo;t need to go through a re-write to achieve this.</p>
+
+<p>Start by mapping what your downtime time-line looks like and you will be able to point out easy wins. Applying a few simple patterns should help reduce the impact of deployments bit by bit, while consolidating the risky parts of it (with automation and observability), getting closer to upgrading your applications during working hours without anybody noticing.</p>
               
             </div>
           </div>
@@ -386,11 +385,9 @@ ga('send', 'pageview');
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/monitoring/">monitoring</a>
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/continuous-delivery/">continuous delivery</a>
 
-  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/observability/">observability</a>
-
-  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/prometheus/">prometheus</a>
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/devops/">devops</a>
 
                   </div>
                 
@@ -402,7 +399,7 @@ ga('send', 'pageview');
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/" data-tooltip="Patterns for zero-downtime deployments of large applications">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -410,7 +407,7 @@ ga('send', 'pageview');
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/" data-tooltip="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" data-tooltip="Prometheus Blog Series (Part 5): Alerting rules">
           
             <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
             <i class="fa fa-angle-right"></i>
@@ -427,17 +424,17 @@ ga('send', 'pageview');
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -473,7 +470,7 @@ ga('send', 'pageview');
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/" data-tooltip="Patterns for zero-downtime deployments of large applications">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -481,7 +478,7 @@ ga('send', 'pageview');
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/" data-tooltip="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" data-tooltip="Prometheus Blog Series (Part 5): Alerting rules">
           
             <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
             <i class="fa fa-angle-right"></i>
@@ -498,17 +495,17 @@ ga('send', 'pageview');
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -529,17 +526,17 @@ ga('send', 'pageview');
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
         <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
         <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2017%2f12%2fprometheus-blog-series-part-5-alerting-rules%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2018%2f12%2fpatterns-for-zero-downtime-deployments-of-large-applications%2f">
         <i class="fa fa-twitter"></i><span>Share on Twitter</span>
       </a>
     </li>

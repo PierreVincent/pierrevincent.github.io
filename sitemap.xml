@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</loc>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/</loc>
     <lastmod>2017-12-31T00:00:00+00:00</lastmod>
   </url>
@@ -98,19 +103,19 @@
   
   <url>
     <loc>https://pierrevincent.github.io/tags/continuous-delivery/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pierrevincent.github.io/tags/devops/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pierrevincent.github.io/categories/devops/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -170,13 +175,13 @@
   
   <url>
     <loc>https://pierrevincent.github.io/</loc>
-    <lastmod>2017-12-31T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pierrevincent.github.io/post/</loc>
-    <lastmod>2017-12-31T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

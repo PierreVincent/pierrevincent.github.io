@@ -6,10 +6,21 @@
     <description>Recent content in Devops on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://pierrevincent.github.io/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Patterns for zero-downtime deployments of large applications</title>
+      <link>https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</guid>
+      <description>&lt;p&gt;For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&amp;rsquo;s products started their development more than a decade ago, with different practices, assumptions or expectations.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>CODE Stockholm Highlights: Data-driven DevOps and raising the Continuous Delivery game</title>
