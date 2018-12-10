@@ -17,7 +17,7 @@
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</guid>
-      <description>&lt;p&gt;For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&amp;rsquo;s products started their development more than a decade ago, with different practices, assumptions or expectations.&lt;/p&gt;
+      <description>&lt;p&gt;For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&amp;rsquo;s products started their development more than a decade ago, with architectures reflecting a different set of practices and assumptions.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
