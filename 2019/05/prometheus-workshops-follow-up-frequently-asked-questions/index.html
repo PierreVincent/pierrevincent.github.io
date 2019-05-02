@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -17,25 +21,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.31.1">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Conference</title>
+    <title>Prometheus workshops follow-up: frequently asked questions</title>
     <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content=", devops, sre, monitoring">
+    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
     <link rel="icon" href="https://pierrevincent.github.io/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://pierrevincent.github.io/tags/conference/index.xml">
-    
 
     
-    <meta name="description" content="Pierre Vincent - SRE Manager at Poppulo">
-    <meta property="og:description" content="Pierre Vincent - SRE Manager at Poppulo">
+    <meta name="description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.
+
+">
+    <meta property="og:description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.
+
+">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Conference">
-    <meta property="og:url" content="/tags/conference/">
+    <meta property="og:title" content="Prometheus workshops follow-up: frequently asked questions">
+    <meta property="og:url" content="/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/">
     <meta property="og:site_name" content="Pierre Vincent">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Conference">
-    <meta name="twitter:description" content="Pierre Vincent - SRE Manager at Poppulo">
+    <meta name="twitter:title" content="Prometheus workshops follow-up: frequently asked questions">
+    <meta name="twitter:description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.
+
+">
     
       <meta name="twitter:creator" content="@PierreVincent">
     
@@ -48,6 +56,8 @@
       <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
     
 
+    
+      <meta property="og:image" content="https://pierrevincent.github.io/images/prometheus.png">
     
     
     
@@ -84,7 +94,7 @@ ga('send', 'pageview');
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="https://pierrevincent.github.io/">Pierre Vincent</a>
@@ -104,7 +114,7 @@ ga('send', 'pageview');
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -210,261 +220,196 @@ ga('send', 'pageview');
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Prometheus workshops follow-up: frequently asked questions
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  
+    <time itemprop="datePublished" datetime="2019-05-02T00:00:00Z">
+      
+  May 2, 2019
+
+    </time>
+  
+  
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://pierrevincent.github.io/categories/monitoring">monitoring</a>
+    
+  
+
+
+</div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.</p>
+
+<p></p>
+
+<h2 id="how-much-data-can-you-put-in-labels">How much data can you put in labels?</h2>
+
+<p>Labels are really powerful so it can be tempting to annotate each metric with very specific information, however there are some important limitations to what should be used for labels.</p>
+
+<p>Prometheus considers each unique combination of labels and label value as a different time series. As a result if a label has an unbounded set of possible values, Prometheus will have a very hard time storing all these time series. In order to avoid performance issues, labels should not be used for high cardinality data sets (e.g. Customer unique ids).</p>
+
+<p>My personal advice on this is:</p>
+
+<ul>
+<li>Labels should rarely have more than 100 possible values</li>
+<li>The set of label values should be bounded (think of them as enums, and not open ended sets of strings)</li>
+</ul>
+
+<p>Further info:</p>
+
+<ul>
+<li>Prometheus docs: <a href="https://prometheus.io/docs/practices/instrumentation/#do-not-overuse-labels">Do not overuse labels</a></li>
+<li>PromCon 2017: <a href="https://www.youtube.com/watch?v=_MNYuTNfTb4">Best Practices and Beastly Pitfalls</a> by Julius Voltz</li>
+</ul>
+
+<h2 id="running-prometheus-in-kubernetes-what-about-storage">Running Prometheus in Kubernetes: what about storage?</h2>
+
+<p>Prometheus stores the content of its time-series database on the file system. When running Prometheus in a containerized environment, like Kubernetes, this data is by default stored inside the running container. The main drawback this is that data stored will be lost if the container restart (node failure, load rebalancing or simply redeployment).</p>
+
+<p>The advice here is to use volumes to store the Prometheus data, which will ensure all data is persisted through Prometheus restarts.</p>
+
+<p>Further info:</p>
+
+<ul>
+<li>Prometheus docs: <a href="https://prometheus.io/docs/prometheus/latest/storage/">Storage</a></li>
+<li>Kubernetes docs: <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a></li>
+</ul>
+
+<!-- ## How long can metrics be kept for? -->
+
+<h2 id="what-are-the-recommended-alerting-practices-to-avoid-alerting-overload">What are the recommended alerting practices to avoid alerting overload?</h2>
+
+<p>The number one benefit of observability is a better understanding on how your system behaves. Once you have Prometheus metrics coming from you application, start by learning what <em>normal</em> looks like, and only then move on to creating alerts if specific thresholds aren&rsquo;t met.</p>
+
+<p>Remember that not every metric is worth alerting on, a lot of them are only interesting when you want to ask questions to your system (during exploratory testing, debugging or especially during an outage).</p>
+
+<p>My advice on valuable alerts:</p>
+
+<ul>
+<li>Alerts must be actionable (and actioned) any time they are triggered</li>
+<li>Alerts must come with context (why is this triggered? what is the impact? is there a dashboard with more info?)</li>
+<li>Alerts must link to run-books (what should I do to investigate &amp; mitigate?)</li>
+</ul>
+
+<p>If some of the above can&rsquo;t be done for an alert you&rsquo;re about to create, then think twice, especially for the sake of whoever is going to have to handle it (maybe at 2am).</p>
+
+<p>Futher info:</p>
+
+<ul>
+<li>Part 5 of my Prometheus series: <a href="https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/">Alerting Rules</a></li>
+<li>The <a href="https://docs.google.com/document/d/199PqyG3UsyXlwieHaqbGiWVa8eMWi8zzAn0YfcApr8Q/edit">My philosophy on alerting</a> paper by Rob Ewaschuk</li>
+<li><a href="https://www.youtube.com/watch?v=lC5SfTMFK3M">Avoiding Alerts Overload from Microservices</a> talk at QCon London 2017, by <a href="https://twitter.com/sarahjwells">Sarah Wells</a></li>
+</ul>
+
+<hr />
+
+<h4 id="looking-to-get-more-practical-training-with-prometheus"><em>Looking to get more practical training with Prometheus?</em></h4>
+
+<p><em>I am regularly teach workshops on Cloud Native monitoring with Prometheus &amp; Grafana - don&rsquo;t hesitate to get in touch with me (<a href="mailto:speaking@pvincent.io">speaking@pvincent.io</a>) for more info about running the workshop for your team or at your meetup/conference.</em></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
             
               
-  
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/monitoring/">monitoring</a>
+
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/observability/">observability</a>
+
+  <a class="tag tag--primary tag--small" href="https://pierrevincent.github.io/tags/prometheus/">prometheus</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/" data-tooltip="Patterns for zero-downtime deployments of large applications">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
     
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-top" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
     
-      <a href="https://pierrevincent.github.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/">
-        <div class="postShorten-thumbnailimg">
-          <img alt="" itemprop="image" src="https://pierrevincent.github.io/images/code-conf/code-sthlm-17.jpg"/>
-        </div>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
       </a>
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://pierrevincent.github.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/">
-          CODE Stockholm Highlights: Data-driven DevOps and raising the Continuous Delivery game
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-09-30T00:00:00Z">
-      
-  September 30, 2017
-
-    </time>
-  
-  
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://pierrevincent.github.io/categories/devops">devops</a>
-    
-  
-
-
+    </li>
+  </ul>
 </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        <p><a href="http://www.code-conf.com/code-conf-17/sthlm/">CODE Stockholm</a> is a one-day conference centered on Continuous Delivery and the DevOps movement. Both aspects were well covered through keynotes and two tracks of great talks.</p>
-
-<p></p>
-
-        <br>
-        <a href="https://pierrevincent.github.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
 
             
               
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/">
-          Increasing the visibility of distributed systems in production
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-06-16T00:00:00Z">
-      
-  June 16, 2017
-
-    </time>
-  
-  
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://pierrevincent.github.io/categories/talks">talks</a>
-    
-  
-
-
-</div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        <p>This talk from <a href="http://rebelcon2017.com">RebelCon 2017</a> gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.</p>
-
-<p></p>
-
-        <br>
-        <a href="https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://pierrevincent.github.io/images/rebelcon.png"/>
-      </div>
-    </a>
-  
-</article>
-
             
-              
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/">
-          Microservices in a fast-paced customer-centric environment: How and Why?
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-05-17T00:00:00Z">
-      
-  May 17, 2017
-
-    </time>
-  
-  
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://pierrevincent.github.io/categories/talks">talks</a>
-    
-  
-
-
-</div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        <p>In this talk at <a href="http://www.tmforumlive.org/">TMForumLive 2017</a>, I describe the <a href="https://www.poppulo.com">Poppulo</a> journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.</p>
-
-<p></p>
-
-        <br>
-        <a href="https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="//www.teoco.com/wp-content/uploads/TMForumLive.png"/>
-      </div>
-    </a>
-  
-</article>
-
-            
-              
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/">
-          Increasing collaboration and confidence with Consumer-Driven Contracts testing
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-03-21T00:00:00Z">
-      
-  March 21, 2017
-
-    </time>
-  
-  
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://pierrevincent.github.io/categories/talks">talks</a>
-    
-  
-
-
-</div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        <p>This talk at <a href="https://web.pipelineconf.info">Pipeline, the Continuous Delivery conference</a> covers how we made Consumer-driven contracts and <a href="https://docs.pact.io/">Pact</a> part of our pipeline at <a href="https://www.poppulo.com">Poppulo</a> and how it improved confidence and collaboration between teams when designing APIs.</p>
-
-<p></p>
-
-        <br>
-        <a href="https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="//pipelineconf.files.wordpress.com/2013/10/pipelineconf-logo-medium.png"/>
-      </div>
-    </a>
-  
-</article>
-
-            
-            
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2019 Pierre Vincent. All Rights Reserved
@@ -472,6 +417,86 @@ ga('send', 'pageview');
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/" data-tooltip="Patterns for zero-downtime deployments of large applications">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+        <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+        <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpierrevincent.github.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
+        <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -766,6 +791,10 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
+    
+  
 
 
 
