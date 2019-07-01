@@ -118,13 +118,13 @@
   </url>
   
   <url>
-    <loc>https://blog.pvincent.io/tags/devops/</loc>
+    <loc>https://blog.pvincent.io/categories/devops/</loc>
     <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.pvincent.io/categories/devops/</loc>
+    <loc>https://blog.pvincent.io/tags/devops/</loc>
     <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -136,13 +136,13 @@
   </url>
   
   <url>
-    <loc>https://blog.pvincent.io/tags/measurement/</loc>
+    <loc>https://blog.pvincent.io/categories/measurement/</loc>
     <lastmod>2017-09-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.pvincent.io/categories/measurement/</loc>
+    <loc>https://blog.pvincent.io/tags/measurement/</loc>
     <lastmod>2017-09-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -160,13 +160,13 @@
   </url>
   
   <url>
-    <loc>https://blog.pvincent.io/tags/monitoring/</loc>
+    <loc>https://blog.pvincent.io/categories/monitoring/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.pvincent.io/categories/monitoring/</loc>
+    <loc>https://blog.pvincent.io/tags/monitoring/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
