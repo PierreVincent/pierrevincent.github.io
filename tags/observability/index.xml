@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Observability on Pierre Vincent</title>
-    <link>https://pierrevincent.github.io/tags/observability/</link>
+    <link>https://blog.pvincent.io/tags/observability/</link>
     <description>Recent content in Observability on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 02 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://pierrevincent.github.io/tags/observability/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.pvincent.io/tags/observability/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Prometheus workshops follow-up: frequently asked questions</title>
-      <link>https://pierrevincent.github.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/</link>
+      <link>https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/</link>
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/</guid>
+      <guid>https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/</guid>
       <description>&lt;p&gt;When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -24,11 +24,11 @@
     
     <item>
       <title>Prometheus Blog Series (Part 5): Alerting rules</title>
-      <link>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/</link>
+      <link>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/</link>
       <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/</guid>
-      <description>&lt;p&gt;Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;blog series&lt;/a&gt;, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover &lt;em&gt;unknown unknowns&lt;/em&gt;, either pro-actively (testing) or reactively (debugging).&lt;/p&gt;
+      <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/</guid>
+      <description>&lt;p&gt;Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;blog series&lt;/a&gt;, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover &lt;em&gt;unknown unknowns&lt;/em&gt;, either pro-actively (testing) or reactively (debugging).&lt;/p&gt;
 
 &lt;p&gt;Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their &lt;em&gt;normal&lt;/em&gt; state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.&lt;/p&gt;
 
@@ -37,11 +37,11 @@
     
     <item>
       <title>Prometheus Blog Series (Part 4): Instrumenting code in Go and Java</title>
-      <link>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</link>
+      <link>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</link>
       <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</guid>
-      <description>&lt;p&gt;So far in this &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; blog series, we have looked into Prometheus metrics and labels (see &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;2&lt;/a&gt;), as well as how Prometheus integrates in a distributed architecture (see &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/&#34;&gt;Part 3&lt;/a&gt;). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&amp;rsquo; wide adoption.&lt;/p&gt;
+      <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</guid>
+      <description>&lt;p&gt;So far in this &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; blog series, we have looked into Prometheus metrics and labels (see &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;2&lt;/a&gt;), as well as how Prometheus integrates in a distributed architecture (see &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/&#34;&gt;Part 3&lt;/a&gt;). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&amp;rsquo; wide adoption.&lt;/p&gt;
 
 &lt;p&gt;This post will go through examples in Go and Java. Prometheus has a number of other &lt;a href=&#34;https://prometheus.io/docs/instrumenting/clientlibs/&#34;&gt;supported languages&lt;/a&gt;, through official libraries and community maintained ones.&lt;/p&gt;
 
@@ -50,32 +50,32 @@
     
     <item>
       <title>Prometheus Blog Series (Part 3): Exposing and collecting metrics</title>
-      <link>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</link>
+      <link>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</link>
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; and &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;Part 2&lt;/a&gt; of this series, we covered the basics of &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.&lt;/p&gt;
+      <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; and &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;Part 2&lt;/a&gt; of this series, we covered the basics of &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Prometheus Blog Series (Part 2): Metric types</title>
-      <link>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/</link>
+      <link>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/</link>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; of this series, we talked about &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.&lt;/p&gt;
+      <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; of this series, we talked about &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Prometheus Blog Series (Part 1): Metrics and Labels</title>
-      <link>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/</link>
+      <link>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/</link>
       <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/</guid>
+      <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/</guid>
       <description>&lt;p&gt;When it comes to monitoring tools in the last while, &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.&lt;/p&gt;
 
 &lt;p&gt;Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.&lt;/p&gt;

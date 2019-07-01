@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Service Discovery on Pierre Vincent</title>
-    <link>https://pierrevincent.github.io/tags/service-discovery/</link>
+    <link>https://blog.pvincent.io/tags/service-discovery/</link>
     <description>Recent content in Service Discovery on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 18 Oct 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://pierrevincent.github.io/tags/service-discovery/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.pvincent.io/tags/service-discovery/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker, Microservices and Service Discovery</title>
-      <link>https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/</link>
+      <link>https://blog.pvincent.io/2015/10/docker-microservices-and-service-discovery/</link>
       <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/</guid>
+      <guid>https://blog.pvincent.io/2015/10/docker-microservices-and-service-discovery/</guid>
       <description>&lt;p&gt;Working with Microservices has recently become very trendy, however building dynamic and distributed systems doesn’t come without new challenges. Service Discovery is one of these challenges: enabling services to dynamically discover other services and communicate with them. In this talk at &lt;a href=&#34;http://corkdev.io/&#34;&gt;CorkDev.io&lt;/a&gt;, I go through a Service Discovery solution, using &lt;a href=&#34;https://medium.com/airbnb-engineering/smartstack-service-discovery-in-the-cloud-4b8a080de619&#34;&gt;Airbnb Smartstack&lt;/a&gt; to wire up Microservices running in Docker containers.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

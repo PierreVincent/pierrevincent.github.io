@@ -3,237 +3,248 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://pierrevincent.github.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/</loc>
+    <loc>https://blog.pvincent.io/page/speaking/</loc>
+    <lastmod>2019-05-04T15:07:01+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</loc>
+    <loc>https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</loc>
     <lastmod>2018-12-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-5-alerting-rules/</loc>
+    <loc>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/</loc>
     <lastmod>2017-12-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</loc>
+    <loc>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</loc>
     <lastmod>2017-12-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</loc>
+    <loc>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</loc>
     <lastmod>2017-12-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-2-metric-types/</loc>
+    <loc>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/</loc>
     <lastmod>2017-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/</loc>
+    <loc>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/</loc>
     <lastmod>2017-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/</loc>
+    <loc>https://blog.pvincent.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/</loc>
     <lastmod>2017-09-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/09/measurement-is-the-number-one-ally-of-technical-work/</loc>
+    <loc>https://blog.pvincent.io/2017/09/measurement-is-the-number-one-ally-of-technical-work/</loc>
     <lastmod>2017-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</loc>
+    <loc>https://blog.pvincent.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</loc>
+    <loc>https://blog.pvincent.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</loc>
+    <loc>https://blog.pvincent.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2016/11/agile-at-poppulo/</loc>
+    <loc>https://blog.pvincent.io/2016/11/agile-at-poppulo/</loc>
     <lastmod>2016-11-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/2015/10/docker-microservices-and-service-discovery/</loc>
+    <loc>https://blog.pvincent.io/2015/10/docker-microservices-and-service-discovery/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/agile/</loc>
+    <loc>https://blog.pvincent.io/tags/agile/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/api/</loc>
+    <loc>https://blog.pvincent.io/tags/api/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/archives/</loc>
+    <loc>https://blog.pvincent.io/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/categories/</loc>
+    <loc>https://blog.pvincent.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/conference/</loc>
+    <loc>https://blog.pvincent.io/tags/conference/</loc>
     <lastmod>2017-09-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/consumer-driven-contracts/</loc>
+    <loc>https://blog.pvincent.io/tags/consumer-driven-contracts/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/continuous-delivery/</loc>
+    <loc>https://blog.pvincent.io/tags/continuous-delivery/</loc>
     <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/devops/</loc>
+    <loc>https://blog.pvincent.io/tags/devops/</loc>
     <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/categories/devops/</loc>
+    <loc>https://blog.pvincent.io/categories/devops/</loc>
     <lastmod>2018-12-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/docker/</loc>
+    <loc>https://blog.pvincent.io/tags/docker/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/measurement/</loc>
+    <loc>https://blog.pvincent.io/tags/measurement/</loc>
     <lastmod>2017-09-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/categories/measurement/</loc>
+    <loc>https://blog.pvincent.io/categories/measurement/</loc>
     <lastmod>2017-09-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/meetup/</loc>
+    <loc>https://blog.pvincent.io/tags/meetup/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/microservices/</loc>
+    <loc>https://blog.pvincent.io/tags/microservices/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/monitoring/</loc>
+    <loc>https://blog.pvincent.io/tags/monitoring/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/categories/monitoring/</loc>
+    <loc>https://blog.pvincent.io/categories/monitoring/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/observability/</loc>
+    <loc>https://blog.pvincent.io/tags/observability/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/pact/</loc>
+    <loc>https://blog.pvincent.io/tags/pact/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/</loc>
+    <loc>https://blog.pvincent.io/page/</loc>
+    <lastmod>2019-05-04T15:07:01+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/</loc>
+    <lastmod>2019-05-04T15:07:01+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/post/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/post/</loc>
+    <loc>https://blog.pvincent.io/tags/prometheus/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/prometheus/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://pierrevincent.github.io/tags/refactoring/</loc>
+    <loc>https://blog.pvincent.io/tags/refactoring/</loc>
     <lastmod>2017-09-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/service-discovery/</loc>
+    <loc>https://blog.pvincent.io/tags/service-discovery/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/smartstack/</loc>
+    <loc>https://blog.pvincent.io/tags/smartstack/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/sre/</loc>
+    <loc>https://blog.pvincent.io/tags/sre/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/</loc>
+    <loc>https://blog.pvincent.io/tags/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/categories/talks/</loc>
+    <loc>https://blog.pvincent.io/categories/talks/</loc>
     <lastmod>2017-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pierrevincent.github.io/tags/testing/</loc>
+    <loc>https://blog.pvincent.io/tags/testing/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Pierre Vincent</title>
+    <link>https://blog.pvincent.io/page/</link>
+    <description>Recent content in Pages on Pierre Vincent</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 04 May 2019 15:07:01 +0100</lastBuildDate>
+    
+	<atom:link href="https://blog.pvincent.io/page/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Training &amp; speaking at events</title>
+      <link>https://blog.pvincent.io/page/speaking/</link>
+      <pubDate>Sat, 04 May 2019 15:07:01 +0100</pubDate>
+      
+      <guid>https://blog.pvincent.io/page/speaking/</guid>
+      <description>If the content on this blog or my talks have resonated with you, that&amp;rsquo;s the best thing I can hope for! If you&amp;rsquo;re interested in getting me to run a workshop/talk at your conference (or internally to your team), please do get in touch with me on speaking@pvincent.io.
+Below are some example of workshops and talks that I&amp;rsquo;m currently running.
+Workshops Cloud native monitoring with Prometheus &amp;amp; Grafana When it comes to monitoring tools in the Cloud Native space, Prometheus is definitely hard to miss.</description>
+    </item>
+    
+  </channel>
+</rss>

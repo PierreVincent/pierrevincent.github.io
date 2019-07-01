@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Continuous Delivery on Pierre Vincent</title>
-    <link>https://pierrevincent.github.io/tags/continuous-delivery/</link>
+    <link>https://blog.pvincent.io/tags/continuous-delivery/</link>
     <description>Recent content in Continuous Delivery on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://pierrevincent.github.io/tags/continuous-delivery/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.pvincent.io/tags/continuous-delivery/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Patterns for zero-downtime deployments of large applications</title>
-      <link>https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</link>
+      <link>https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</link>
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</guid>
+      <guid>https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</guid>
       <description>&lt;p&gt;For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&amp;rsquo;s products started their development more than a decade ago, with architectures reflecting a different set of practices and assumptions.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>CODE Stockholm Highlights: Data-driven DevOps and raising the Continuous Delivery game</title>
-      <link>https://pierrevincent.github.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/</link>
+      <link>https://blog.pvincent.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/</link>
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/</guid>
+      <guid>https://blog.pvincent.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.code-conf.com/code-conf-17/sthlm/&#34;&gt;CODE Stockholm&lt;/a&gt; is a one-day conference centered on Continuous Delivery and the DevOps movement. Both aspects were well covered through keynotes and two tracks of great talks.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -35,10 +35,10 @@
     
     <item>
       <title>Microservices in a fast-paced customer-centric environment: How and Why?</title>
-      <link>https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</link>
+      <link>https://blog.pvincent.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</guid>
+      <guid>https://blog.pvincent.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</guid>
       <description>&lt;p&gt;In this talk at &lt;a href=&#34;http://www.tmforumlive.org/&#34;&gt;TMForumLive 2017&lt;/a&gt;, I describe the &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -46,10 +46,10 @@
     
     <item>
       <title>Increasing collaboration and confidence with Consumer-Driven Contracts testing</title>
-      <link>https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</link>
+      <link>https://blog.pvincent.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</link>
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pierrevincent.github.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</guid>
+      <guid>https://blog.pvincent.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</guid>
       <description>&lt;p&gt;This talk at &lt;a href=&#34;https://web.pipelineconf.info&#34;&gt;Pipeline, the Continuous Delivery conference&lt;/a&gt; covers how we made Consumer-driven contracts and &lt;a href=&#34;https://docs.pact.io/&#34;&gt;Pact&lt;/a&gt; part of our pipeline at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; and how it improved confidence and collaboration between teams when designing APIs.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
