@@ -6,10 +6,19 @@
     <description>Recent content in Pages on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 May 2019 15:07:01 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 07 Dec 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://blog.pvincent.io/page/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Contributions on other publications</title>
+      <link>https://blog.pvincent.io/page/contributions/</link>
+      <pubDate>Sat, 07 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://blog.pvincent.io/page/contributions/</guid>
+      <description> 2019 Integration tests don&amp;rsquo;t cut it for microservices. Here&amp;rsquo;s what does. (TechBeacon) How to move a large monolithic app to continuous delivery with zero downtime (TechBeacon) 2018 Software superstars lined up for this year&amp;rsquo;s RebelCon (Poppulo Tech Blog) Reaching production is only the beginning (Poppulo Tech Blog) 2016 Pact tests: what about state data? (Poppulo Tech Blog) Sharing Consumer-Driven Contracts with Pact Broker (Poppulo Tech Blog) 2015 Our take-away from µCon 2015, the Microservices conference (Poppulo Tech Blog) Microservices: Service Discovery with Smartstack and Docker (Poppulo Tech Blog) How to write clean functional code in Scala and keep it that way (Poppulo Tech Blog) Why you should use Consumer-Driven Contracts for Microservice integration tests (Poppulo Tech Blog) </description>
+    </item>
     
     <item>
       <title>Training &amp; speaking at events</title>
