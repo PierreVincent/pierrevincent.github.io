@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Testing on Pierre Vincent</title>
+    <title>testing on Pierre Vincent</title>
     <link>https://blog.pvincent.io/tags/testing/</link>
-    <description>Recent content in Testing on Pierre Vincent</description>
+    <description>Recent content in testing on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Mar 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.pvincent.io/tags/testing/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 21 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/testing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Increasing collaboration and confidence with Consumer-Driven Contracts testing</title>
       <link>https://blog.pvincent.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</link>
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</guid>
-      <description>&lt;p&gt;This talk at &lt;a href=&#34;https://web.pipelineconf.info&#34;&gt;Pipeline, the Continuous Delivery conference&lt;/a&gt; covers how we made Consumer-driven contracts and &lt;a href=&#34;https://docs.pact.io/&#34;&gt;Pact&lt;/a&gt; part of our pipeline at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; and how it improved confidence and collaboration between teams when designing APIs.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;This talk at &lt;a href=&#34;https://web.pipelineconf.info&#34;&gt;Pipeline, the Continuous Delivery conference&lt;/a&gt; covers how we made Consumer-driven contracts and &lt;a href=&#34;https://docs.pact.io/&#34;&gt;Pact&lt;/a&gt; part of our pipeline at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; and how it improved confidence and collaboration between teams when designing APIs.&lt;/p&gt;</description>
     </item>
     
   </channel>

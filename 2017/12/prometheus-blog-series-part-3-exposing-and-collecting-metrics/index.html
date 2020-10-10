@@ -1,91 +1,109 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
-    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.75.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Pierre Vincent">
+<meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
+<meta name="description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.">
+
+
+<meta property="og:description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+<meta name="twitter:title" content="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+<meta property="og:url" content="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">
+<meta property="twitter:url" content="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">
+<meta property="og:site_name" content="Pierre Vincent">
+<meta property="og:description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.">
+<meta name="twitter:description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2017-12-26T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2017-12-26T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="monitoring">
+    
+  
+  
+    
+      <meta property="article:tag" content="monitoring">
+    
+      <meta property="article:tag" content="observability">
+    
+      <meta property="article:tag" content="prometheus">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@PierreVincent">
+
+
+  <meta name="twitter:creator" content="@PierreVincent">
+
+
+
+
+
+
+  <meta property="og:image" content="https://blog.pvincent.io/images/prometheus.png">
+  <meta property="twitter:image" content="https://blog.pvincent.io/images/prometheus.png">
+
+
+
+
+
+  <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+  <meta property="twitter:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+
+
     <title>Prometheus Blog Series (Part 3): Exposing and collecting metrics</title>
-    <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
     <link rel="icon" href="https://blog.pvincent.io/favicon.png">
     
 
     
-    <meta name="description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.
 
-">
-    <meta property="og:description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
-    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">
-    <meta property="og:site_name" content="Pierre Vincent">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
-    <meta name="twitter:description" content="In Part 1 and Part 2 of this series, we covered the basics of Prometheus metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.
-
-">
-    
-      <meta name="twitter:creator" content="@PierreVincent">
-    
-    
+    <link rel="canonical" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">
 
     
-    
-
-    
-      <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
-    
-
-    
-      <meta property="og:image" content="https://blog.pvincent.io/images/prometheus.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    
-
-    
-
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
-    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
-    
-    
-      <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
+        <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-104104349-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-104104349-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -123,7 +141,7 @@ ga('send', 'pageview');
         </a>
         <h4 class="sidebar-profile-name">Pierre Vincent</h4>
         
-          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</h5>
+          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</h5>
         
       </div>
     
@@ -179,12 +197,13 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -194,7 +213,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
       
@@ -204,7 +223,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank">
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -214,13 +233,14 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank">
+      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-slideshare"></i>
       
       <span class="sidebar-button-desc">SlideShare</span>
     </a>
   </li>
+
 
     </ul>
     <ul class="sidebar-buttons">
@@ -255,6 +275,7 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
   </div>
 </nav>
@@ -274,15 +295,16 @@ ga('send', 'pageview');
       Prometheus Blog Series (Part 3): Exposing and collecting metrics
     </h1>
   
-  <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-12-26T00:00:00Z">
-      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-26T00:00:00Z">
+        
   December 26, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -291,67 +313,40 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
 </div>
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>In <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> and <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">Part 2</a> of this series, we covered the basics of <a href="https://prometheus.io/">Prometheus</a> metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.</p>
-
-<p></p>
-
 <h2 id="push-vs-pull">Push vs Pull</h2>
-
 <p>Metrics collection with Prometheus relies on the <em>pull model</em>, meaning that Prometheus is responsible for getting metrics (<em>scraping</em>) from the services that it monitors. This is diametrically opposed from other tools like Graphite, which are passively waiting on clients to <em>push</em> their metrics to a known server.</p>
-
 <p>Moving this responsibility to the server relieves the clients from a lot of the workload. Instrumented services only have to expose metrics in a way a Prometheus server can read them and doesn’t need to worry about where the Prometheus server is (or if there is any at all). Additionally, instrumenting a service is relatively cheap on the client side, as Prometheus does all the heavy lifting for complex calculations (see Histograms mentioned in <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">Part 2</a>). Finally, if the Prometheus server was ever under pressure, it will throttle the scraping of services itself, as opposed to having clients pushing metrics and bringing down the server.</p>
-
-<p>A potential challenge with this model is that Prometheus now needs to know where to collect these metrics. In a microservices architecture, services can be short-lived and their number of instances can vary over time, which means that static configuration is not an option. Fortunately, Prometheus server comes with built-in service discovery solutions and makes it pretty seamless to integrate with a number of platforms and tools, including <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#&lt;kubernetes_sd_config">Kubernetes</a> and <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#&lt;consul_sd_config">Consul</a>.</p>
-
+<p>A potential challenge with this model is that Prometheus now needs to know where to collect these metrics. In a microservices architecture, services can be short-lived and their number of instances can vary over time, which means that static configuration is not an option. Fortunately, Prometheus server comes with built-in service discovery solutions and makes it pretty seamless to integrate with a number of platforms and tools, including <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Ckubernetes_sd_config%3E">Kubernetes</a> and <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Cconsul_sd_config%3E">Consul</a>.</p>
 <h2 id="exposing-and-scraping-metrics">Exposing and scraping metrics</h2>
-
 <p>Clients have only one responsibility: make their metrics available for a Prometheus server to scrape. This is done by exposing an HTTP endpoint, usually <code>/metrics</code>, which returns the full list of metrics (with label sets) and their values. This endpoint is very cheap to call as it simply outputs the current value of each metric, without doing any calculation.</p>
-
-<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-service-scrape.png" alt="Scraping a single service" /></p>
-
+<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-service-scrape.png" alt="Scraping a single service"></p>
 <p>Most languages have some implementation of the Prometheus client, which comes with:</p>
-
 <ul>
 <li>Built-in metrics for the language (e.g. JVM metrics, Go metrics)</li>
 <li>The ability to registry custom metrics</li>
 <li>Some HTTP handler to create the <code>/metrics</code> endpoint</li>
 </ul>
-
 <p>On the Prometheus server side, each target (statically defined, or dynamically discovered) is scraped at a regular interval (<em>scrape interval</em>). Each scrape reads the <code>/metrics</code> to get the current state of the client metrics, and persists the values in the Prometheus time-series database.</p>
-
 <p>In addition to the collected metrics, Prometheus will create an additional one called <code>up</code>, which will be set to <code>1</code> if the last scrape is successful, or <code>0</code> otherwise. The <code>up</code> metric is incredibly useful to detect crashes.</p>
-
 <h2 id="exporters-instrumenting-machines-and-third-party-appliances">Exporters: Instrumenting machines and third-party appliances</h2>
-
 <p>Not everything can be instrumented at the code level. This is where <em>exporters</em> come useful, acting as side-cars to machines or other applications (e.g. databases).</p>
-
 <p>The most common one is the <a href="https://github.com/prometheus/node_exporter">node exporter</a>, which can be installed on every machine to read system level metrics (cpu, memory, file system&hellip;) and expose them under a <code>/metrics</code> endpoint in the way Prometheus can scrape it.</p>
-
 <p>Other exporters are listed on the <a href="https://prometheus.io/docs/instrumenting/exporters/">Prometheus documentation</a></p>
-
 <h2 id="the-big-picture">The big picture</h2>
-
 <p>Combining client libraries, node exporters and application-specific exporters, Prometheus can gather metrics from services, infrastructure and third-party appliances:</p>
-
-<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-scrape.png" alt="Scraping services, infra and appliances" /></p>
-
-<h2 id="what-s-next">What&rsquo;s next?</h2>
-
+<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-scrape.png" alt="Scraping services, infra and appliances"></p>
+<h2 id="whats-next">What&rsquo;s next?</h2>
 <p>The key of any monitoring tool is its simplicity, especially when it comes to instrumentation. Prometheus shines in that area, making it very easy for clients to expose built-in metrics without having to worry about the Prometheus server (so long as best practices are being followed in terms of label cardinality!). However, built-in metrics only get us some part of the way to observe systems; in the <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/">next part</a>, we will be looking at how to instrument Golang and Java applications to add custom metrics.</p>
-
 <p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
-
-<hr />
-
-<h4 id="looking-to-get-more-practical-training-with-prometheus"><em>Looking to get more practical training with Prometheus?</em></h4>
-
+<hr>
+<h4 id="_looking-to-get-more-practical-training-with-prometheus_"><em>Looking to get more practical training with Prometheus?</em></h4>
 <p><em>I am regularly teaching workshops on Cloud Native monitoring with Prometheus &amp; Grafana - don&rsquo;t hesitate to get in touch with me (<a href="mailto:speaking@pvincent.io">speaking@pvincent.io</a>) for more info about running a workshop for your team or at your meetup/conference.</em></p>
               
             </div>
@@ -375,62 +370,49 @@ ga('send', 'pageview');
               
             
             <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/" data-tooltip="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/" data-tooltip="Prometheus Blog Series (Part 2): Metric types">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/" data-tooltip="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/" data-tooltip="Prometheus Blog Series (Part 2): Metric types">
-          
-            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
+        
       
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+  
 </div>
-
 
             
               
@@ -439,88 +421,62 @@ ga('send', 'pageview');
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Pierre Vincent. All Rights Reserved
+    &copy; 2020 Pierre Vincent. All Rights Reserved
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
         <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/" data-tooltip="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/" data-tooltip="Prometheus Blog Series (Part 2): Metric types">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/" data-tooltip="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/" data-tooltip="Prometheus Blog Series (Part 2): Metric types">
-          
-            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
+        
       
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+  
 </div>
-
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-        <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-        <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-3-exposing-and-collecting-metrics%2f">
-        <i class="fa fa-twitter"></i><span>Share on Twitter</span>
-      </a>
-    </li>
+    
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
@@ -536,65 +492,64 @@ ga('send', 'pageview');
     
     <h4 id="about-card-name">Pierre Vincent</h4>
     
-      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</div>
+      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</div>
     
     
       <div id="about-card-job">
         <i class="fa fa-briefcase"></i>
         <br/>
-        Infastructure &amp; Reliability Manager
+        Head of SRE
       </div>
     
     
       <div id="about-card-location">
         <i class="fa fa-map-marker"></i>
         <br/>
-        Poppulo - Cork, Ireland
+        Glofox - Ireland
       </div>
     
   </div>
 </div>
 
     
+
     
   
     
-    <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+      
+      <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+    
   
 
 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://blog.pvincent.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+<script src="https://blog.pvincent.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight').each(function(i, block) {
-    var code = "";
-    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
-      code += "<span class=\"line\">" + line + "</span><br>";
-    });
-    if (code.length > 0) {
-      block.innerHTML = code;  
-    }
-  });
-  $('pre > code').each(function(i, block) {
-    $(this).addClass('codeblock');
-    hljs.highlightBlock(block);
-  });
-});
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
 </script>
 
+
   
     
   
-
 
 
 

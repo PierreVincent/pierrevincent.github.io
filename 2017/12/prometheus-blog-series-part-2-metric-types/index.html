@@ -1,91 +1,109 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
-    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.75.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Pierre Vincent">
+<meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
+<meta name="description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.">
+
+
+<meta property="og:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prometheus Blog Series (Part 2): Metric types">
+<meta name="twitter:title" content="Prometheus Blog Series (Part 2): Metric types">
+<meta property="og:url" content="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">
+<meta property="twitter:url" content="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">
+<meta property="og:site_name" content="Pierre Vincent">
+<meta property="og:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.">
+<meta name="twitter:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2017-12-24T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2017-12-24T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="monitoring">
+    
+  
+  
+    
+      <meta property="article:tag" content="monitoring">
+    
+      <meta property="article:tag" content="observability">
+    
+      <meta property="article:tag" content="prometheus">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@PierreVincent">
+
+
+  <meta name="twitter:creator" content="@PierreVincent">
+
+
+
+
+
+
+  <meta property="og:image" content="https://blog.pvincent.io/images/prometheus.png">
+  <meta property="twitter:image" content="https://blog.pvincent.io/images/prometheus.png">
+
+
+
+
+
+  <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+  <meta property="twitter:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+
+
     <title>Prometheus Blog Series (Part 2): Metric types</title>
-    <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
     <link rel="icon" href="https://blog.pvincent.io/favicon.png">
     
 
     
-    <meta name="description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
 
-">
-    <meta property="og:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Prometheus Blog Series (Part 2): Metric types">
-    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-2-metric-types/">
-    <meta property="og:site_name" content="Pierre Vincent">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Prometheus Blog Series (Part 2): Metric types">
-    <meta name="twitter:description" content="In Part 1 of this series, we talked about Prometheus metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.
-
-">
-    
-      <meta name="twitter:creator" content="@PierreVincent">
-    
-    
+    <link rel="canonical" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">
 
     
-    
-
-    
-      <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
-    
-
-    
-      <meta property="og:image" content="https://blog.pvincent.io/images/prometheus.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    
-
-    
-
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
-    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
-    
-    
-      <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
+        <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-104104349-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-104104349-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -123,7 +141,7 @@ ga('send', 'pageview');
         </a>
         <h4 class="sidebar-profile-name">Pierre Vincent</h4>
         
-          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</h5>
+          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</h5>
         
       </div>
     
@@ -179,12 +197,13 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -194,7 +213,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
       
@@ -204,7 +223,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank">
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -214,13 +233,14 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank">
+      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-slideshare"></i>
       
       <span class="sidebar-button-desc">SlideShare</span>
     </a>
   </li>
+
 
     </ul>
     <ul class="sidebar-buttons">
@@ -255,6 +275,7 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
   </div>
 </nav>
@@ -274,15 +295,16 @@ ga('send', 'pageview');
       Prometheus Blog Series (Part 2): Metric types
     </h1>
   
-  <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-12-24T00:00:00Z">
-      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-24T00:00:00Z">
+        
   December 24, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -291,85 +313,50 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
 </div>
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>In <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> of this series, we talked about <a href="https://prometheus.io/">Prometheus</a> metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.</p>
-
-<p></p>
-
 <h2 id="counters-the-only-way-is-up">Counters: the only way is up</h2>
-
 <p>A great way to instrument the internal state of an application is to count whenever specific events happen, and expose this counter over time as a time series. Each data point of the time series is the value of the counter at the time the counter was observed.</p>
-
 <p>The counter metric type works on a very strict assumption that it can only be incremented. When a service exposes a counter metric, it always starts at 0 and only goes up. Like all other metrics, each label combination is its own data-point and is incremented individually.</p>
-
 <p>The best practice on naming counters is to using the <code>_total</code> suffix, e.g. <code>batch_jobs_completed_total</code>.</p>
-
 <h3 id="observing-counters-over-time">Observing counters over time</h3>
-
 <p>The absolute value of a counter is pretty irrelevant and should not be relied on - this is because counters do not preserve their value over application restarts. In a microservices architecture, instances of services are short-lived (e.g. rolling-updates, auto-scaling&hellip;), therefore counters will very often reset back to 0.</p>
-
 <p>The real purpose of counters is actually in their evolution over time, which can be obtained through functions like <code>rate()</code> or <code>irate()</code>. These functions will automatically correct counter resets, allowing to calculate accurate rates even if some services restart.</p>
-
 <pre><code># Total number of completed cleanup jobs by datacenter (will be affected by restarts)
 sum(batch_jobs_completed_total{job_type=&quot;hourly-cleanup&quot;}) by (datacenter)
 
 # Number of completed cleanup jobs per second, by datacenter (not affected by restarts)
 sum(rate(batch_jobs_completed_total{job_type=&quot;hourly-cleanup&quot;}[5m])) by (datacenter)
-</code></pre>
-
-<p>Unlike the <code>sum()</code> function, <code>rate()</code> does not take in a metric, but a <em>range vector</em> (created by using the <code>[ ]</code> operator). A <em>range vector</em> contains all the data-points of the metric for the time-period specified. In the example above, <code>[5m]</code> will consider all data-points captured for our <code>batch_jobs_completed_total</code> metric for 5 minutes. Applying <code>rate()</code> to a <em>range vector</em> calculates the average rate of increase per second during that time-window. The longer the time-window, the smoother the <code>rate()</code> graph will be (potentially hiding local spikes).</p>
-
+</code></pre><p>Unlike the <code>sum()</code> function, <code>rate()</code> does not take in a metric, but a <em>range vector</em> (created by using the <code>[ ]</code> operator). A <em>range vector</em> contains all the data-points of the metric for the time-period specified. In the example above, <code>[5m]</code> will consider all data-points captured for our <code>batch_jobs_completed_total</code> metric for 5 minutes. Applying <code>rate()</code> to a <em>range vector</em> calculates the average rate of increase per second during that time-window. The longer the time-window, the smoother the <code>rate()</code> graph will be (potentially hiding local spikes).</p>
 <p>Example of a requests counter (total and rate):</p>
-
-<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-requests-counter.png" alt="Total number of requests" /></p>
-
-<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-requests-counter-rate.png" alt="Requests rate" /></p>
-
+<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-requests-counter.png" alt="Total number of requests"></p>
+<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-requests-counter-rate.png" alt="Requests rate"></p>
 <h2 id="gauges-instrumenting-the-current-state">Gauges: instrumenting the current state</h2>
-
 <p>Not all application metrics can be covered by counters, as they might go up and down over time. Typically this will be the case of any metric exposing the <em>current state</em> of something, as opposed to <em>how many things happened</em>. Gauges can be used to track such metrics, for example:</p>
-
 <pre><code># Amount of memory currently used
 memory_bytes_used
 
 # Number of jobs currently in queue
 batch_jobs_in_queue{job_type=&quot;hourly-cleanup&quot;}
-</code></pre>
-
-<p>Gauges are very easy to reason about - unlike counters, their absolute value is meaningful and can be used for graphs and alerts. Their evolution over-time can also be used, with functions like <code>delta()</code>, <code>deriv()</code> and even <a href="https://www.robustperception.io/reduce-noise-from-disk-space-alerts/">predicted using linear-regression</a> with functions like <code>predict_linear()</code></p>
-
-<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-memory-gauge.png" alt="Memory usage gauge" /></p>
-
+</code></pre><p>Gauges are very easy to reason about - unlike counters, their absolute value is meaningful and can be used for graphs and alerts. Their evolution over-time can also be used, with functions like <code>delta()</code>, <code>deriv()</code> and even <a href="https://www.robustperception.io/reduce-noise-from-disk-space-alerts/">predicted using linear-regression</a> with functions like <code>predict_linear()</code></p>
+<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-memory-gauge.png" alt="Memory usage gauge"></p>
 <h2 id="histograms-sampling-observations">Histograms: sampling observations</h2>
-
 <p>When trying to observe the request latency of a service, the initial temptation can be to work with averages: they are simple to calculate over time using a total and a counter. Averages unfortunately have the big drawback of hiding distribution and prevent the discovery of outliers.</p>
-
 <p>Quantiles are better measurement for this kind of metrics, as they allow to understand distribution. For example, if the request latency 0.5-quantile (50th percentile) is 100ms, it means that 50% of requests completed under 100ms. Similarly, if the 0.99-quantile (99th percentile) is 4s, it means that 1% of requests responded in more than 4s.</p>
-
 <p>Quantiles are however quite expensive to calculate accurately, as they need the full set of observations (i.e. duration of each requests). Histograms make this simpler by sampling the observations in a pre-defined <em>buckets</em>. For example, a request latency Histogram can have buckets for &lt;10ms, &lt;100ms, &lt;1s, &lt;10s.</p>
-
 <p>When creating an Histogram, it is important to think about what the buckets should be from the beginning. In most scenarios, the <em>SLO</em> for the metric in question can be a good place to start.</p>
-
 <p>Prometheus can use these <em>buckets</em> to infer the quantiles using the <code>histogram_quantile()</code> function:</p>
-
 <pre><code># Request duration 90th percentile
 histogram_quantile(0.9, rate(http_request_duration_milliseconds_bucket[5m]))
-</code></pre>
-
-<p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-latency-histogram.png" alt="Memory usage gauge" /></p>
-
+</code></pre><p><img src="https://blog.pvincent.io/images/prometheus-series/prometheus-latency-histogram.png" alt="Memory usage gauge"></p>
 <p>The graph aboves highlights how important distribution is to understand a metric like latency. If we imagine that this metric has an <em>SLO</em> of 150ms, a 137ms average latency might look acceptable; in reality 1 out of 10 requests completes in 193ms or more (90th percentile) and 1 out of 100 takes more than 1s!</p>
-
 <h3 id="more-buckets-means-more-labels">More buckets means more labels</h3>
-
 <p>In practice, a Histogram will result in the creation of an additional metric (with the <code>_bucket</code> suffix), labeled with the upper bound of the <em>bucket</em>:</p>
-
 <pre><code># HELP http_request_duration_milliseconds Http request latency histogram
 # TYPE http_request_duration_milliseconds histogram
 http_request_duration_milliseconds_bucket{le=&quot;100&quot;} 3741
@@ -380,20 +367,12 @@ http_request_duration_milliseconds_bucket{le=&quot;1600&quot;} 4991
 http_request_duration_milliseconds_bucket{le=&quot;+Inf&quot;} 5033
 http_request_duration_milliseconds_sum 673428
 http_request_duration_milliseconds_count 5033
-</code></pre>
-
-<p>Keeping in mind that each unique combination of labels is considered as a separate time-series, it is usually good practice to keep the number of buckets small, as well as the number of other labels on Histograms.</p>
-
+</code></pre><p>Keeping in mind that each unique combination of labels is considered as a separate time-series, it is usually good practice to keep the number of buckets small, as well as the number of other labels on Histograms.</p>
 <h2 id="summaries-client-side-quantiles">Summaries: client-side quantiles</h2>
-
 <p><a href="https://prometheus.io/docs/practices/histograms/">Histograms and Summaries</a> are very similar in the way that they expose the distribution of a given data set. While Histograms use sampling (with <em>buckets</em>) and estimate quantiles on the Prometheus server, Summaries are calculated on the client side (i.e. the service exposing metrics)</p>
-
 <p>Summaries have the advantage of being more accurate for the pre-defined quantiles, however the client-side calculation can be expensive to do (while Histograms are basically just counters). One of the other drawbacks of Summaries is that they cannot be combined together, because quantiles cannot be averaged. Therefore, Summaries should only be used for metrics that make sense at an individual instance level (e.g. garbage collection times) or if the service in question is only going to have a single instance.</p>
-
 <p>The pre-configured aspect of Summaries quantiles can also be a bit limiting, while Histograms allow to do this at the server level, without changing client instrumentation.</p>
-
 <p>Example of the built-in Golang garbage collector summary:</p>
-
 <pre><code># HELP go_gc_duration_seconds A summary of the GC invocation durations.
 # TYPE go_gc_duration_seconds summary
 go_gc_duration_seconds{quantile=&quot;0&quot;} 4.274e-05
@@ -403,42 +382,28 @@ go_gc_duration_seconds{quantile=&quot;0.75&quot;} 0.002328529
 go_gc_duration_seconds{quantile=&quot;1&quot;} 0.201453313
 go_gc_duration_seconds_sum 0.467543895
 go_gc_duration_seconds_count 92
-</code></pre>
-
-<h2 id="what-s-next">What&rsquo;s next?</h2>
-
+</code></pre><h2 id="whats-next">What&rsquo;s next?</h2>
 <p>This second part covered the different metric types Prometheus offers and in what situation they should (or should not) be used:</p>
-
 <ul>
 <li><strong>Counters</strong>: use for counting events that happen (e.g. total number of requests) and query using <code>rate()</code></li>
 <li><strong>Gauge</strong>: use to instrument the current state of a metric (e.g. memory usage, jobs in queue)</li>
 <li><strong>Histograms</strong>: use to sample observations in order to analyse distribution of a data set (e.g. request latency)</li>
 <li><strong>Summaries</strong>: use for pre-calculated quantiles on client side, but be mindful of calculation cost and aggregation limitations</li>
 </ul>
-
 <p>You should now have a better understanding of what Prometheus metrics are and how to query them&hellip;  but how do these metrics get there in the first place? The <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">next part</a> of this series will get into the Prometheus <em>pull model</em> on how clients expose metrics and how Prometheus collects them.</p>
-
 <p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
-
 <h3 id="more-reading">More reading</h3>
-
 <p>Prometheus documentation:</p>
-
 <ul>
 <li><a href="https://prometheus.io/docs/concepts/metric_types/">Metric types</a></li>
 <li><a href="https://prometheus.io/docs/practices/histograms/">Histograms and quantiles</a></li>
 </ul>
-
 <p>Articles:</p>
-
 <ul>
 <li>Using <code>predict_linear()</code> to alert on disk about to fill up, from <a href="https://www.robustperception.io/reduce-noise-from-disk-space-alerts/">robustperception.io</a></li>
 </ul>
-
-<hr />
-
-<h4 id="looking-to-get-more-practical-training-with-prometheus"><em>Looking to get more practical training with Prometheus?</em></h4>
-
+<hr>
+<h4 id="_looking-to-get-more-practical-training-with-prometheus_"><em>Looking to get more practical training with Prometheus?</em></h4>
 <p><em>I am regularly teaching workshops on Cloud Native monitoring with Prometheus &amp; Grafana - don&rsquo;t hesitate to get in touch with me (<a href="mailto:speaking@pvincent.io">speaking@pvincent.io</a>) for more info about running a workshop for your team or at your meetup/conference.</em></p>
               
             </div>
@@ -462,62 +427,49 @@ go_gc_duration_seconds_count 92
               
             
             <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" data-tooltip="Prometheus Blog Series (Part 1): Metrics and Labels">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" data-tooltip="Prometheus Blog Series (Part 1): Metrics and Labels">
-          
-            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
+        
       
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+  
 </div>
-
 
             
               
@@ -526,88 +478,62 @@ go_gc_duration_seconds_count 92
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Pierre Vincent. All Rights Reserved
+    &copy; 2020 Pierre Vincent. All Rights Reserved
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
         <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" data-tooltip="Prometheus Blog Series (Part 1): Metrics and Labels">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" data-tooltip="Prometheus Blog Series (Part 1): Metrics and Labels">
-          
-            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
+        
       
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+  
 </div>
-
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-        <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-        <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-2-metric-types%2f">
-        <i class="fa fa-twitter"></i><span>Share on Twitter</span>
-      </a>
-    </li>
+    
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
@@ -623,65 +549,64 @@ go_gc_duration_seconds_count 92
     
     <h4 id="about-card-name">Pierre Vincent</h4>
     
-      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</div>
+      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</div>
     
     
       <div id="about-card-job">
         <i class="fa fa-briefcase"></i>
         <br/>
-        Infastructure &amp; Reliability Manager
+        Head of SRE
       </div>
     
     
       <div id="about-card-location">
         <i class="fa fa-map-marker"></i>
         <br/>
-        Poppulo - Cork, Ireland
+        Glofox - Ireland
       </div>
     
   </div>
 </div>
 
     
+
     
   
     
-    <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+      
+      <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+    
   
 
 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://blog.pvincent.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+<script src="https://blog.pvincent.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight').each(function(i, block) {
-    var code = "";
-    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
-      code += "<span class=\"line\">" + line + "</span><br>";
-    });
-    if (code.length > 0) {
-      block.innerHTML = code;  
-    }
-  });
-  $('pre > code').each(function(i, block) {
-    $(this).addClass('codeblock');
-    hljs.highlightBlock(block);
-  });
-});
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
 </script>
 
+
   
     
   
-
 
 
 

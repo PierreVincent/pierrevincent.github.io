@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Agile on Pierre Vincent</title>
+    <title>agile on Pierre Vincent</title>
     <link>https://blog.pvincent.io/tags/agile/</link>
-    <description>Recent content in Agile on Pierre Vincent</description>
+    <description>Recent content in agile on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Jun 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.pvincent.io/tags/agile/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 16 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/agile/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Increasing the visibility of distributed systems in production</title>
       <link>https://blog.pvincent.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</link>
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</guid>
-      <description>&lt;p&gt;This talk from &lt;a href=&#34;http://rebelcon2017.com&#34;&gt;RebelCon 2017&lt;/a&gt; gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;This talk from &lt;a href=&#34;http://rebelcon2017.com&#34;&gt;RebelCon 2017&lt;/a&gt; gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,9 +22,7 @@
       <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2016/11/agile-at-poppulo/</guid>
-      <description>&lt;p&gt;Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at &lt;a href=&#34;https://www.meetup.com/Agile-Cork/&#34;&gt;Agile Cork&lt;/a&gt;, I go through the evolution of the processes used over the last few years at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at &lt;a href=&#34;https://www.meetup.com/Agile-Cork/&#34;&gt;Agile Cork&lt;/a&gt;, I go through the evolution of the processes used over the last few years at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.&lt;/p&gt;</description>
     </item>
     
   </channel>

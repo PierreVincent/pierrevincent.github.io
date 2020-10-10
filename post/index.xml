@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Pierre Vincent</title>
@@ -6,10 +6,15 @@
     <description>Recent content in Posts on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 May 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.pvincent.io/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box write-up: Cache</title>
+      <link>https://blog.pvincent.io/2020/10/hack-the-box-write-up-cache/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/2020/10/hack-the-box-write-up-cache/</guid>
+      <description>&lt;p&gt;Since completing OSCP in November 2019, I have been refining my penetration testing skills on &lt;a href=&#34;https://www.hackthebox.eu/&#34;&gt;Hack The Box&lt;/a&gt;, a Penetration Testing lab. Every target is usually a rollercoaster of both frustration and excitement, definitely pushing the &lt;em&gt;Try harder&lt;/em&gt; philosophy. Here is a step-by-step guide to root one of the recently retired machines: Cache.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Prometheus workshops follow-up: frequently asked questions</title>
@@ -17,9 +22,7 @@
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/</guid>
-      <description>&lt;p&gt;When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,9 +31,7 @@
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</guid>
-      <description>&lt;p&gt;For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&amp;rsquo;s products started their development more than a decade ago, with architectures reflecting a different set of practices and assumptions.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&amp;rsquo;s products started their development more than a decade ago, with architectures reflecting a different set of practices and assumptions.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,10 +41,7 @@
       
       <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/</guid>
       <description>&lt;p&gt;Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;blog series&lt;/a&gt;, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover &lt;em&gt;unknown unknowns&lt;/em&gt;, either pro-actively (testing) or reactively (debugging).&lt;/p&gt;
-
-&lt;p&gt;Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their &lt;em&gt;normal&lt;/em&gt; state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their &lt;em&gt;normal&lt;/em&gt; state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -52,11 +50,8 @@
       <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/</guid>
-      <description>&lt;p&gt;So far in this &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; blog series, we have looked into Prometheus metrics and labels (see &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;2&lt;/a&gt;), as well as how Prometheus integrates in a distributed architecture (see &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/&#34;&gt;Part 3&lt;/a&gt;). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&amp;rsquo; wide adoption.&lt;/p&gt;
-
-&lt;p&gt;This post will go through examples in Go and Java. Prometheus has a number of other &lt;a href=&#34;https://prometheus.io/docs/instrumenting/clientlibs/&#34;&gt;supported languages&lt;/a&gt;, through official libraries and community maintained ones.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;So far in this &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; blog series, we have looked into Prometheus metrics and labels (see &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;2&lt;/a&gt;), as well as how Prometheus integrates in a distributed architecture (see &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/&#34;&gt;Part 3&lt;/a&gt;). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&#39; wide adoption.&lt;/p&gt;
+&lt;p&gt;This post will go through examples in Go and Java. Prometheus has a number of other &lt;a href=&#34;https://prometheus.io/docs/instrumenting/clientlibs/&#34;&gt;supported languages&lt;/a&gt;, through official libraries and community maintained ones.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -65,9 +60,7 @@
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; and &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;Part 2&lt;/a&gt; of this series, we covered the basics of &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;In &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; and &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/&#34;&gt;Part 2&lt;/a&gt; of this series, we covered the basics of &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -76,9 +69,7 @@
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; of this series, we talked about &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;In &lt;a href=&#34;https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/&#34;&gt;Part 1&lt;/a&gt; of this series, we talked about &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -88,10 +79,7 @@
       
       <guid>https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/</guid>
       <description>&lt;p&gt;When it comes to monitoring tools in the last while, &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.&lt;/p&gt;
-
-&lt;p&gt;Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -100,9 +88,7 @@
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://www.code-conf.com/code-conf-17/sthlm/&#34;&gt;CODE Stockholm&lt;/a&gt; is a one-day conference centered on Continuous Delivery and the DevOps movement. Both aspects were well covered through keynotes and two tracks of great talks.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.code-conf.com/code-conf-17/sthlm/&#34;&gt;CODE Stockholm&lt;/a&gt; is a one-day conference centered on Continuous Delivery and the DevOps movement. Both aspects were well covered through keynotes and two tracks of great talks.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -112,10 +98,7 @@
       
       <guid>https://blog.pvincent.io/2017/09/measurement-is-the-number-one-ally-of-technical-work/</guid>
       <description>&lt;p&gt;As engineers, we tend to have high expectations of product managers to justify the value of adding new features. What problem is this solving? How will we validate that we&amp;rsquo;re building the right thing? Is this the most important thing to work on right now?&lt;/p&gt;
-
-&lt;p&gt;These are great questions but interestingly we aren&amp;rsquo;t always applying the same rigor to the technical work.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;These are great questions but interestingly we aren&amp;rsquo;t always applying the same rigor to the technical work.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -124,9 +107,7 @@
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</guid>
-      <description>&lt;p&gt;This talk from &lt;a href=&#34;http://rebelcon2017.com&#34;&gt;RebelCon 2017&lt;/a&gt; gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;This talk from &lt;a href=&#34;http://rebelcon2017.com&#34;&gt;RebelCon 2017&lt;/a&gt; gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -135,9 +116,7 @@
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</guid>
-      <description>&lt;p&gt;In this talk at &lt;a href=&#34;http://www.tmforumlive.org/&#34;&gt;TMForumLive 2017&lt;/a&gt;, I describe the &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;In this talk at &lt;a href=&#34;http://www.tmforumlive.org/&#34;&gt;TMForumLive 2017&lt;/a&gt;, I describe the &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -146,9 +125,7 @@
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</guid>
-      <description>&lt;p&gt;This talk at &lt;a href=&#34;https://web.pipelineconf.info&#34;&gt;Pipeline, the Continuous Delivery conference&lt;/a&gt; covers how we made Consumer-driven contracts and &lt;a href=&#34;https://docs.pact.io/&#34;&gt;Pact&lt;/a&gt; part of our pipeline at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; and how it improved confidence and collaboration between teams when designing APIs.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;This talk at &lt;a href=&#34;https://web.pipelineconf.info&#34;&gt;Pipeline, the Continuous Delivery conference&lt;/a&gt; covers how we made Consumer-driven contracts and &lt;a href=&#34;https://docs.pact.io/&#34;&gt;Pact&lt;/a&gt; part of our pipeline at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; and how it improved confidence and collaboration between teams when designing APIs.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -157,9 +134,7 @@
       <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2016/11/agile-at-poppulo/</guid>
-      <description>&lt;p&gt;Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at &lt;a href=&#34;https://www.meetup.com/Agile-Cork/&#34;&gt;Agile Cork&lt;/a&gt;, I go through the evolution of the processes used over the last few years at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at &lt;a href=&#34;https://www.meetup.com/Agile-Cork/&#34;&gt;Agile Cork&lt;/a&gt;, I go through the evolution of the processes used over the last few years at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -168,9 +143,7 @@
       <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2015/10/docker-microservices-and-service-discovery/</guid>
-      <description>&lt;p&gt;Working with Microservices has recently become very trendy, however building dynamic and distributed systems doesn’t come without new challenges. Service Discovery is one of these challenges: enabling services to dynamically discover other services and communicate with them. In this talk at &lt;a href=&#34;http://corkdev.io/&#34;&gt;CorkDev.io&lt;/a&gt;, I go through a Service Discovery solution, using &lt;a href=&#34;https://medium.com/airbnb-engineering/smartstack-service-discovery-in-the-cloud-4b8a080de619&#34;&gt;Airbnb Smartstack&lt;/a&gt; to wire up Microservices running in Docker containers.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Working with Microservices has recently become very trendy, however building dynamic and distributed systems doesn’t come without new challenges. Service Discovery is one of these challenges: enabling services to dynamically discover other services and communicate with them. In this talk at &lt;a href=&#34;http://corkdev.io/&#34;&gt;CorkDev.io&lt;/a&gt;, I go through a Service Discovery solution, using &lt;a href=&#34;https://medium.com/airbnb-engineering/smartstack-service-discovery-in-the-cloud-4b8a080de619&#34;&gt;Airbnb Smartstack&lt;/a&gt; to wire up Microservices running in Docker containers.&lt;/p&gt;</description>
     </item>
     
   </channel>

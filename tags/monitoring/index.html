@@ -1,25 +1,49 @@
-
-
-
-  
-
-
-
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
-    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Monitoring</title>
-    <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content=", devops, sre, monitoring">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.75.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Pierre Vincent">
+<meta name="keywords" content=", devops, sre, monitoring">
+<meta name="description" content="Pierre Vincent - SRE Manager at Poppulo">
+
+
+<meta property="og:description" content="Pierre Vincent - SRE Manager at Poppulo">
+<meta property="og:type" content="website">
+<meta property="og:title" content="monitoring">
+<meta name="twitter:title" content="monitoring">
+<meta property="og:url" content="https://blog.pvincent.io/tags/monitoring/">
+<meta property="twitter:url" content="https://blog.pvincent.io/tags/monitoring/">
+<meta property="og:site_name" content="Pierre Vincent">
+<meta property="og:description" content="Pierre Vincent - SRE Manager at Poppulo">
+<meta name="twitter:description" content="Pierre Vincent - SRE Manager at Poppulo">
+<meta property="og:locale" content="en-us">
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@PierreVincent">
+
+
+  <meta name="twitter:creator" content="@PierreVincent">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+  <meta property="twitter:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+
+
+    <title>monitoring</title>
 
     <link rel="icon" href="https://blog.pvincent.io/favicon.png">
     
@@ -27,55 +51,36 @@
     
 
     
-    <meta name="description" content="Pierre Vincent - SRE Manager at Poppulo">
-    <meta property="og:description" content="Pierre Vincent - SRE Manager at Poppulo">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Monitoring">
-    <meta property="og:url" content="/tags/monitoring/">
-    <meta property="og:site_name" content="Pierre Vincent">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Monitoring">
-    <meta name="twitter:description" content="Pierre Vincent - SRE Manager at Poppulo">
-    
-      <meta name="twitter:creator" content="@PierreVincent">
-    
-    
+
+    <link rel="canonical" href="https://blog.pvincent.io/tags/monitoring/">
 
     
-    
-
-    
-      <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
-    
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    
-
-    
-
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
-    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
-    
-    
-      <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
+        <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-104104349-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-104104349-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -113,7 +118,7 @@ ga('send', 'pageview');
         </a>
         <h4 class="sidebar-profile-name">Pierre Vincent</h4>
         
-          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</h5>
+          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</h5>
         
       </div>
     
@@ -169,12 +174,13 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -184,7 +190,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
       
@@ -194,7 +200,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank">
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -204,13 +210,14 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank">
+      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-slideshare"></i>
       
       <span class="sidebar-button-desc">SlideShare</span>
     </a>
   </li>
+
 
     </ul>
     <ul class="sidebar-buttons">
@@ -245,6 +252,7 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
   </div>
 </nav>
@@ -278,15 +286,16 @@ ga('send', 'pageview');
           Prometheus workshops follow-up: frequently asked questions
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2019-05-02T00:00:00Z">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-05-02T00:00:00Z">
+        
   May 2, 2019
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -295,17 +304,14 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
+      
         <p>When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.</p>
-
-<p></p>
-
-        <br>
+      
+      <p>
         <a href="https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -338,15 +344,16 @@ ga('send', 'pageview');
           Prometheus Blog Series (Part 5): Alerting rules
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-12-31T00:00:00Z">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-31T00:00:00Z">
+        
   December 31, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -355,19 +362,15 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
+      
         <p>Instrumented applications bring in a wealth of information on how they behave. In the previous parts of this <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">blog series</a>, the focus has been mostly on getting applications to expose their metrics and on how to query Prometheus to make sense of these metrics. This exploratory approach is extremely valuable to uncover <em>unknown unknowns</em>, either pro-actively (testing) or reactively (debugging).</p>
-
 <p>Metrics can also be used to help with things we already know and care about: instrumenting those things and knowing what is their <em>normal</em> state, then it’s possible to alert on situations that are judged problematic. Prometheus makes this possible through the definition of alerting rules.</p>
-
-<p></p>
-
-        <br>
+      
+      <p>
         <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -400,15 +403,16 @@ ga('send', 'pageview');
           Prometheus Blog Series (Part 4): Instrumenting code in Go and Java
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-12-28T00:00:00Z">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-28T00:00:00Z">
+        
   December 28, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -417,19 +421,15 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        <p>So far in this <a href="https://prometheus.io/">Prometheus</a> blog series, we have looked into Prometheus metrics and labels (see <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> &amp; <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">2</a>), as well as how Prometheus integrates in a distributed architecture (see <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">Part 3</a>). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.</p>
-
+      
+        <p>So far in this <a href="https://prometheus.io/">Prometheus</a> blog series, we have looked into Prometheus metrics and labels (see <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> &amp; <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">2</a>), as well as how Prometheus integrates in a distributed architecture (see <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">Part 3</a>). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus' wide adoption.</p>
 <p>This post will go through examples in Go and Java. Prometheus has a number of other <a href="https://prometheus.io/docs/instrumenting/clientlibs/">supported languages</a>, through official libraries and community maintained ones.</p>
-
-<p></p>
-
-        <br>
+      
+      <p>
         <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -462,15 +462,16 @@ ga('send', 'pageview');
           Prometheus Blog Series (Part 3): Exposing and collecting metrics
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-12-26T00:00:00Z">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-26T00:00:00Z">
+        
   December 26, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -479,17 +480,14 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
+      
         <p>In <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> and <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">Part 2</a> of this series, we covered the basics of <a href="https://prometheus.io/">Prometheus</a> metrics and labels. This third part will concentrate on the way Prometheus collects metrics and how clients expose them.</p>
-
-<p></p>
-
-        <br>
+      
+      <p>
         <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -522,15 +520,16 @@ ga('send', 'pageview');
           Prometheus Blog Series (Part 2): Metric types
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-12-24T00:00:00Z">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-24T00:00:00Z">
+        
   December 24, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -539,17 +538,14 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
+      
         <p>In <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> of this series, we talked about <a href="https://prometheus.io/">Prometheus</a> metrics and how to make good use of labels to observe your applications under different segments and dimensions. This second part will look into more details in the 4 different types of Prometheus metrics: Counters, Gauges, Histograms and Summaries.</p>
-
-<p></p>
-
-        <br>
+      
+      <p>
         <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -582,15 +578,16 @@ ga('send', 'pageview');
           Prometheus Blog Series (Part 1): Metrics and Labels
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-12-22T00:00:00Z">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-22T00:00:00Z">
+        
   December 22, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -599,19 +596,15 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
+      
         <p>When it comes to monitoring tools in the last while, <a href="https://prometheus.io/">Prometheus</a> is definitely hard to miss. It has quickly risen to be top of the class, with overwhelming adoption from the community and integrations with all the major pieces of the Cloud Native puzzle.</p>
-
 <p>Throughout this blog series, we will be learning the basics of Prometheus and how Prometheus fits within a service-oriented architecture.  This first post the series will cover the main concepts used in Prometheus: metrics and labels.</p>
-
-<p></p>
-
-        <br>
+      
+      <p>
         <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -644,15 +637,16 @@ ga('send', 'pageview');
           Measurement is the number one ally of technical work
         </a>
       </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-09-10T00:00:00Z">
       
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-09-10T00:00:00Z">
+        
   September 10, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -661,19 +655,15 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
+      
         <p>As engineers, we tend to have high expectations of product managers to justify the value of adding new features. What problem is this solving? How will we validate that we&rsquo;re building the right thing? Is this the most important thing to work on right now?</p>
-
 <p>These are great questions but interestingly we aren&rsquo;t always applying the same rigor to the technical work.</p>
-
-<p></p>
-
-        <br>
+      
+      <p>
         <a href="https://blog.pvincent.io/2017/09/measurement-is-the-number-one-ally-of-technical-work/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
@@ -693,13 +683,15 @@ ga('send', 'pageview');
   <div class="pagination-bar">
     <ul class="pagination">
       
-      
-        <li class="pagination-next">
-          <a class="btn btn--default btn--small" href="https://blog.pvincent.io/tags/monitoring/page/2/">
-            <span>OLDER POSTS</span>
-            <i class="fa fa-angle-right text-base icon-ml"></i>
-          </a>
-        </li>
+        
+        
+          <li class="pagination-next">
+            <a class="btn btn--default btn--small" href="https://blog.pvincent.io/tags/monitoring/page/2/">
+              <span>OLDER POSTS</span>
+              <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+          </li>
+        
       
       <li class="pagination-number">page 1 of 2</li>
     </ul>
@@ -710,7 +702,7 @@ ga('send', 'pageview');
         
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Pierre Vincent. All Rights Reserved
+    &copy; 2020 Pierre Vincent. All Rights Reserved
   </span>
 </footer>
 
@@ -727,59 +719,58 @@ ga('send', 'pageview');
     
     <h4 id="about-card-name">Pierre Vincent</h4>
     
-      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</div>
+      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</div>
     
     
       <div id="about-card-job">
         <i class="fa fa-briefcase"></i>
         <br/>
-        Infastructure &amp; Reliability Manager
+        Head of SRE
       </div>
     
     
       <div id="about-card-location">
         <i class="fa fa-map-marker"></i>
         <br/>
-        Poppulo - Cork, Ireland
+        Glofox - Ireland
       </div>
     
   </div>
 </div>
 
     
+
     
   
     
-    <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+      
+      <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+    
   
 
 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://blog.pvincent.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+<script src="https://blog.pvincent.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight').each(function(i, block) {
-    var code = "";
-    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
-      code += "<span class=\"line\">" + line + "</span><br>";
-    });
-    if (code.length > 0) {
-      block.innerHTML = code;  
-    }
-  });
-  $('pre > code').each(function(i, block) {
-    $(this).addClass('codeblock');
-    hljs.highlightBlock(block);
-  });
-});
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
 </script>
 
 

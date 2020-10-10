@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Pierre Vincent</title>
@@ -6,30 +6,18 @@
     <description>Recent content in Categories on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-	<atom:link href="https://blog.pvincent.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Devops</title>
-      <link>https://blog.pvincent.io/categories/devops/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <title>security</title>
+      <link>https://blog.pvincent.io/categories/security/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.pvincent.io/categories/devops/</guid>
+      <guid>https://blog.pvincent.io/categories/security/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Measurement</title>
-      <link>https://blog.pvincent.io/categories/measurement/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/categories/measurement/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Monitoring</title>
+      <title>monitoring</title>
       <link>https://blog.pvincent.io/categories/monitoring/</link>
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
@@ -38,7 +26,25 @@
     </item>
     
     <item>
-      <title>Talks</title>
+      <title>devops</title>
+      <link>https://blog.pvincent.io/categories/devops/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>measurement</title>
+      <link>https://blog.pvincent.io/categories/measurement/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/categories/measurement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>talks</title>
       <link>https://blog.pvincent.io/categories/talks/</link>
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       

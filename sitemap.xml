@@ -1,9 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.pvincent.io/categories/</loc>
+    <lastmod>2020-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/2020/10/hack-the-box-write-up-cache/</loc>
+    <lastmod>2020-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/hackthebox/</loc>
+    <lastmod>2020-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/pentest/</loc>
+    <lastmod>2020-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/</loc>
+    <lastmod>2020-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/post/</loc>
+    <lastmod>2020-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/categories/security/</loc>
+    <lastmod>2020-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/</loc>
+    <lastmod>2020-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.pvincent.io/page/contributions/</loc>
+    <lastmod>2019-12-07T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/page/</loc>
     <lastmod>2019-12-07T00:00:00+01:00</lastmod>
   </url>
   
@@ -13,8 +58,43 @@
   </url>
   
   <url>
+    <loc>https://blog.pvincent.io/tags/monitoring/</loc>
+    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/categories/monitoring/</loc>
+    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/observability/</loc>
+    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/prometheus/</loc>
+    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/</loc>
     <lastmod>2019-05-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/continuous-delivery/</loc>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/devops/</loc>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/categories/devops/</loc>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -53,8 +133,33 @@
   </url>
   
   <url>
+    <loc>https://blog.pvincent.io/tags/conference/</loc>
+    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/measurement/</loc>
+    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/categories/measurement/</loc>
+    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.pvincent.io/2017/09/measurement-is-the-number-one-ally-of-technical-work/</loc>
     <lastmod>2017-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/refactoring/</loc>
+    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/agile/</loc>
+    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -63,12 +168,47 @@
   </url>
   
   <url>
+    <loc>https://blog.pvincent.io/tags/sre/</loc>
+    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/categories/talks/</loc>
+    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/microservices/</loc>
+    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.pvincent.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://blog.pvincent.io/tags/api/</loc>
+    <lastmod>2017-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/consumer-driven-contracts/</loc>
+    <lastmod>2017-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.pvincent.io/2017/03/increasing-collaboration-and-confidence-with-consumer-driven-contracts-testing/</loc>
+    <lastmod>2017-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/pact/</loc>
+    <lastmod>2017-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pvincent.io/tags/testing/</loc>
     <lastmod>2017-03-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -78,180 +218,32 @@
   </url>
   
   <url>
+    <loc>https://blog.pvincent.io/tags/docker/</loc>
+    <lastmod>2015-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.pvincent.io/2015/10/docker-microservices-and-service-discovery/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.pvincent.io/tags/agile/</loc>
-    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/api/</loc>
-    <lastmod>2017-03-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/archives/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/conference/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/consumer-driven-contracts/</loc>
-    <lastmod>2017-03-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/continuous-delivery/</loc>
-    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/devops/</loc>
-    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/categories/devops/</loc>
-    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/docker/</loc>
-    <lastmod>2015-10-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/measurement/</loc>
-    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/categories/measurement/</loc>
-    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.pvincent.io/tags/meetup/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/microservices/</loc>
-    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/monitoring/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/categories/monitoring/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/observability/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/pact/</loc>
-    <lastmod>2017-03-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/page/</loc>
-    <lastmod>2019-12-07T00:00:00+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/</loc>
-    <lastmod>2019-12-07T00:00:00+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/post/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/prometheus/</loc>
-    <lastmod>2019-05-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/refactoring/</loc>
-    <lastmod>2017-09-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.pvincent.io/tags/service-discovery/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.pvincent.io/tags/smartstack/</loc>
     <lastmod>2015-10-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.pvincent.io/tags/sre/</loc>
-    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/</loc>
-    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/categories/talks/</loc>
-    <lastmod>2017-06-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.pvincent.io/tags/testing/</loc>
-    <lastmod>2017-03-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://blog.pvincent.io/archives/</loc>
   </url>
   
 </urlset>

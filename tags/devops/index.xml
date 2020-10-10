@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Devops on Pierre Vincent</title>
+    <title>devops on Pierre Vincent</title>
     <link>https://blog.pvincent.io/tags/devops/</link>
-    <description>Recent content in Devops on Pierre Vincent</description>
+    <description>Recent content in devops on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.pvincent.io/tags/devops/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Patterns for zero-downtime deployments of large applications</title>
       <link>https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</link>
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/</guid>
-      <description>&lt;p&gt;For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&amp;rsquo;s products started their development more than a decade ago, with architectures reflecting a different set of practices and assumptions.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;For anybody starting a product today, the idea of deployments requiring downtime is ludicrous. The truth is, a lot of today&amp;rsquo;s products started their development more than a decade ago, with architectures reflecting a different set of practices and assumptions.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,9 +22,7 @@
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/09/code-stockholm-highlights-data-driven-devops-and-raising-the-continuous-delivery-game/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://www.code-conf.com/code-conf-17/sthlm/&#34;&gt;CODE Stockholm&lt;/a&gt; is a one-day conference centered on Continuous Delivery and the DevOps movement. Both aspects were well covered through keynotes and two tracks of great talks.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.code-conf.com/code-conf-17/sthlm/&#34;&gt;CODE Stockholm&lt;/a&gt; is a one-day conference centered on Continuous Delivery and the DevOps movement. Both aspects were well covered through keynotes and two tracks of great talks.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -39,9 +31,7 @@
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/06/increasing-the-visibility-of-distributed-systems-in-production/</guid>
-      <description>&lt;p&gt;This talk from &lt;a href=&#34;http://rebelcon2017.com&#34;&gt;RebelCon 2017&lt;/a&gt; gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;This talk from &lt;a href=&#34;http://rebelcon2017.com&#34;&gt;RebelCon 2017&lt;/a&gt; gives an overview of different monitoring patterns and how different tools can be used to help build a fuller picture of distributed applications in production.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -50,9 +40,7 @@
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2017/05/microservices-in-a-fast-paced-customer-centric-environment-how-and-why/</guid>
-      <description>&lt;p&gt;In this talk at &lt;a href=&#34;http://www.tmforumlive.org/&#34;&gt;TMForumLive 2017&lt;/a&gt;, I describe the &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;In this talk at &lt;a href=&#34;http://www.tmforumlive.org/&#34;&gt;TMForumLive 2017&lt;/a&gt;, I describe the &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; journey (and challenges!) from a single team building a monolithic application to six teams practicing DevOps on a microservices architecture.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -61,9 +49,7 @@
       <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/2016/11/agile-at-poppulo/</guid>
-      <description>&lt;p&gt;Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at &lt;a href=&#34;https://www.meetup.com/Agile-Cork/&#34;&gt;Agile Cork&lt;/a&gt;, I go through the evolution of the processes used over the last few years at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Agile is about continuous improvement, not only for the product we are building but for own process as well. In this talk at &lt;a href=&#34;https://www.meetup.com/Agile-Cork/&#34;&gt;Agile Cork&lt;/a&gt;, I go through the evolution of the processes used over the last few years at &lt;a href=&#34;https://www.poppulo.com&#34;&gt;Poppulo&lt;/a&gt; (formerly Newsweaver), from a large iteration based development approach, to Scrum and more recently Kanban, DevOps and Continuous Delivery.&lt;/p&gt;</description>
     </item>
     
   </channel>

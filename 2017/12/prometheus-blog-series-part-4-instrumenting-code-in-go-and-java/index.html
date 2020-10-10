@@ -1,97 +1,113 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
-    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.75.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Pierre Vincent">
+<meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
+<meta name="description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&#39; wide adoption.
+This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.">
+
+
+<meta property="og:description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&#39; wide adoption.
+This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
+<meta name="twitter:title" content="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
+<meta property="og:url" content="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/">
+<meta property="twitter:url" content="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/">
+<meta property="og:site_name" content="Pierre Vincent">
+<meta property="og:description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&#39; wide adoption.
+This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.">
+<meta name="twitter:description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&#39; wide adoption.
+This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2017-12-28T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2017-12-28T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="monitoring">
+    
+  
+  
+    
+      <meta property="article:tag" content="monitoring">
+    
+      <meta property="article:tag" content="observability">
+    
+      <meta property="article:tag" content="prometheus">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@PierreVincent">
+
+
+  <meta name="twitter:creator" content="@PierreVincent">
+
+
+
+
+
+
+  <meta property="og:image" content="https://blog.pvincent.io/images/prometheus.png">
+  <meta property="twitter:image" content="https://blog.pvincent.io/images/prometheus.png">
+
+
+
+
+
+  <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+  <meta property="twitter:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+
+
     <title>Prometheus Blog Series (Part 4): Instrumenting code in Go and Java</title>
-    <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
     <link rel="icon" href="https://blog.pvincent.io/favicon.png">
     
 
     
-    <meta name="description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.
 
-This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.
-
-">
-    <meta property="og:description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.
-
-This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
-    <meta property="og:url" content="/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/">
-    <meta property="og:site_name" content="Pierre Vincent">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Prometheus Blog Series (Part 4): Instrumenting code in Go and Java">
-    <meta name="twitter:description" content="So far in this Prometheus blog series, we have looked into Prometheus metrics and labels (see Part 1 &amp; 2), as well as how Prometheus integrates in a distributed architecture (see Part 3). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.
-
-This post will go through examples in Go and Java. Prometheus has a number of other supported languages, through official libraries and community maintained ones.
-
-">
-    
-      <meta name="twitter:creator" content="@PierreVincent">
-    
-    
+    <link rel="canonical" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-4-instrumenting-code-in-go-and-java/">
 
     
-    
-
-    
-      <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
-    
-
-    
-      <meta property="og:image" content="https://blog.pvincent.io/images/prometheus.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    
-
-    
-
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
-    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
-    
-    
-      <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
+        <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-104104349-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-104104349-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -129,7 +145,7 @@ ga('send', 'pageview');
         </a>
         <h4 class="sidebar-profile-name">Pierre Vincent</h4>
         
-          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</h5>
+          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</h5>
         
       </div>
     
@@ -185,12 +201,13 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -200,7 +217,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
       
@@ -210,7 +227,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank">
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -220,13 +237,14 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank">
+      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-slideshare"></i>
       
       <span class="sidebar-button-desc">SlideShare</span>
     </a>
   </li>
+
 
     </ul>
     <ul class="sidebar-buttons">
@@ -261,6 +279,7 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
   </div>
 </nav>
@@ -280,15 +299,16 @@ ga('send', 'pageview');
       Prometheus Blog Series (Part 4): Instrumenting code in Go and Java
     </h1>
   
-  <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-12-28T00:00:00Z">
-      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-28T00:00:00Z">
+        
   December 28, 2017
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -297,33 +317,23 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
 </div>
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>So far in this <a href="https://prometheus.io/">Prometheus</a> blog series, we have looked into Prometheus metrics and labels (see <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> &amp; <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">2</a>), as well as how Prometheus integrates in a distributed architecture (see <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">Part 3</a>). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus&rsquo; wide adoption.</p>
-
+              <p>So far in this <a href="https://prometheus.io/">Prometheus</a> blog series, we have looked into Prometheus metrics and labels (see <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-1-metrics-and-labels/">Part 1</a> &amp; <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">2</a>), as well as how Prometheus integrates in a distributed architecture (see <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/">Part 3</a>). In this 4th part, it is time to look at code to create custom instrumentation. Luckily, client libraries make this pretty easy, which is one of the reasons behind Prometheus' wide adoption.</p>
 <p>This post will go through examples in Go and Java. Prometheus has a number of other <a href="https://prometheus.io/docs/instrumenting/clientlibs/">supported languages</a>, through official libraries and community maintained ones.</p>
-
-<p></p>
-
 <h2 id="instrumentation-in-go">Instrumentation in Go</h2>
-
 <p>Go is one of the officially supported languages for Prometheus instrumentation. Not hugely surprising, since Prometheus is written in Go!</p>
-
 <p>The <a href="https://github.com/prometheus/client_golang">Prometheus Go client</a> provides:</p>
-
 <ul>
 <li>Built-in Go metrics (memory usage, goroutines, GC, &hellip;)</li>
 <li>The ability to create custom metrics</li>
 <li>An HTTP handler for the <code>/metrics</code> endpoint</li>
 </ul>
-
 <h3 id="add-built-in-metrics">Add built-in metrics</h3>
-
 <p>Enabling the built-in metrics is as simple as importing the library and exposing the metrics handler.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">package</span> main
 
@@ -332,12 +342,11 @@ ga('send', 'pageview');
     <span style="color:#a50">&#34;net/http&#34;</span>
 )
 
-<span style="color:#00a">func</span> main() {
-    http.Handle(<span style="color:#a50">&#34;/metrics&#34;</span>, promhttp.Handler())
-    <span style="color:#0aa">panic</span>(http.ListenAndServe(<span style="color:#a50">&#34;:8080&#34;</span>, <span style="color:#00a">nil</span>))
-}</code></pre></div>
-<p>This sample application will expose standard Go metrics, which should be accessible under <a href="http://localhost:8080/metrics">http://localhost:8080/metrics</a>. It should output something like:</p>
-
+<span style="color:#00a">func</span> <span style="color:#0a0">main</span>() {
+    http.<span style="color:#0a0">Handle</span>(<span style="color:#a50">&#34;/metrics&#34;</span>, promhttp.<span style="color:#0a0">Handler</span>())
+    <span style="color:#0aa">panic</span>(http.<span style="color:#0a0">ListenAndServe</span>(<span style="color:#a50">&#34;:8080&#34;</span>, <span style="color:#00a">nil</span>))
+}
+</code></pre></div><p>This sample application will expose standard Go metrics, which should be accessible under <a href="http://localhost:8080/metrics">http://localhost:8080/metrics</a>. It should output something like:</p>
 <pre><code># HELP go_gc_duration_seconds A summary of the GC invocation durations.
 # TYPE go_gc_duration_seconds summary
 go_gc_duration_seconds{quantile=&quot;0&quot;} 0
@@ -354,106 +363,89 @@ go_goroutines 8
 # TYPE go_memstats_alloc_bytes gauge
 go_memstats_alloc_bytes 510728
 # [...]
-</code></pre>
-
-<h3 id="creating-custom-metrics">Creating custom metrics</h3>
-
+</code></pre><h3 id="creating-custom-metrics">Creating custom metrics</h3>
 <p>Instrumenting an application goes further than low-level metrics. Custom metrics can be used to expose information about the internal state of applications, to gain more understanding for monitoring or debugging purposes.</p>
-
 <h4 id="simple-gauge">Simple Gauge</h4>
-
 <p>Custom metrics are created via the <code>github.com/prometheus/client_golang/prometheus</code> package. For example, a Gauge for the number of jobs currently in a queue:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">import</span> <span style="color:#a50">&#34;github.com/prometheus/client_golang/prometheus&#34;</span>
 
-<span style="color:#00a">var</span> jobsInQueue = prometheus.NewGauge(
+<span style="color:#00a">var</span> jobsInQueue = prometheus.<span style="color:#0a0">NewGauge</span>(
     prometheus.GaugeOpts{
         Name: <span style="color:#a50">&#34;jobs_in_queue&#34;</span>,
         Help: <span style="color:#a50">&#34;Current number of jobs in the queue&#34;</span>,
     },
-)</code></pre></div>
-<p>To include the new metric in the list exposed in the HTTP handler, it must be registered in the default registry (it is easy to forget this step and spend a while figuring out why a metric is missing from the endpoint):</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> init(){
-    prometheus.MustRegister(jobsInQueue)
-}</code></pre></div>
-<p>Finally, the metric can be used inside the code:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> enqueueJob(job Job) {
-    queue.Add(job)
-    jobsInQueue.Inc()
+)
+</code></pre></div><p>To include the new metric in the list exposed in the HTTP handler, it must be registered in the default registry (it is easy to forget this step and spend a while figuring out why a metric is missing from the endpoint):</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> <span style="color:#0a0">init</span>(){
+    prometheus.<span style="color:#0a0">MustRegister</span>(jobsInQueue)
+}
+</code></pre></div><p>Finally, the metric can be used inside the code:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> <span style="color:#0a0">enqueueJob</span>(job Job) {
+    queue.<span style="color:#0a0">Add</span>(job)
+    jobsInQueue.<span style="color:#0a0">Inc</span>()
 }
 
-<span style="color:#00a">func</span> runNextJob() {
-    job := queue.Dequeue()
-    jobsInQueue.Dec()
+<span style="color:#00a">func</span> <span style="color:#0a0">runNextJob</span>() {
+    job := queue.<span style="color:#0a0">Dequeue</span>()
+    jobsInQueue.<span style="color:#0a0">Dec</span>()
 
-    job.Run()
-}</code></pre></div>
-<p>Creating a Counter is very similar to a Gauge, using <code>prometheus.NewCounter()</code>. The only difference is that a Counter only has the <code>.Inc()</code> receiver.</p>
-
+    job.<span style="color:#0a0">Run</span>()
+}
+</code></pre></div><p>Creating a Counter is very similar to a Gauge, using <code>prometheus.NewCounter()</code>. The only difference is that a Counter only has the <code>.Inc()</code> receiver.</p>
 <h4 id="adding-labels">Adding labels</h4>
-
 <p>As it is, <code>jobs_in_queue</code> is a simple metric with no labels. It would be interesting to track the queue size for each type of jobs. In this case, the metric creation can use <code>NewGaugeVec()</code> instead of <code>NewGauge()</code> and specify the list of labels for the metric.</p>
-
 <p>The metric creation code becomes:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">var</span> jobsInQueue = prometheus.NewGaugeVec(
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">var</span> jobsInQueue = prometheus.<span style="color:#0a0">NewGaugeVec</span>(
     prometheus.GaugeOpts{
         Name: <span style="color:#a50">&#34;jobs_in_queue&#34;</span>,
         Help: <span style="color:#a50">&#34;Current number of jobs in the queue&#34;</span>,
     },
     []<span style="color:#0aa">string</span>{<span style="color:#a50">&#34;job_type&#34;</span>},
-)</code></pre></div>
-<p>The instrumentation must now specify the values for the labels (in this case <code>job_type</code>) before incrementing or decrementing the Gauge:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> enqueueJob(job Job) {
-    queue.Add(job)
-    jobsInQueue.WithLabelValues(job.Type()).Inc()
+)
+</code></pre></div><p>The instrumentation must now specify the values for the labels (in this case <code>job_type</code>) before incrementing or decrementing the Gauge:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">func</span> <span style="color:#0a0">enqueueJob</span>(job Job) {
+    queue.<span style="color:#0a0">Add</span>(job)
+    jobsInQueue.<span style="color:#0a0">WithLabelValues</span>(job.<span style="color:#0a0">Type</span>()).<span style="color:#0a0">Inc</span>()
 }
 
-<span style="color:#00a">func</span> runNextJob() {
-    job := queue.Dequeue()
-    jobsInQueue.WithLabelValues(job.Type()).Dec()
+<span style="color:#00a">func</span> <span style="color:#0a0">runNextJob</span>() {
+    job := queue.<span style="color:#0a0">Dequeue</span>()
+    jobsInQueue.<span style="color:#0a0">WithLabelValues</span>(job.<span style="color:#0a0">Type</span>()).<span style="color:#0a0">Dec</span>()
 
-    job.Run()
-}</code></pre></div>
-<p>If specifying multiple labels, the label values must be passed in the same order as the labels were defined when creating the metric.</p>
-
+    job.<span style="color:#0a0">Run</span>()
+}
+</code></pre></div><p>If specifying multiple labels, the label values must be passed in the same order as the labels were defined when creating the metric.</p>
 <h4 id="defining-histogram-buckets">Defining Histogram buckets</h4>
-
 <p>Measuring the duration of the things happening inside applications is usually a good way to get some insights of performance and detect anomalies. As explained in <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-2-metric-types/">Part 2</a>, durations should be analysed through their distribution (and not averages), which means the ideal metric type in such a situation is an Histogram (or potentially a Summary).</p>
-
 <p>Histograms observe all values and count them in bounded <em>buckets</em>. These <em>buckets</em> must be defined for the Histogram at creation time and should be tailored to what&rsquo;s being measured (otherwise, the metric will be of very little use). If the typical profile for the jobs ran by this application is in the order of 1~5 seconds, good <em>buckets</em> could be: &lt;1s, &lt;2s, &lt;5s, &lt;10s, &lt;20s, &lt;1m.</p>
-
 <p>Creating an Histogram is very similar to a Gauge, with the addition of the <em>buckets</em>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">var</span> jobsDurationHistogram = prometheus.NewHistogramVec(
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00a">var</span> jobsDurationHistogram = prometheus.<span style="color:#0a0">NewHistogramVec</span>(
     prometheus.HistogramOpts{
         Name:    <span style="color:#a50">&#34;jobs_duration_seconds&#34;</span>,
         Help:    <span style="color:#a50">&#34;Jobs duration distribution&#34;</span>,
         Buckets: []<span style="color:#0aa">float64</span>{<span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">5</span>, <span style="color:#099">10</span>, <span style="color:#099">20</span>, <span style="color:#099">60</span>},
     },
     []<span style="color:#0aa">string</span>{<span style="color:#a50">&#34;job_type&#34;</span>},
-)</code></pre></div>
-<p>Instead of defining the <em>buckets</em> manually, it is also possible to create <em>buckets</em> in a linear sequence (e.g. 10, 15, 20, 25) or exponential sequence (e.g. 1, 10, 100, 1000):</p>
+)
+</code></pre></div><p>Instead of defining the <em>buckets</em> manually, it is also possible to create <em>buckets</em> in a linear sequence (e.g. 10, 15, 20, 25) or exponential sequence (e.g. 1, 10, 100, 1000):</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#aaa;font-style:italic">// 4 buckets, starting from 10 and adding 5 between each
-</span><span style="color:#aaa;font-style:italic"></span>prometheus.LinearBuckets(<span style="color:#099">10</span>, <span style="color:#099">5</span>, <span style="color:#099">4</span>)
+</span><span style="color:#aaa;font-style:italic"></span>prometheus.<span style="color:#0a0">LinearBuckets</span>(<span style="color:#099">10</span>, <span style="color:#099">5</span>, <span style="color:#099">4</span>)
 
 <span style="color:#aaa;font-style:italic">// 4 buckets, starting from 1 and multiplying by 10 between each
-</span><span style="color:#aaa;font-style:italic"></span>prometheus.ExponentialBuckets(<span style="color:#099">1</span>, <span style="color:#099">10</span>, <span style="color:#099">4</span>)</code></pre></div>
-<p>The Histogram is then used inside the code to observe the duration of each job:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">start := time.Now()
-job.Run()
-duration := time.Since(start)
-jobsDurationHistogram.WithLabelValues(job.Type()).Observe(duration.Seconds())</code></pre></div>
-<p>Creating a Summary is somewhat similar to an Histogram, the difference is that <code>prometheus.NewSummary()</code> must specify which <em>quantiles</em> to calculate (instead of specifying <em>buckets</em>).</p>
-
+</span><span style="color:#aaa;font-style:italic"></span>prometheus.<span style="color:#0a0">ExponentialBuckets</span>(<span style="color:#099">1</span>, <span style="color:#099">10</span>, <span style="color:#099">4</span>)
+</code></pre></div><p>The Histogram is then used inside the code to observe the duration of each job:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">start := time.<span style="color:#0a0">Now</span>()
+job.<span style="color:#0a0">Run</span>()
+duration := time.<span style="color:#0a0">Since</span>(start)
+jobsDurationHistogram.<span style="color:#0a0">WithLabelValues</span>(job.<span style="color:#0a0">Type</span>()).<span style="color:#0a0">Observe</span>(duration.<span style="color:#0a0">Seconds</span>())
+</code></pre></div><p>Creating a Summary is somewhat similar to an Histogram, the difference is that <code>prometheus.NewSummary()</code> must specify which <em>quantiles</em> to calculate (instead of specifying <em>buckets</em>).</p>
 <p>You can find more <a href="https://github.com/prometheus/client_golang/tree/master/examples">examples</a> provided with the Go client library.</p>
-
 <h2 id="instrumentation-in-java">Instrumentation in Java</h2>
-
 <p>The <a href="https://github.com/prometheus/client_java">client library for Java</a> is also officially supported and as a result instrumenting Java code is very similar to Go.</p>
-
 <p>Following the same example as above, here are the equivalent code snippets in Java.</p>
-
 <h3 id="add-built-in-metrics-1">Add built-in metrics</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">import</span> <span style="color:#0aa">io.prometheus.client.exporter.MetricsServlet</span>;
-<span style="color:#00a">import</span> <span style="color:#0aa">io.prometheus.client.hotspot.DefaultExports</span>;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">import</span> <span style="color:#0aa;text-decoration:underline">io.prometheus.client.exporter.MetricsServlet</span>;
+<span style="color:#00a">import</span> <span style="color:#0aa;text-decoration:underline">io.prometheus.client.hotspot.DefaultExports</span>;
 
 <span style="color:#aaa;font-style:italic">// ...
 </span><span style="color:#aaa;font-style:italic"></span>
@@ -465,17 +457,15 @@ jobsDurationHistogram.WithLabelValues(job.Type()).Observe(duration.Seconds())</c
 </span><span style="color:#aaa;font-style:italic"></span>   context.<span style="color:#1e90ff">addServlet</span>(<span style="color:#00a">new</span> ServletHolder(<span style="color:#00a">new</span> MetricsServlet()), <span style="color:#a50">&#34;/metrics&#34;</span>);
 
    <span style="color:#aaa;font-style:italic">// ...
-</span><span style="color:#aaa;font-style:italic"></span>}</code></pre></div>
-<p>If you are using a framework like Spring Boot, a lot of this might be taken care of through configuration and annotations. There is a good example in a blog from Njål Nordmark: <a href="https://njalnordmark.wordpress.com/2017/05/08/using-prometheus-with-spring-boot/">Using Prometheus with Spring Boot</a>. Another alertnative for instrumenting a Spring Boot app is to use a vendor-neutral library that supports Prometheus, such as <a href="https://ordina-jworks.github.io/microservices/2017/09/17/monitoring-your-microservices-with-micrometer.html">Micrometer</a>.</p>
-
+</span><span style="color:#aaa;font-style:italic"></span>}
+</code></pre></div><p>If you are using a framework like Spring Boot, a lot of this might be taken care of through configuration and annotations. There is a good example in a blog from Njål Nordmark: <a href="https://njalnordmark.wordpress.com/2017/05/08/using-prometheus-with-spring-boot/">Using Prometheus with Spring Boot</a>. Another alertnative for instrumenting a Spring Boot app is to use a vendor-neutral library that supports Prometheus, such as <a href="https://ordina-jworks.github.io/microservices/2017/09/17/monitoring-your-microservices-with-micrometer.html">Micrometer</a>.</p>
 <h3 id="creating-a-simple-gauge">Creating a simple Gauge</h3>
-
 <p>Creation and registration:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Gauge JOBS_IN_QUEUE = Gauge.<span style="color:#1e90ff">build</span>()
     .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_in_queue&#34;</span>)
     .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Current number of jobs in the queue&#34;</span>)
-    .<span style="color:#1e90ff">register</span>();</code></pre></div>
-<p>Using the metric:</p>
+    .<span style="color:#1e90ff">register</span>();
+</code></pre></div><p>Using the metric:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">public</span> <span style="color:#0aa">void</span> <span style="color:#0a0">enqueueJob</span>(Job job) {
     queue.<span style="color:#1e90ff">add</span>(job);
     JOBS_IN_QUEUE.<span style="color:#1e90ff">inc</span>();
@@ -486,16 +476,15 @@ jobsDurationHistogram.WithLabelValues(job.Type()).Observe(duration.Seconds())</c
     JOBS_IN_QUEUE.<span style="color:#1e90ff">dec</span>();
 
     job.<span style="color:#1e90ff">run</span>();
-}</code></pre></div>
-<h3 id="adding-labels-1">Adding labels</h3>
-
+}
+</code></pre></div><h3 id="adding-labels-1">Adding labels</h3>
 <p>Defining the metric with the added <code>job_type</code> label:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Gauge JOBS_IN_QUEUE = Gauge.<span style="color:#1e90ff">build</span>()
     .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_in_queue&#34;</span>)
     .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Current number of jobs in the queue&#34;</span>)
     .<span style="color:#1e90ff">labelNames</span>(<span style="color:#a50">&#34;job_type&#34;</span>)
-    .<span style="color:#1e90ff">register</span>();</code></pre></div>
-<p>Adding the label value when using the Gauge:</p>
+    .<span style="color:#1e90ff">register</span>();
+</code></pre></div><p>Adding the label value when using the Gauge:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">public</span> <span style="color:#0aa">void</span> <span style="color:#0a0">enqueueJob</span>(Job job) {
     queue.<span style="color:#1e90ff">add</span>(job);
     JOBS_IN_QUEUE.<span style="color:#1e90ff">labels</span>(job.<span style="color:#1e90ff">getType</span>()).<span style="color:#1e90ff">inc</span>();
@@ -506,46 +495,39 @@ jobsDurationHistogram.WithLabelValues(job.Type()).Observe(duration.Seconds())</c
     JOBS_IN_QUEUE.<span style="color:#1e90ff">labels</span>(job.<span style="color:#1e90ff">getType</span>()).<span style="color:#1e90ff">dec</span>();
 
     job.<span style="color:#1e90ff">run</span>();
-}</code></pre></div>
-<h4 id="defining-histogram-buckets-1">Defining Histogram buckets</h4>
-
+}
+</code></pre></div><h4 id="defining-histogram-buckets-1">Defining Histogram buckets</h4>
 <p>Creating an histogram with manually defined <em>buckets</em>:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Histogram JOB_DURATION_HISTOGRAM = Histogram.<span style="color:#1e90ff">build</span>()
     .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_duration_seconds&#34;</span>)
     .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Jobs duration distribution&#34;</span>)
     .<span style="color:#1e90ff">labelNames</span>(<span style="color:#a50">&#34;job_type&#34;</span>)
     .<span style="color:#1e90ff">buckets</span>(1, 2, 5, 10, 20, 60)
-    .<span style="color:#1e90ff">register</span>();</code></pre></div>
-<p>With linear <em>buckets</em>:</p>
+    .<span style="color:#1e90ff">register</span>();
+</code></pre></div><p>With linear <em>buckets</em>:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Histogram JOB_DURATION_HISTOGRAM = Histogram.<span style="color:#1e90ff">build</span>()
     .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_duration_seconds&#34;</span>)
     .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Jobs duration distribution&#34;</span>)
     .<span style="color:#1e90ff">labelNames</span>(<span style="color:#a50">&#34;job_type&#34;</span>)
     .<span style="color:#1e90ff">linearBuckets</span>(10, 5, 4)
-    .<span style="color:#1e90ff">register</span>();</code></pre></div>
-<p>With exponential <em>buckets</em>:</p>
+    .<span style="color:#1e90ff">register</span>();
+</code></pre></div><p>With exponential <em>buckets</em>:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a">private</span> <span style="color:#00a">static</span> <span style="color:#00a">final</span> Histogram JOB_DURATION_HISTOGRAM = Histogram.<span style="color:#1e90ff">build</span>()
     .<span style="color:#1e90ff">name</span>(<span style="color:#a50">&#34;jobs_duration_seconds&#34;</span>)
     .<span style="color:#1e90ff">help</span>(<span style="color:#a50">&#34;Jobs duration distribution&#34;</span>)
     .<span style="color:#1e90ff">labelNames</span>(<span style="color:#a50">&#34;job_type&#34;</span>)
     .<span style="color:#1e90ff">exponentialBuckets</span>(1, 10, 4)
-    .<span style="color:#1e90ff">register</span>();</code></pre></div>
-<p>Observing job durations:</p>
+    .<span style="color:#1e90ff">register</span>();
+</code></pre></div><p>Observing job durations:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Histogram.<span style="color:#1e90ff">Timer</span> jobTimer = JOB_DURATION_HISTOGRAM.<span style="color:#1e90ff">WithLabelValues</span>(job.<span style="color:#1e90ff">Type</span>()).<span style="color:#1e90ff">startTimer</span>();
 job.<span style="color:#1e90ff">run</span>();
-jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div>
-<h2 id="what-s-next">What&rsquo;s next?</h2>
-
+jobTimer.<span style="color:#1e90ff">observeDuration</span>();
+</code></pre></div><h2 id="whats-next">What&rsquo;s next?</h2>
 <p>With the large number of client libraries available for Prometheus instrumentation, there is very little barrier to add custom metrics to any application you write yourself.</p>
-
 <p>Custom metrics can be infinitely more valuable than system metrics, as they can allow to create powerful indicators of how a service is fulfilling its responsibilities (or not). These top-level metrics are typically more interesting to alert on; in the <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/">next post</a>, we will look more into what is worth alerting on, and how to define Prometheus rules in order to trigger such alerts.</p>
-
 <p>If there is any specific subject you would like me to cover in this series, feel free to reach out to me on Twitter at <a href="https://twitter.com/PierreVincent">@PierreVincent</a></p>
-
-<hr />
-
-<h4 id="looking-to-get-more-practical-training-with-prometheus"><em>Looking to get more practical training with Prometheus?</em></h4>
-
+<hr>
+<h4 id="_looking-to-get-more-practical-training-with-prometheus_"><em>Looking to get more practical training with Prometheus?</em></h4>
 <p><em>I am regularly teaching workshops on Cloud Native monitoring with Prometheus &amp; Grafana - don&rsquo;t hesitate to get in touch with me (<a href="mailto:speaking@pvincent.io">speaking@pvincent.io</a>) for more info about running a workshop for your team or at your meetup/conference.</em></p>
               
             </div>
@@ -569,62 +551,49 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
               
             
             <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" data-tooltip="Prometheus Blog Series (Part 5): Alerting rules">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" data-tooltip="Prometheus Blog Series (Part 5): Alerting rules">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
-          
-            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
+        
       
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+  
 </div>
-
 
             
               
@@ -633,88 +602,62 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Pierre Vincent. All Rights Reserved
+    &copy; 2020 Pierre Vincent. All Rights Reserved
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
         <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" data-tooltip="Prometheus Blog Series (Part 5): Alerting rules">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/" data-tooltip="Prometheus Blog Series (Part 5): Alerting rules">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-3-exposing-and-collecting-metrics/" data-tooltip="Prometheus Blog Series (Part 3): Exposing and collecting metrics">
-          
-            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
+        
       
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+  
 </div>
-
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-        <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-        <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2017%2f12%2fprometheus-blog-series-part-4-instrumenting-code-in-go-and-java%2f">
-        <i class="fa fa-twitter"></i><span>Share on Twitter</span>
-      </a>
-    </li>
+    
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
@@ -730,65 +673,64 @@ jobTimer.<span style="color:#1e90ff">observeDuration</span>();</code></pre></div
     
     <h4 id="about-card-name">Pierre Vincent</h4>
     
-      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</div>
+      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</div>
     
     
       <div id="about-card-job">
         <i class="fa fa-briefcase"></i>
         <br/>
-        Infastructure &amp; Reliability Manager
+        Head of SRE
       </div>
     
     
       <div id="about-card-location">
         <i class="fa fa-map-marker"></i>
         <br/>
-        Poppulo - Cork, Ireland
+        Glofox - Ireland
       </div>
     
   </div>
 </div>
 
     
+
     
   
     
-    <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+      
+      <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+    
   
 
 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://blog.pvincent.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+<script src="https://blog.pvincent.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight').each(function(i, block) {
-    var code = "";
-    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
-      code += "<span class=\"line\">" + line + "</span><br>";
-    });
-    if (code.length > 0) {
-      block.innerHTML = code;  
-    }
-  });
-  $('pre > code').each(function(i, block) {
-    $(this).addClass('codeblock');
-    hljs.highlightBlock(block);
-  });
-});
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
 </script>
 
+
   
     
   
-
 
 
 

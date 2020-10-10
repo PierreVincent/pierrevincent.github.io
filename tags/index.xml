@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Pierre Vincent</title>
@@ -6,103 +6,27 @@
     <description>Recent content in Tags on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Jun 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.pvincent.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Agile</title>
-      <link>https://blog.pvincent.io/tags/agile/</link>
-      <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
+      <title>hackthebox</title>
+      <link>https://blog.pvincent.io/tags/hackthebox/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.pvincent.io/tags/agile/</guid>
+      <guid>https://blog.pvincent.io/tags/hackthebox/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Api</title>
-      <link>https://blog.pvincent.io/tags/api/</link>
-      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
+      <title>pentest</title>
+      <link>https://blog.pvincent.io/tags/pentest/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.pvincent.io/tags/api/</guid>
+      <guid>https://blog.pvincent.io/tags/pentest/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Conference</title>
-      <link>https://blog.pvincent.io/tags/conference/</link>
-      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/conference/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Consumer Driven Contracts</title>
-      <link>https://blog.pvincent.io/tags/consumer-driven-contracts/</link>
-      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/consumer-driven-contracts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Continuous Delivery</title>
-      <link>https://blog.pvincent.io/tags/continuous-delivery/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/continuous-delivery/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Devops</title>
-      <link>https://blog.pvincent.io/tags/devops/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/devops/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Docker</title>
-      <link>https://blog.pvincent.io/tags/docker/</link>
-      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Measurement</title>
-      <link>https://blog.pvincent.io/tags/measurement/</link>
-      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/measurement/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Meetup</title>
-      <link>https://blog.pvincent.io/tags/meetup/</link>
-      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/meetup/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Microservices</title>
-      <link>https://blog.pvincent.io/tags/microservices/</link>
-      <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/microservices/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Monitoring</title>
+      <title>monitoring</title>
       <link>https://blog.pvincent.io/tags/monitoring/</link>
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
@@ -111,7 +35,7 @@
     </item>
     
     <item>
-      <title>Observability</title>
+      <title>observability</title>
       <link>https://blog.pvincent.io/tags/observability/</link>
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
@@ -120,16 +44,7 @@
     </item>
     
     <item>
-      <title>Pact</title>
-      <link>https://blog.pvincent.io/tags/pact/</link>
-      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/pact/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Prometheus</title>
+      <title>prometheus</title>
       <link>https://blog.pvincent.io/tags/prometheus/</link>
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
@@ -138,7 +53,43 @@
     </item>
     
     <item>
-      <title>Refactoring</title>
+      <title>continuous delivery</title>
+      <link>https://blog.pvincent.io/tags/continuous-delivery/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/continuous-delivery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>https://blog.pvincent.io/tags/devops/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>conference</title>
+      <link>https://blog.pvincent.io/tags/conference/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/conference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>measurement</title>
+      <link>https://blog.pvincent.io/tags/measurement/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/measurement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>refactoring</title>
       <link>https://blog.pvincent.io/tags/refactoring/</link>
       <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
       
@@ -147,25 +98,16 @@
     </item>
     
     <item>
-      <title>Service Discovery</title>
-      <link>https://blog.pvincent.io/tags/service-discovery/</link>
-      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
+      <title>agile</title>
+      <link>https://blog.pvincent.io/tags/agile/</link>
+      <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.pvincent.io/tags/service-discovery/</guid>
+      <guid>https://blog.pvincent.io/tags/agile/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Smartstack</title>
-      <link>https://blog.pvincent.io/tags/smartstack/</link>
-      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/smartstack/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sre</title>
+      <title>SRE</title>
       <link>https://blog.pvincent.io/tags/sre/</link>
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
@@ -174,11 +116,83 @@
     </item>
     
     <item>
-      <title>Testing</title>
+      <title>microservices</title>
+      <link>https://blog.pvincent.io/tags/microservices/</link>
+      <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/microservices/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>api</title>
+      <link>https://blog.pvincent.io/tags/api/</link>
+      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>consumer-driven contracts</title>
+      <link>https://blog.pvincent.io/tags/consumer-driven-contracts/</link>
+      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/consumer-driven-contracts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pact</title>
+      <link>https://blog.pvincent.io/tags/pact/</link>
+      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/pact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>testing</title>
       <link>https://blog.pvincent.io/tags/testing/</link>
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/tags/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://blog.pvincent.io/tags/docker/</link>
+      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>meetup</title>
+      <link>https://blog.pvincent.io/tags/meetup/</link>
+      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/meetup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>service discovery</title>
+      <link>https://blog.pvincent.io/tags/service-discovery/</link>
+      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/service-discovery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>smartstack</title>
+      <link>https://blog.pvincent.io/tags/smartstack/</link>
+      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/smartstack/</guid>
       <description></description>
     </item>
     

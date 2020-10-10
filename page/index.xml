@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Pierre Vincent</title>
@@ -6,18 +6,14 @@
     <description>Recent content in Pages on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Dec 2019 00:00:00 +0100</lastBuildDate>
-    
-	<atom:link href="https://blog.pvincent.io/page/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 07 Dec 2019 00:00:00 +0100</lastBuildDate><atom:link href="https://blog.pvincent.io/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Contributions on other publications</title>
       <link>https://blog.pvincent.io/page/contributions/</link>
       <pubDate>Sat, 07 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://blog.pvincent.io/page/contributions/</guid>
-      <description> 2019 Integration tests don&amp;rsquo;t cut it for microservices. Here&amp;rsquo;s what does. (TechBeacon) How to move a large monolithic app to continuous delivery with zero downtime (TechBeacon) 2018 Software superstars lined up for this year&amp;rsquo;s RebelCon (Poppulo Tech Blog) Reaching production is only the beginning (Poppulo Tech Blog) 2016 Pact tests: what about state data? (Poppulo Tech Blog) Sharing Consumer-Driven Contracts with Pact Broker (Poppulo Tech Blog) 2015 Our take-away from µCon 2015, the Microservices conference (Poppulo Tech Blog) Microservices: Service Discovery with Smartstack and Docker (Poppulo Tech Blog) How to write clean functional code in Scala and keep it that way (Poppulo Tech Blog) Why you should use Consumer-Driven Contracts for Microservice integration tests (Poppulo Tech Blog) </description>
+      <description>2020 How to get big results with a small SRE team (TechBeacon) How trunk-based delivery is key to faster, more reliable software (TechBeacon) 2019 Integration tests don&amp;rsquo;t cut it for microservices. Here&amp;rsquo;s what does. (TechBeacon) How to move a large monolithic app to continuous delivery with zero downtime (TechBeacon) 2018 Software superstars lined up for this year&amp;rsquo;s RebelCon (Poppulo Tech Blog) Reaching production is only the beginning (Poppulo Tech Blog) 2016 Pact tests: what about state data?</description>
     </item>
     
     <item>

@@ -1,91 +1,109 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
-    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.75.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Pierre Vincent">
+<meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
+<meta name="description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.">
+
+
+<meta property="og:description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prometheus workshops follow-up: frequently asked questions">
+<meta name="twitter:title" content="Prometheus workshops follow-up: frequently asked questions">
+<meta property="og:url" content="https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/">
+<meta property="twitter:url" content="https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/">
+<meta property="og:site_name" content="Pierre Vincent">
+<meta property="og:description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.">
+<meta name="twitter:description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-05-02T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-05-02T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="monitoring">
+    
+  
+  
+    
+      <meta property="article:tag" content="monitoring">
+    
+      <meta property="article:tag" content="observability">
+    
+      <meta property="article:tag" content="prometheus">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@PierreVincent">
+
+
+  <meta name="twitter:creator" content="@PierreVincent">
+
+
+
+
+
+
+  <meta property="og:image" content="https://blog.pvincent.io/images/prometheus-faq.png">
+  <meta property="twitter:image" content="https://blog.pvincent.io/images/prometheus-faq.png">
+
+
+
+
+
+  <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+  <meta property="twitter:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+
+
     <title>Prometheus workshops follow-up: frequently asked questions</title>
-    <meta name="author" content="Pierre Vincent">
-    <meta name="keywords" content="monitoring, prometheus, observability, cloud native, devops, sre, monitoring">
 
     <link rel="icon" href="https://blog.pvincent.io/favicon.png">
     
 
     
-    <meta name="description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.
 
-">
-    <meta property="og:description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Prometheus workshops follow-up: frequently asked questions">
-    <meta property="og:url" content="/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/">
-    <meta property="og:site_name" content="Pierre Vincent">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Prometheus workshops follow-up: frequently asked questions">
-    <meta name="twitter:description" content="When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.
-
-">
-    
-      <meta name="twitter:creator" content="@PierreVincent">
-    
-    
+    <link rel="canonical" href="https://blog.pvincent.io/2019/05/prometheus-workshops-follow-up-frequently-asked-questions/">
 
     
-    
-
-    
-      <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
-    
-
-    
-      <meta property="og:image" content="https://blog.pvincent.io/images/prometheus-faq.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    
-
-    
-
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
-    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
-    
-    
-      <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
+        <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-104104349-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-104104349-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -123,7 +141,7 @@ ga('send', 'pageview');
         </a>
         <h4 class="sidebar-profile-name">Pierre Vincent</h4>
         
-          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</h5>
+          <h5 class="sidebar-profile-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</h5>
         
       </div>
     
@@ -179,12 +197,13 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -194,7 +213,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank">
+      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
       
@@ -204,7 +223,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank">
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -214,13 +233,14 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank">
+      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-slideshare"></i>
       
       <span class="sidebar-button-desc">SlideShare</span>
     </a>
   </li>
+
 
     </ul>
     <ul class="sidebar-buttons">
@@ -255,6 +275,7 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
   </div>
 </nav>
@@ -274,15 +295,16 @@ ga('send', 'pageview');
       Prometheus workshops follow-up: frequently asked questions
     </h1>
   
-  <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2019-05-02T00:00:00Z">
-      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-05-02T00:00:00Z">
+        
   May 2, 2019
 
-    </time>
-  
-  
+      </time>
+    
+    
   
   
     <span>in</span>
@@ -291,80 +313,53 @@ ga('send', 'pageview');
     
   
 
-
-</div>
+  </div>
 
 </div>
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>When I run workshops on practical monitoring with Prometheus, the same kind of questions usually get asked. Here are a few of them, with my answers and with pointers to other resources (articles, talks) to learn more.</p>
-
-<p></p>
-
 <h2 id="how-much-data-can-you-put-in-labels">How much data can you put in labels?</h2>
-
 <p>Labels are really powerful so it can be tempting to annotate each metric with very specific information, however there are some important limitations to what should be used for labels.</p>
-
 <p>Prometheus considers each unique combination of labels and label value as a different time series. As a result if a label has an unbounded set of possible values, Prometheus will have a very hard time storing all these time series. In order to avoid performance issues, labels should not be used for high cardinality data sets (e.g. Customer unique ids).</p>
-
 <p>My personal advice on this is:</p>
-
 <ul>
 <li>Labels should rarely have more than 100 possible values</li>
 <li>The set of label values should be bounded (think of them as enums, and not open ended sets of strings)</li>
 </ul>
-
 <p>Further info:</p>
-
 <ul>
 <li>Prometheus docs: <a href="https://prometheus.io/docs/practices/instrumentation/#do-not-overuse-labels">Do not overuse labels</a></li>
 <li>PromCon 2017: <a href="https://www.youtube.com/watch?v=_MNYuTNfTb4">Best Practices and Beastly Pitfalls</a> by Julius Voltz</li>
 </ul>
-
 <h2 id="running-prometheus-in-kubernetes-what-about-storage">Running Prometheus in Kubernetes: what about storage?</h2>
-
 <p>Prometheus stores the content of its time-series database on the file system. When running Prometheus in a containerized environment, like Kubernetes, this data is by default stored inside the running container. The main drawback this is that data stored will be lost if the container restart (node failure, load rebalancing or simply redeployment).</p>
-
 <p>The advice here is to use volumes to store the Prometheus data, which will ensure all data is persisted through Prometheus restarts.</p>
-
 <p>Further info:</p>
-
 <ul>
 <li>Prometheus docs: <a href="https://prometheus.io/docs/prometheus/latest/storage/">Storage</a></li>
 <li>Kubernetes docs: <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a></li>
 </ul>
-
-<!-- ## How long can metrics be kept for? -->
-
+<!-- raw HTML omitted -->
 <h2 id="what-are-the-recommended-alerting-practices-to-avoid-alerting-overload">What are the recommended alerting practices to avoid alerting overload?</h2>
-
 <p>The number one benefit of observability is a better understanding on how your system behaves. Once you have Prometheus metrics coming from you application, start by learning what <em>normal</em> looks like, and only then move on to creating alerts if specific thresholds aren&rsquo;t met.</p>
-
 <p>Remember that not every metric is worth alerting on, a lot of them are only interesting when you want to ask questions to your system (during exploratory testing, debugging or especially during an outage).</p>
-
 <p>My advice on valuable alerts:</p>
-
 <ul>
 <li>Alerts must be actionable (and actioned) any time they are triggered</li>
 <li>Alerts must come with context (why is this triggered? what is the impact? is there a dashboard with more info?)</li>
 <li>Alerts must link to run-books (what should I do to investigate &amp; mitigate?)</li>
 </ul>
-
 <p>If some of the above can&rsquo;t be done for an alert you&rsquo;re about to create, then think twice, especially for the sake of whoever is going to have to handle it (maybe at 2am).</p>
-
 <p>Futher info:</p>
-
 <ul>
 <li>Part 5 of my Prometheus series: <a href="https://blog.pvincent.io/2017/12/prometheus-blog-series-part-5-alerting-rules/">Alerting Rules</a></li>
 <li>The <a href="https://docs.google.com/document/d/199PqyG3UsyXlwieHaqbGiWVa8eMWi8zzAn0YfcApr8Q/edit">My philosophy on alerting</a> paper by Rob Ewaschuk</li>
 <li><a href="https://www.youtube.com/watch?v=lC5SfTMFK3M">Avoiding Alerts Overload from Microservices</a> talk at QCon London 2017, by <a href="https://twitter.com/sarahjwells">Sarah Wells</a></li>
 </ul>
-
-<hr />
-
-<h4 id="looking-to-get-more-practical-training-with-prometheus"><em>Looking to get more practical training with Prometheus?</em></h4>
-
+<hr>
+<h4 id="_looking-to-get-more-practical-training-with-prometheus_"><em>Looking to get more practical training with Prometheus?</em></h4>
 <p><em>I am regularly teaching workshops on Cloud Native monitoring with Prometheus &amp; Grafana - don&rsquo;t hesitate to get in touch with me (<a href="mailto:speaking@pvincent.io">speaking@pvincent.io</a>) for more info about running a workshop for your team or at your meetup/conference.</em></p>
               
             </div>
@@ -388,62 +383,49 @@ ga('send', 'pageview');
               
             
             <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2020/10/hack-the-box-write-up-cache/" data-tooltip="Hack The Box write-up: Cache">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/" data-tooltip="Patterns for zero-downtime deployments of large applications">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--disabled">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/" data-tooltip="Patterns for zero-downtime deployments of large applications">
-          
-            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
+        
       
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+  
 </div>
-
 
             
               
@@ -452,88 +434,62 @@ ga('send', 'pageview');
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Pierre Vincent. All Rights Reserved
+    &copy; 2020 Pierre Vincent. All Rights Reserved
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
         <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2020/10/hack-the-box-write-up-cache/" data-tooltip="Hack The Box write-up: Cache">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/" data-tooltip="Patterns for zero-downtime deployments of large applications">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--disabled">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2018/12/patterns-for-zero-downtime-deployments-of-large-applications/" data-tooltip="Patterns for zero-downtime deployments of large applications">
-          
-            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
+        
       
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+  
 </div>
-
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-        <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-        <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fblog.pvincent.io%2f2019%2f05%2fprometheus-workshops-follow-up-frequently-asked-questions%2f">
-        <i class="fa fa-twitter"></i><span>Share on Twitter</span>
-      </a>
-    </li>
+    
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
@@ -549,65 +505,64 @@ ga('send', 'pageview');
     
     <h4 id="about-card-name">Pierre Vincent</h4>
     
-      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery</div>
+      <div id="about-card-bio">DevOps, InfoSec, SRE &amp; Continuous Delivery. OSCP</div>
     
     
       <div id="about-card-job">
         <i class="fa fa-briefcase"></i>
         <br/>
-        Infastructure &amp; Reliability Manager
+        Head of SRE
       </div>
     
     
       <div id="about-card-location">
         <i class="fa fa-map-marker"></i>
         <br/>
-        Poppulo - Cork, Ireland
+        Glofox - Ireland
       </div>
     
   </div>
 </div>
 
     
+
     
   
     
-    <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+      
+      <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+    
   
 
 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://blog.pvincent.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+<script src="https://blog.pvincent.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight').each(function(i, block) {
-    var code = "";
-    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
-      code += "<span class=\"line\">" + line + "</span><br>";
-    });
-    if (code.length > 0) {
-      block.innerHTML = code;  
-    }
-  });
-  $('pre > code').each(function(i, block) {
-    $(this).addClass('codeblock');
-    hljs.highlightBlock(block);
-  });
-});
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
 </script>
 
+
   
     
   
-
 
 
 
