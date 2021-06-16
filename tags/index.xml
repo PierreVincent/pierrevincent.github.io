@@ -6,7 +6,34 @@
     <description>Recent content in Tags on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>honeycomb</title>
+      <link>https://blog.pvincent.io/tags/honeycomb/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/honeycomb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>observability</title>
+      <link>https://blog.pvincent.io/tags/observability/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/observability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>production engineering</title>
+      <link>https://blog.pvincent.io/tags/production-engineering/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/production-engineering/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>hackthebox</title>
       <link>https://blog.pvincent.io/tags/hackthebox/</link>
@@ -31,15 +58,6 @@
       <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/tags/monitoring/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>observability</title>
-      <link>https://blog.pvincent.io/tags/observability/</link>
-      <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/observability/</guid>
       <description></description>
     </item>
     

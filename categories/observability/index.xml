@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>observability on Pierre Vincent</title>
+    <link>https://blog.pvincent.io/categories/observability/</link>
+    <description>Recent content in observability on Pierre Vincent</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 16 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/categories/observability/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bubbling up customer-specific experience with high-cardinality observability</title>
+      <link>https://blog.pvincent.io/2021/06/bubbling-up-customer-specific-experience-with-high-cardinality-observability/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/2021/06/bubbling-up-customer-specific-experience-with-high-cardinality-observability/</guid>
+      <description>&lt;p&gt;Aggregated metrics help to view our production systems from a global perspective. This is fine when we&amp;rsquo;re trying to alert on situations that affect a large portion of users&amp;hellip; but what about identifying the customer who has a particularly bad experience?&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
