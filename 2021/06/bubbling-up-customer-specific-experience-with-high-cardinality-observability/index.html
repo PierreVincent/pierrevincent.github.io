@@ -8,18 +8,18 @@
 <meta name="generator" content="Hugo 0.75.1 with theme Tranquilpeak 0.4.8-BETA">
 <meta name="author" content="Pierre Vincent">
 <meta name="keywords" content="honeycomb, sre, performance, observability, o11y, devops, sre, monitoring">
-<meta name="description" content="Aggregated metrics help to view our production systems from a global perspective. This is fine when we&rsquo;re trying to alert on situations that affect a large portion of users&hellip; but what about identifying the customer who has a particularly bad experience?">
+<meta name="description" content="When averages look fine, how can we discover that one customer who&rsquo;s having a bad experience?">
 
 
-<meta property="og:description" content="Aggregated metrics help to view our production systems from a global perspective. This is fine when we&rsquo;re trying to alert on situations that affect a large portion of users&hellip; but what about identifying the customer who has a particularly bad experience?">
+<meta property="og:description" content="When averages look fine, how can we discover that one customer who&rsquo;s having a bad experience?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bubbling up customer-specific experience with high-cardinality observability">
 <meta name="twitter:title" content="Bubbling up customer-specific experience with high-cardinality observability">
 <meta property="og:url" content="https://blog.pvincent.io/2021/06/bubbling-up-customer-specific-experience-with-high-cardinality-observability/">
 <meta property="twitter:url" content="https://blog.pvincent.io/2021/06/bubbling-up-customer-specific-experience-with-high-cardinality-observability/">
 <meta property="og:site_name" content="Pierre Vincent">
-<meta property="og:description" content="Aggregated metrics help to view our production systems from a global perspective. This is fine when we&rsquo;re trying to alert on situations that affect a large portion of users&hellip; but what about identifying the customer who has a particularly bad experience?">
-<meta name="twitter:description" content="Aggregated metrics help to view our production systems from a global perspective. This is fine when we&rsquo;re trying to alert on situations that affect a large portion of users&hellip; but what about identifying the customer who has a particularly bad experience?">
+<meta property="og:description" content="When averages look fine, how can we discover that one customer who&rsquo;s having a bad experience?">
+<meta name="twitter:description" content="When averages look fine, how can we discover that one customer who&rsquo;s having a bad experience?">
 <meta property="og:locale" content="en-us">
 
   
@@ -330,7 +330,8 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Aggregated metrics help to view our production systems from a global perspective. This is fine when we&rsquo;re trying to alert on situations that affect a large portion of users&hellip; but what about identifying the customer who has a particularly bad experience?</p>
+              <p>When averages look fine, how can we discover that one customer who&rsquo;s having a bad experience?</p>
+<p>Aggregated metrics help to view our production systems from a global perspective. This is fine when we&rsquo;re trying to alert on situations that affect a large portion of users - but what if the very few slow requests are all experienced by one single customer?</p>
 <p>Here is a story where averages looked good but a specific customer had a poor experience, and how we were able to identify and fix thanks to high-cardinality observability with <a href="https://www.honeycomb.io/">Honeycomb</a>.</p>
 <h2 id="exploring-production-weirdness">Exploring production weirdness</h2>
 <p>Production systems are weird and full of emergent behaviours that will never show on staging environments - don&rsquo;t get me wrong, pre-prod testing is a good thing, but it&rsquo;s a futile effort to attempt having this cover all cases. This is why I care about running production systems that are observable and explorable.</p>
