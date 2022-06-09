@@ -6,7 +6,25 @@
     <description>Recent content in Tags on Pierre Vincent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>on-call</title>
+      <link>https://blog.pvincent.io/tags/on-call/</link>
+      <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/on-call/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SRE</title>
+      <link>https://blog.pvincent.io/tags/sre/</link>
+      <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/tags/sre/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>honeycomb</title>
       <link>https://blog.pvincent.io/tags/honeycomb/</link>
@@ -121,15 +139,6 @@
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://blog.pvincent.io/tags/agile/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SRE</title>
-      <link>https://blog.pvincent.io/tags/sre/</link>
-      <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.pvincent.io/tags/sre/</guid>
       <description></description>
     </item>
     

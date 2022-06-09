@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.75.1 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Pierre Vincent">
+<meta name="keywords" content="sre, on-call, production engineering, pagerduty, devops, sre, monitoring">
+<meta name="description" content="Incidents can happen despite our best efforts. It&rsquo;s the nature of the software systems we build today, relying on complex distributed systems with emergent behaviours. Incidents don’t care about the concept of working hours and without the luxury of a follow-the-sun response team, it means sometimes, somebody needs to respond out-of-hours.">
+
+
+<meta property="og:description" content="Incidents can happen despite our best efforts. It&rsquo;s the nature of the software systems we build today, relying on complex distributed systems with emergent behaviours. Incidents don’t care about the concept of working hours and without the luxury of a follow-the-sun response team, it means sometimes, somebody needs to respond out-of-hours.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="On-call only works when responders are happy">
+<meta name="twitter:title" content="On-call only works when responders are happy">
+<meta property="og:url" content="https://blog.pvincent.io/2022/06/on-call-only-works-when-responders-are-happy/">
+<meta property="twitter:url" content="https://blog.pvincent.io/2022/06/on-call-only-works-when-responders-are-happy/">
+<meta property="og:site_name" content="Pierre Vincent">
+<meta property="og:description" content="Incidents can happen despite our best efforts. It&rsquo;s the nature of the software systems we build today, relying on complex distributed systems with emergent behaviours. Incidents don’t care about the concept of working hours and without the luxury of a follow-the-sun response team, it means sometimes, somebody needs to respond out-of-hours.">
+<meta name="twitter:description" content="Incidents can happen despite our best efforts. It&rsquo;s the nature of the software systems we build today, relying on complex distributed systems with emergent behaviours. Incidents don’t care about the concept of working hours and without the luxury of a follow-the-sun response team, it means sometimes, somebody needs to respond out-of-hours.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2022-06-09T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2022-06-09T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="SRE">
+    
+  
+  
+    
+      <meta property="article:tag" content="SRE">
+    
+      <meta property="article:tag" content="on-call">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@PierreVincent">
+
+
+  <meta name="twitter:creator" content="@PierreVincent">
+
+
+
+
+
+
+  <meta property="og:image" content="https://blog.pvincent.io/images/oncall-phone.jpeg">
+  <meta property="twitter:image" content="https://blog.pvincent.io/images/oncall-phone.jpeg">
+
+
+  <meta property="og:image" content="https://blog.pvincent.io/images/oncall-phone.jpeg">
+  <meta property="twitter:image" content="https://blog.pvincent.io/images/oncall-phone.jpeg">
+
+
+
+
+  <meta property="og:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+  <meta property="twitter:image" content="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250">
+
+
+    <title>On-call only works when responders are happy</title>
+
+    <link rel="icon" href="https://blog.pvincent.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://blog.pvincent.io/2022/06/on-call-only-works-when-responders-are-happy/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://blog.pvincent.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+      
+        <link rel="stylesheet" href="https://blog.pvincent.io/css/style.css">
+      
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-104104349-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://blog.pvincent.io/">Pierre Vincent</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://blog.pvincent.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://blog.pvincent.io/#about">
+          <img class="sidebar-profile-picture" src="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Pierre Vincent</h4>
+        
+          <h5 class="sidebar-profile-bio">Software Engineer, SRE &amp; OSCP</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/PierreVincent" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/PierreVincent" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/pierrevincent85/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.slideshare.net/PierreVincent3/presentations" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-slideshare"></i>
+      
+      <span class="sidebar-button-desc">SlideShare</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/page/contributions">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-paragraph"></i>
+      
+      <span class="sidebar-button-desc">Contributions</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/page/speaking">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bullhorn"></i>
+      
+      <span class="sidebar-button-desc">Speaking</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://blog.pvincent.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('/images/oncall-phone.jpeg')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      On-call only works when responders are happy
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2022-06-09T00:00:00Z">
+        
+  June 9, 2022
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://blog.pvincent.io/categories/sre">SRE</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Incidents can happen despite our best efforts. It&rsquo;s the nature of the software systems we build today, relying on complex distributed systems with emergent behaviours. Incidents don’t care about the concept of working hours and without the luxury of a <em>follow-the-sun</em> response team, it means sometimes, somebody needs to respond out-of-hours.</p>
+<p>Here is an overview of the key principles of our on-call rotation at <a href="http://www.glofox.com">Glofox</a>, which allowed my team to transition away from stressful firefighting by fostering a predictable and sustainable approach to incident response.</p>
+<h2 id="making-out-of-hours-explicit">Making out-of-hours explicit</h2>
+<p>The very first thing is to acknowledge that out-of-hours response happens, regardless of whether an on-call rotation is in place. This was needed for my team a few years ago: the responsibility organically grew to be taken on by a couple of key people who were the de-facto responders. Let’s be honest, they were doing an awesome job at it, but let’s be even more honest, it’s absolutely not sustainable for anybody to be expected to respond to problems 24 hours a day, 7 days a week. Besides the inevitable risk of burning out the very few people that hold the weight of uptime on their shoulders, this dynamic has many downsides, like siloing knowledge or fostering heroic behaviour.</p>
+<p>When the reality of out-of-hours response is called out, it’s a lot easier to have conversations about what this response means, when it’s needed and how we can support the teams to do it in a fair, balanced and sustainable way.</p>
+<h2 id="a-fair-and-balanced-schedule">A fair and balanced schedule</h2>
+<p>The scheduling rule of our on-call rotation is “no more than 1 week per month”. With four people on the rotation (at the time of writing), it’s something we’ve almost never deviated from. Coming from living on the edge 24/7, this rule alone made a huge difference to the work-life balance of our SREs, finally able to step away from Slack after work knowing that somebody is in charge.
+Knowing our on-call schedule a few months in advance makes sure there are no surprises and allows people in the rotation to freely swap shifts. The schedule is also flexible for last-minute changes when daily life takes over - and there’s always somebody volunteering to take the pager for a night when that happens.</p>
+<p>Moving to an explicit rotation schedule has meant the need to let go of old habits. It had become a routine for some of us to continuously check emails or Slack after work, just to make sure everything was ok - for fear that we’d miss an important alert or a thread we were tagged on.</p>
+<p>Being able to step away (and stay away!) when not on-call can be hard at first. It’s critical because it sets expectations for others. Old habits get broken by trusting that there is always somebody in charge to deal with escalations. Turn off notifications after work or better even, uninstall Slack from your phone: if you’re on-call, you have Pagerduty, if not, somebody else has it.</p>
+<h2 id="time-on-call-means-extra-pay">Time on-call means extra pay</h2>
+<p>Speak to anybody that has ever been on-call: the additional stress comes more from the fact that you can be called, rather than the calls themselves. This is why we chose a compensation model that doesn’t depend on the number of calls - in other words, regardless of whether the pager goes off, the on-call person gets the same additional pay for every day of their shift.</p>
+<p>In addition to this, any time spent responding to incidents is credited as additional time-off, usually taken shortly after. You’ve been woken up at 2 am? You get to start a few hours later tomorrow. You’ve spent your Saturday afternoon responding to an alert? Take a half-day next Friday!</p>
+<p>Compensation and time-off for on-call duties aren’t perks, they are important signals to acknowledge these additional responsibilities and their associated impact on personal lives.</p>
+<h2 id="sticking-with-a-small-number-of-actionable-alerts">Sticking with a small number of actionable alerts</h2>
+<p>Very few of our alerts get promoted to triggering Pagerduty, for the simple reason that if somebody is going to be woken up in the middle of the night, it better be worth it. The conditions are:</p>
+<ul>
+<li>The alert has been shown to have no false-positives</li>
+<li>The alert is synonymous with a customer-impacting outage, or imminent risk of outage</li>
+<li>The alert is actionable, documented with a runbook to guide the response.</li>
+</ul>
+<p>In the rare case where a critical issue did not result in an alert, we also provide a break-the-glass mechanism for anybody in the company to trigger incident response. It comes with a few warnings to confirm that there is indeed an emergency affecting production, as to be mindful that the on-call person might be about to be woken up! Thankfully, this is something that we only saw used a couple of times last year, and always in justifiable situations.</p>
+<h2 id="making-response-repeatable-with-runbooks">Making response repeatable with runbooks</h2>
+<p>Runbooks are one of the cheapest tools to scale incident response by making sure every responder is equipped with the same information to evaluate the impact of an alert, troubleshoot the system and mitigate the issue.</p>
+<p>Here are some of the things we expect in all our runbooks:</p>
+<ul>
+<li>Investigation checklists</li>
+<li>Links to dashboards and pre-built queries in our observability tooling</li>
+<li>Links to specific services in AWS Console</li>
+<li>Useful troubleshooting commands, with examples of their output in good or bad scenarios</li>
+<li>Step-by-step guides for mitigation actions, with short videos (e.g. “this is how you manually scale up a Fargate service”)</li>
+</ul>
+<p>As a side-effect, the simple act of writing the runbook acts as a filter for non-actionable alerts: if the alert is only informative and it’s not clear what should be looked into or done, it most likely doesn’t belong in Pagerduty.</p>
+<h2 id="dropping-tools-to-avoid-repeating-alerts">Dropping tools to avoid repeating alerts</h2>
+<p>It&rsquo;s so frustrating to respond several times to the same alerts, caused by the same problems, without having the power to address the underlying causes.</p>
+<p>Our philosophy is that if Pagerduty was triggered overnight, the only thing we’ll focus on the next day is to ensure it doesn’t happen again the exact same way. It means moving further than the mitigation, looking at the contributing causes of the issue and collaborating with the appropriate teams on durable fixes.</p>
+<p>Finally, the incident is wrapped up by systematically conducting a post-mortem, openly (and blamelessly) discussing the details of the incident. More importantly, this is a chance to reflect on the incident response experience:</p>
+<ul>
+<li>What was hard to do? What was confusing?</li>
+<li>How come this area of the product is suddenly the source of more issues?</li>
+<li>Where did we get lucky? What could have gone worse?</li>
+</ul>
+<h2 id="on-call-only-works-when-responders-are-happy">On-call only works when responders are happy</h2>
+<p>The Glofox platform is used 24/7 by Gym goers all around the world; this implies the necessity of being able to respond outside of our working hours. When the unexpected happens, our on-call rotation is a consistent safety net that gives us the assurance that somebody is going to respond and have the tools at their disposal to respond fast.</p>
+<p>The principles described here are our way to acknowledge that on-call only works when the people responding feel like they’re treated fairly and that they are empowered to improve the system, rather than passively deal with the consequences of decisions they can’t influence.</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://blog.pvincent.io/tags/sre/">SRE</a>
+
+  <a class="tag tag--primary tag--small" href="https://blog.pvincent.io/tags/on-call/">on-call</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2021/06/bubbling-up-customer-specific-experience-with-high-cardinality-observability/" data-tooltip="Bubbling up customer-specific experience with high-cardinality observability">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2022 Pierre Vincent. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://blog.pvincent.io/2021/06/bubbling-up-customer-specific-experience-with-high-cardinality-observability/" data-tooltip="Bubbling up customer-specific experience with high-cardinality observability">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://s.gravatar.com/avatar/44d398d6974d29619c2dfc37428fc5ab?s=250" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Pierre Vincent</h4>
+    
+      <div id="about-card-bio">Software Engineer, SRE &amp; OSCP</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Head of SRE
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Glofox - Ireland
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      
+      <div id="cover" style="background-image:url('https://blog.pvincent.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://blog.pvincent.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>on-call on Pierre Vincent</title>
+    <link>https://blog.pvincent.io/tags/on-call/</link>
+    <description>Recent content in on-call on Pierre Vincent</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pvincent.io/tags/on-call/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On-call only works when responders are happy</title>
+      <link>https://blog.pvincent.io/2022/06/on-call-only-works-when-responders-are-happy/</link>
+      <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.pvincent.io/2022/06/on-call-only-works-when-responders-are-happy/</guid>
+      <description>&lt;p&gt;Incidents can happen despite our best efforts. It&amp;rsquo;s the nature of the software systems we build today, relying on complex distributed systems with emergent behaviours. Incidents don’t care about the concept of working hours and without the luxury of a &lt;em&gt;follow-the-sun&lt;/em&gt; response team, it means sometimes, somebody needs to respond out-of-hours.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
